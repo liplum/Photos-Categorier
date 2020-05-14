@@ -1,0 +1,9 @@
+﻿<Application x:Class="PhotosCategorier.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:PhotosCategorier" xmlns:layout="clr-namespace:PhotosCategorier.Layout"
+             StartupUri="/Main/MainWindow.xaml" Startup="Application_Startup">
+    <Application.Resources>
+        <layout:Layout x:Name="CurLayout" x:Key="CurLayout"></layout:Layout>
+    </Application.Resources>
+</Application>

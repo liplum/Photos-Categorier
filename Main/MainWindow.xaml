@@ -1,0 +1,116 @@
+﻿<Window   x:Class="PhotosCategorier.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PhotosCategorier"
+        xmlns:calc="clr-namespace:CalcBinding;assembly=CalcBinding"
+        xmlns:loc="clr-namespace:PhotosCategorier.Properties"
+        mc:Ignorable="d"
+        Title="{x:Static loc:Resources.Title}" 
+        Width="{Binding WINDOW_WIDTH,Source={StaticResource CurLayout}}" 
+        Height="{Binding WINDOW_HEIGHT,Source={StaticResource CurLayout}}"
+        ResizeMode="NoResize" KeyUp="Window_KeyUp">
+    <Window.Resources>
+        <SolidColorBrush x:Key="Translucent" Color="White" Opacity="0.8"></SolidColorBrush>
+        <Style TargetType="MenuItem">
+            <Setter Property="FontSize" Value="{Binding FontSize,Source={StaticResource CurLayout}}"></Setter>
+        </Style>
+        <Style TargetType="Label">
+            <Setter   Property="FontSize" Value="{Binding FontSize,Source={StaticResource CurLayout}}"></Setter>
+        </Style>
+    </Window.Resources>
+    <Window.Content>
+        <Grid   x:Name="MainGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Menu x:Name="Setting" Background="Gray" Grid.Row="0" Grid.ColumnSpan="2">
+                <Menu.Resources>
+                    <Style TargetType="MenuItem" x:Key="Main">
+                        <Setter Property="FontSize" Value="{Binding FontSize,Source={StaticResource CurLayout}}"></Setter>
+                    </Style>
+                    <Style TargetType="Label">
+                        <Setter Property="FontSize" Value="{Binding ItemFontSize,Source={StaticResource CurLayout}}"></Setter>
+                    </Style>
+                </Menu.Resources>
+                <MenuItem Header="{x:Static loc:Resources.Folder}" Style="{StaticResource Main}">
+                    <MenuItem.Resources>
+                        <Style TargetType="MenuItem">
+                            <Setter Property="FontSize" Value="{Binding ItemFontSize,Source={StaticResource CurLayout}}"></Setter>
+                        </Style>
+                    </MenuItem.Resources>
+                    <MenuItem Header="{x:Static loc:Resources.SettingClassifyFolder}" Name="SettingClassifyFolder" Click="SettingClassifyFolder_Click"/>
+                    <Separator></Separator>
+                    <MenuItem Header="{x:Static loc:Resources.KeepLeftFolder}" Name="KeepLeftFolder" Click="KeepLeftFolder_Click"/>
+                    <MenuItem Header="{x:Static loc:Resources.KeepRightFolder}" Name="KeepRightFolder" Click="KeepRightFolder_Click"/>
+                </MenuItem>
+                <MenuItem Header="{x:Static loc:Resources.Setting}" Style="{StaticResource Main}">
+                    <MenuItem.Resources>
+                        <Style TargetType="MenuItem">
+                            <Setter Property="FontSize" Value="{Binding ItemFontSize,Source={StaticResource CurLayout}}"></Setter>
+                        </Style>
+                    </MenuItem.Resources>
+                    <MenuItem Header="{x:Static loc:Resources.SettingWindowSize}" Name="SettingWindowSize" Click="SettingWindowSize_Click"/>
+                </MenuItem>
+                <MenuItem Header="{x:Static loc:Resources.Help}" Style="{StaticResource Main}">
+                    <MenuItem.Resources>
+                        <Style TargetType="MenuItem">
+                            <Setter Property="FontSize" Value="{Binding ItemFontSize,Source={StaticResource CurLayout}}"></Setter>
+                        </Style>
+                    </MenuItem.Resources>
+                    <MenuItem Header="{x:Static loc:Resources.HelpInfo}">
+                        <MenuItem.ToolTip>
+                            <StackPanel>
+                                <Label Content="{x:Static loc:Resources.HelpA1}" ></Label>
+                                <Label Content="{x:Static loc:Resources.HelpA2}" ></Label>
+                                <Label Content="{x:Static loc:Resources.HelpA3}" ></Label>
+                                <Label Content="{x:Static loc:Resources.HelpA4}" ></Label>
+                                <Separator></Separator>
+                                <Label Content="{x:Static loc:Resources.HelpB1}"></Label>
+                                <Label Content="{x:Static loc:Resources.HelpB2}"></Label>
+                            </StackPanel>
+                        </MenuItem.ToolTip>
+                    </MenuItem>
+                    <MenuItem Header="{x:Static loc:Resources.Formats}">
+                        <MenuItem.ToolTip>
+                            <Label Content="{x:Static loc:Resources.SupportedFormats}"></Label>
+                        </MenuItem.ToolTip>
+                    </MenuItem>
+                    <MenuItem Header="{x:Static loc:Resources.VersionInfo}">
+                        <MenuItem.ToolTip>
+                            <Label Content="{x:Static loc:Resources.Version}"></Label>
+                        </MenuItem.ToolTip>
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
+            <Canvas Grid.Row="1" Name="DisplayArea" Focusable="True" Grid.ColumnSpan="2">
+                <Image Name="curImage" Canvas.Top="0" Canvas.Left="0" />
+                <Label Name="LeftArrowPointedToFolder" Content="{x:Static loc:Resources.Left}" FontWeight="Bold" Background="{StaticResource Translucent}" Width="Auto" Height="Auto" Canvas.Left="{calc:Binding WINDOW_WIDTH / 12 ,Source={StaticResource CurLayout}}" Canvas.Bottom="{calc:Binding WINDOW_HEIGHT / 15 ,Source={StaticResource CurLayout}}" Cursor="Hand" MouseDown="LeftArrowPointedToFolder_MouseDown"/>
+                <Label Name="RightArrowPointedToFolder" Content="{x:Static loc:Resources.Right}" Background="{StaticResource Translucent}" Width="Auto" Height="Auto" FontWeight="Bold" Canvas.Right="{calc:Binding WINDOW_WIDTH / 12 ,Source={StaticResource CurLayout}}" Canvas.Bottom="{calc:Binding WINDOW_HEIGHT / 15 ,Source={StaticResource CurLayout}}" Cursor="Hand" MouseDown="RightArrowPointedToFolder_MouseDown"/>
+                <Label Name="RemainingFileCounter" Content="" Background="{StaticResource Translucent}" FontWeight="Bold" Canvas.Right="{calc:Binding WINDOW_WIDTH / 12 ,Source={StaticResource CurLayout}}" Canvas.Top="{calc:Binding WINDOW_HEIGHT / 15 ,Source={StaticResource CurLayout}}"/>
+            </Canvas>
+            <DockPanel Grid.Row="1" Grid.ColumnSpan="2" LastChildFill="False">
+                <Button x:Name="ToLeft" Margin="0,5,5,5" IsEnabled="False" Content="{x:Static loc:Resources.ToLeft}" Background="{StaticResource Translucent}"  FontSize="{Binding FontSize,Source={StaticResource CurLayout}}" DockPanel.Dock="Left" Click="ToLeft_Click">
+                    <Button.LayoutTransform>
+                        <RotateTransform   Angle="-90"></RotateTransform>
+                    </Button.LayoutTransform>
+                </Button>
+                <Button   x:Name="ToRight" Margin="5,5,0,5" IsEnabled="False" Content="{x:Static loc:Resources.ToRight}" Background="{StaticResource Translucent}"  FontSize="{Binding FontSize,Source={StaticResource CurLayout}}" DockPanel.Dock="Right" Click="ToRight_Click">
+                    <Button.LayoutTransform>
+                        <RotateTransform   Angle="90"></RotateTransform>
+                    </Button.LayoutTransform>
+                </Button>
+                <Button x:Name="DeleteThis" IsEnabled="False" Margin="5,5,5,0" Content="{x:Static loc:Resources.DeleteThis}" Background="{StaticResource Translucent}"  FontSize="{Binding FontSize,Source={StaticResource CurLayout}}" DockPanel.Dock="Bottom" Click="DeleteThis_Click"/>
+                <Button x:Name="SkipThis" IsEnabled="False" Margin="5,0,5,5" Content="{x:Static loc:Resources.SkipThis}" Background="{StaticResource Translucent}"  FontSize="{Binding FontSize,Source={StaticResource CurLayout}}" DockPanel.Dock="Top" Click="SkipThis_Click"/>
+            </DockPanel>
+        </Grid>
+    </Window.Content>
+</Window>
