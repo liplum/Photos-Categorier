@@ -2,8 +2,10 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:PhotosCategorier" xmlns:layout="clr-namespace:PhotosCategorier.Layout"
-             StartupUri="/Main/MainWindow.xaml" Startup="Application_Startup">
+             StartupUri="/Main/MainWindow.xaml" Startup="Application_Startup"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime">
     <Application.Resources>
         <layout:Layout x:Name="CurLayout" x:Key="CurLayout"></layout:Layout>
+        <system:String x:Key="Version">1.2.0</system:String>
     </Application.Resources>
 </Application>

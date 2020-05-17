@@ -213,7 +213,11 @@ namespace PhotosCategorier
             catch
             {
                 var file = photographs[curPhoto].FilePath;
-                MessageBox.Show($"{ Properties.Resources.CannotOpen}\n{FileAlgorithm.GetNameFromPath(file)}", Properties.Resources.Error);
+                var r = MessageBox.Show($"{ Properties.Resources.CannotOpen}\n{FileAlgorithm.GetNameFromPath(file)}\n{Properties.Resources.ConfirmDeletion}", Properties.Resources.Error, MessageBoxButton.OKCancel);
+                if(r == MessageBoxResult.OK)
+                {
+                    file.Delete();
+                }
                 NextImage();
             }
         }

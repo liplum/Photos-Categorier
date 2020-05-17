@@ -129,9 +129,6 @@
   <data name="DeleteThis" xml:space="preserve">
     <value>Delete</value>
   </data>
-  <data name="DeletionTips" xml:space="preserve">
-    <value>setting deletion tips</value>
-  </data>
   <data name="DirectoryNotFound" xml:space="preserve">
     <value>Target folder isn't existed or invalid</value>
   </data>
@@ -242,9 +239,6 @@
   </data>
   <data name="UnauthorizedAccess" xml:space="preserve">
     <value>Can't opreate,Possibly because you has no access or the file is read-only</value>
-  </data>
-  <data name="Version" xml:space="preserve">
-    <value>1.2.0</value>
   </data>
   <data name="VersionInfo" xml:space="preserve">
     <value>Version</value>

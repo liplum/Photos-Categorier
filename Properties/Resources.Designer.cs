@@ -97,15 +97,6 @@ namespace PhotosCategorier.Properties {
         }
         
         /// <summary>
-        ///   查找类似 setting deletion tips 的本地化字符串。
-        /// </summary>
-        public static string DeletionTips {
-            get {
-                return ResourceManager.GetString("DeletionTips", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 Target folder isn&apos;t existed or invalid 的本地化字符串。
         /// </summary>
         public static string DirectoryNotFound {
@@ -435,15 +426,6 @@ namespace PhotosCategorier.Properties {
         public static string UnauthorizedAccess {
             get {
                 return ResourceManager.GetString("UnauthorizedAccess", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 1.2.0 的本地化字符串。
-        /// </summary>
-        public static string Version {
-            get {
-                return ResourceManager.GetString("Version", resourceCulture);
             }
         }
         

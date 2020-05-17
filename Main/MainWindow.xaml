@@ -86,7 +86,7 @@
                     </MenuItem>
                     <MenuItem Header="{x:Static loc:Resources.VersionInfo}">
                         <MenuItem.ToolTip>
-                            <Label Content="{x:Static loc:Resources.Version}"></Label>
+                            <Label Content="{StaticResource Version}"></Label>
                         </MenuItem.ToolTip>
                     </MenuItem>
                 </MenuItem>
