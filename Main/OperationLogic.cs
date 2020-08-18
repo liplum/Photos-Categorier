@@ -74,8 +74,10 @@ namespace PhotosCategorier
         {
             DirectoryInfo target = null;
 
-            using var dialog = new CommonOpenFileDialog(Caption);
-            dialog.IsFolderPicker = true;
+            using var dialog = new CommonOpenFileDialog(Caption)
+            {
+                IsFolderPicker = true
+            };
 
             var mode = dialog.ShowDialog();
 
@@ -186,13 +188,13 @@ namespace PhotosCategorier
 
                 var photo = photographs[curPhoto];
                 var file = photo.FilePath;
-                var r = MessageBox.Show($"{Properties.Resources.ConfirmDeletion}\n{FileAlgorithm.GetNameFromPath(file)}",
+                var r = MessageBox.Show($"{Properties.Resources.ConfirmDeletion}\n{GetNameFromPath(file)}",
                     Properties.Resources.Warnning, MessageBoxButton.OKCancel);
                 if (r == MessageBoxResult.OK)
                 {
                     try 
                     {
-                        file.Delete();
+                        file.DeleteFile();
                     }
                     catch (IOException)
                     {
@@ -216,7 +218,7 @@ namespace PhotosCategorier
                 var r = MessageBox.Show($"{ Properties.Resources.CannotOpen}\n{FileAlgorithm.GetNameFromPath(file)}\n{Properties.Resources.ConfirmDeletion}", Properties.Resources.Error, MessageBoxButton.OKCancel);
                 if(r == MessageBoxResult.OK)
                 {
-                    file.Delete();
+                    file.DeleteFile();
                 }
                 NextImage();
             }

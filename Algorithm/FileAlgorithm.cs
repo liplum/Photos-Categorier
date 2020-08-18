@@ -43,7 +43,7 @@ namespace PhotosCategorier.Algorithm
             }
         }
 
-        public static void Delete(this string filePath)
+        public static void DeleteFile(this string filePath)
         {
             try
             {
