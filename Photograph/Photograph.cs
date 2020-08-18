@@ -12,50 +12,24 @@ namespace PhotosCategorier
     /// </summary>
     public class Photograph
     {
-        private readonly string filePath;
-
-        public string FilePath
-        {
-            get => filePath;
-        }
-
-        private static int maxWidth;
-        public static int MaxWidth
-        {
-            get => maxWidth;
-            private set => maxWidth = value;
-        }
-        private static int maxHeight;
-        public static int MaxHeight
-        {
-            get => maxHeight;
-            private set => maxHeight = value;
-        }
+        public string FilePath { get; }
+        public static int MaxWidth { get; private set; }
+        public static int MaxHeight { get; private set; }
 
         /// <summary>
         /// 背景刷
         /// </summary>
         public static Brush BackgroundBrush { set; get; }
 
-        private static bool isCentered = true;
         /// <summary>
         /// 是否居中
         /// </summary>
-        public static bool IsCentered
-        {
-            set => isCentered = value;
-            get => isCentered;
-        }
+        public static bool IsCentered { set; get; } = true;
 
-        private static bool isScale = true;
         /// <summary>
         /// 是否缩放
         /// </summary>
-        public static bool IsScale
-        {
-            set => isScale = value;
-            get => isScale;
-        }
+        public static bool IsScale { set; get; } = true;
 
         /// <summary>
         /// 缩放算法
@@ -81,7 +55,7 @@ namespace PhotosCategorier
         /// 通过图片的地址新建对象
         /// </summary>
         /// <param name="Path">图片的地址</param>
-        public Photograph(string Path) => filePath = Path;
+        public Photograph(string Path) => FilePath = Path;
 
         /// <summary>
         /// 获得图片对应的Source，用于给Image控件使用
@@ -94,7 +68,7 @@ namespace PhotosCategorier
             Bitmap img;
             try
             {
-                img = ReadBitmap(filePath);
+                img = ReadBitmap(FilePath);
             }
             catch(CannotOpenFileException e)
             {
