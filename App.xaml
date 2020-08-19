@@ -6,6 +6,6 @@
              xmlns:system="clr-namespace:System;assembly=System.Runtime">
     <Application.Resources>
         <layout:Layout x:Name="CurLayout" x:Key="CurLayout"></layout:Layout>
-        <system:String x:Key="Version">1.2.1</system:String>
+        <system:String x:Key="Version">1.3.0</system:String>
     </Application.Resources>
 </Application>

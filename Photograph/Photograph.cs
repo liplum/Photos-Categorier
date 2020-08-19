@@ -70,7 +70,7 @@ namespace PhotosCategorier
             {
                 img = ReadBitmap(FilePath);
             }
-            catch(CannotOpenFileException e)
+            catch (CannotOpenFileException e)
             {
                 throw e;
             }
@@ -79,7 +79,7 @@ namespace PhotosCategorier
                 if (IsScale)
                     img = ScaleImage(img);
             }
-            catch(CannotProcessImageException e)
+            catch (CannotProcessImageException e)
             {
                 throw e;
             }

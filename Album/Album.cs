@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Linq;
 
-namespace PhotosCategorier.Album
+namespace PhotosCategorier
 {
     public class Album
     {
@@ -25,7 +25,6 @@ namespace PhotosCategorier.Album
             var imageFiles = selectedFiles.ToArray();
 
             int filesCount = imageFiles.Length;
-
 
             if (filesCount > 0)
             {

@@ -61,7 +61,7 @@ namespace PhotosCategorier.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Add a new classify folder 的本地化字符串。
+        ///   查找类似 Add (a) new classify folder 的本地化字符串。
         /// </summary>
         public static string AddingClassifyFolder {
             get {

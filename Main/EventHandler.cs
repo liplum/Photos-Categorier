@@ -48,6 +48,11 @@ namespace PhotosCategorier
             SetClassifyFolder();
         }
 
+        private void AddingClassifyFolder_Click(object sender, RoutedEventArgs e)
+        {
+            AddClassifyFolder();
+        }
+
         private void ToLeft_Click(object sender, RoutedEventArgs e)
         {
             MoveThisTo(Arrow.LEFT_ARROW);

@@ -27,18 +27,11 @@ namespace PhotosCategorier
 
         private List<Photograph> photographs;
 
-        private List<string> allClassifyFolder;
-
         private int curPhoto = 0;
 
         private DirectoryInfo leftArrow, rightArrow;
 
         private readonly SolidBrush BackgroundBrush = new SolidBrush(Color.FromArgb(122, 240, 240, 240));
-
-        private void AddingClassifyFolder_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void ResetSize(int Width, int Height)
         {

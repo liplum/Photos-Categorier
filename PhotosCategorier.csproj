@@ -12,7 +12,7 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>Liplum.pfx</AssemblyOriginatorKeyFile>
-    <Version>1.2.0</Version>
+    <Version>1.3.0</Version>
     <DelaySign>false</DelaySign>
   </PropertyGroup>
 

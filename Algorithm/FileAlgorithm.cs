@@ -49,7 +49,7 @@ namespace PhotosCategorier.Algorithm
             {
                 File.Delete(filePath);
             }
-            catch(IOException)
+            catch (IOException)
             {
                 //等待被删除的文件夹不存在
                 ;

@@ -11,6 +11,9 @@ namespace PhotosCategorier
 {
     public partial class MainWindow
     {
+
+        private List<Album> allClassifyFolder;
+
         /// <summary>
         /// 设置需分类的文件夹
         /// 使 删除 和 跳过 按钮可用
@@ -21,27 +24,22 @@ namespace PhotosCategorier
 
             if (directories != null)
             {
-                List<FileInfo> allFiles = new List<FileInfo>();
-                foreach(var dir in directories){
-                    allFiles.AddRange(dir.GetFiles());
-                    allClassifyFolder.Add(dir.FullName);
+                photographs = new List<Photograph>();
+                allClassifyFolder = new List<Album>();
+
+                foreach (var dir in directories)
+                {
+                    var curAlbum = new Album(dir);
+                    allClassifyFolder.Add(curAlbum);
+                    var curAlbumImages = curAlbum.GetAllPhotographs();
+                    if (curAlbumImages != null)
+                    {
+                        photographs.AddRange(curAlbumImages);
+                    }
                 }
 
-                var selectedFiles = from file in allFiles
-                                    where
-               file.Name.EndsWith(".png") || file.Name.EndsWith(".jpg") || file.Name.EndsWith(".gif")
-               || file.Name.EndsWith(".jpeg")
-                                    select file;
-                var imageFiles = selectedFiles.ToArray();
-
-                int filesCount = imageFiles.Length;
-
-                if (filesCount > 0)
+                if (photographs.Count > 0)
                 {
-                    photographs = new List<Photograph>(filesCount);
-                    foreach (var file in imageFiles)
-                        photographs.Add(new Photograph(file.FullName));
-
                     DeleteThis.IsEnabled = SkipThis.IsEnabled = true;
                     AddingClassifyFolder.IsEnabled = true;
                     InitImage();
@@ -55,6 +53,39 @@ namespace PhotosCategorier
 
         private void AddClassifyFolder()
         {
+            var directories = SelectFolders(Properties.Resources.AddingClassifyFolder);
+
+            if (directories != null)
+            {
+                foreach (var dir in directories)
+                {
+                    var curAlbum = new Album(dir);
+
+                    if (NotHas())
+                    {
+                        allClassifyFolder.Add(curAlbum);
+                        var curAlbumImages = curAlbum.GetAllPhotographs();
+                        if (curAlbumImages != null)
+                        {
+                            photographs.AddRange(curAlbumImages);
+                            RemainingFileCounter.Content = $"{photographs.Count - curPhoto}";
+                        }
+                    }
+
+                    bool NotHas()
+                    {
+                        foreach (var folder in allClassifyFolder)
+                        {
+                            if (curAlbum.Equals(folder))
+                            {
+                                return false;
+                            }
+                        }
+                        return true;
+                    }
+                }
+            }
+
 
         }
 
@@ -126,7 +157,8 @@ namespace PhotosCategorier
                 DirectoryInfo[] dirs = new DirectoryInfo[len];
                 for (int i = 0; i < len; i++)
                 {
-                    dirs[i] = new DirectoryInfo(names[len]);
+                    var name = names[i];
+                    dirs[i] = new DirectoryInfo(name);
                 }
 
                 return dirs;
@@ -155,7 +187,7 @@ namespace PhotosCategorier
             }
         }
 
-        private enum Arrow { LEFT_ARROW,RIGHT_ARROW}
+        private enum Arrow { LEFT_ARROW, RIGHT_ARROW }
 
         private void MoveThisTo(Arrow arrow)
         {
@@ -197,7 +229,7 @@ namespace PhotosCategorier
                 }
                 catch (UnauthorizedAccessException)
                 {
-                    MessageBox.Show($"{Properties.Resources.UnauthorizedAccess}\n{photo.FilePath}",Properties.Resources.Error);
+                    MessageBox.Show($"{Properties.Resources.UnauthorizedAccess}\n{photo.FilePath}", Properties.Resources.Error);
                 }
                 catch (IOException)
                 {
@@ -237,7 +269,7 @@ namespace PhotosCategorier
                     Properties.Resources.Warnning, MessageBoxButton.OKCancel);
                 if (r == MessageBoxResult.OK)
                 {
-                    try 
+                    try
                     {
                         file.DeleteFile();
                     }
@@ -261,7 +293,7 @@ namespace PhotosCategorier
             {
                 var file = photographs[curPhoto].FilePath;
                 var r = MessageBox.Show($"{Properties.Resources.CannotOpen}\n{FileAlgorithm.GetNameFromPath(file)}\n{Properties.Resources.ConfirmDeletion}", Properties.Resources.Error, MessageBoxButton.OKCancel);
-                if(r == MessageBoxResult.OK)
+                if (r == MessageBoxResult.OK)
                 {
                     file.DeleteFile();
                 }
