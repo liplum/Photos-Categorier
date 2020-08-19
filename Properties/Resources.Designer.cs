@@ -61,6 +61,15 @@ namespace PhotosCategorier.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Add a new classify folder 的本地化字符串。
+        /// </summary>
+        public static string AddingClassifyFolder {
+            get {
+                return ResourceManager.GetString("AddingClassifyFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Cancel 的本地化字符串。
         /// </summary>
         public static string Cancel {
@@ -241,24 +250,6 @@ namespace PhotosCategorier.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Keep Left-Arrow to point to a Album 的本地化字符串。
-        /// </summary>
-        public static string KeepLeftFolder {
-            get {
-                return ResourceManager.GetString("KeepLeftFolder", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Keep Right-Arrow to point to a Album 的本地化字符串。
-        /// </summary>
-        public static string KeepRightFolder {
-            get {
-                return ResourceManager.GetString("KeepRightFolder", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 Left Folder 的本地化字符串。
         /// </summary>
         public static string Left {
@@ -327,6 +318,24 @@ namespace PhotosCategorier.Properties {
         public static string Right {
             get {
                 return ResourceManager.GetString("Right", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Keep Left-Arrow to point to a Album 的本地化字符串。
+        /// </summary>
+        public static string SelectLeftFolder {
+            get {
+                return ResourceManager.GetString("SelectLeftFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Keep Right-Arrow to point to a Album 的本地化字符串。
+        /// </summary>
+        public static string SelectRightFolder {
+            get {
+                return ResourceManager.GetString("SelectRightFolder", resourceCulture);
             }
         }
         

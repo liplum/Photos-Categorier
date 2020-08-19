@@ -17,11 +17,16 @@ namespace PhotosCategorier
         /// </summary>
         private void SetClassifyFolder()
         {
-            var folder = SelectFolder(Properties.Resources.SettingClassifyFolder);
+            var directories = SelectFolders(Properties.Resources.SettingClassifyFolder);
 
-            if (folder != null)
+            if (directories != null)
             {
-                var allFiles = folder.GetFiles();
+                List<FileInfo> allFiles = new List<FileInfo>();
+                foreach(var dir in directories){
+                    allFiles.AddRange(dir.GetFiles());
+                    allClassifyFolder.Add(dir.FullName);
+                }
+
                 var selectedFiles = from file in allFiles
                                     where
                file.Name.EndsWith(".png") || file.Name.EndsWith(".jpg") || file.Name.EndsWith(".gif")
@@ -38,6 +43,7 @@ namespace PhotosCategorier
                         photographs.Add(new Photograph(file.FullName));
 
                     DeleteThis.IsEnabled = SkipThis.IsEnabled = true;
+                    AddingClassifyFolder.IsEnabled = true;
                     InitImage();
                 }
                 else
@@ -46,9 +52,15 @@ namespace PhotosCategorier
                 }
             }
         }
+
+        private void AddClassifyFolder()
+        {
+
+        }
+
         private void SetLeftFolder()
         {
-            leftArrow = SelectFolder(Properties.Resources.KeepLeftFolder);
+            leftArrow = SelectFolder(Properties.Resources.SelectLeftFolder);
             if (leftArrow != null)
             {
                 this.LeftArrowPointedToFolder.Content = leftArrow.Name;
@@ -57,7 +69,7 @@ namespace PhotosCategorier
         }
         private void SetRightFolder()
         {
-            rightArrow = SelectFolder(Properties.Resources.KeepRightFolder);
+            rightArrow = SelectFolder(Properties.Resources.SelectRightFolder);
             if (rightArrow != null)
             {
                 this.RightArrowPointedToFolder.Content = rightArrow.Name;
@@ -76,7 +88,7 @@ namespace PhotosCategorier
 
             using var dialog = new CommonOpenFileDialog(Caption)
             {
-                IsFolderPicker = true
+                IsFolderPicker = true,
             };
 
             var mode = dialog.ShowDialog();
@@ -89,6 +101,37 @@ namespace PhotosCategorier
 
             }
             return target;
+        }
+
+        /// <summary>
+        /// 打开选择文件夹窗口
+        /// </summary>
+        /// <param name="Caption">窗口标题</param>
+        /// <returns></returns>
+        private static DirectoryInfo[] SelectFolders(string Caption)
+        {
+
+            using var dialog = new CommonOpenFileDialog(Caption)
+            {
+                IsFolderPicker = true,
+                Multiselect = true
+            };
+
+            var mode = dialog.ShowDialog();
+
+            if (mode == CommonFileDialogResult.Ok)
+            {
+                string[] names = dialog.FileNames.ToArray();
+                int len = names.Length;
+                DirectoryInfo[] dirs = new DirectoryInfo[len];
+                for (int i = 0; i < len; i++)
+                {
+                    dirs[i] = new DirectoryInfo(names[len]);
+                }
+
+                return dirs;
+            }
+            return null;
         }
 
         private void InitImage()
@@ -107,7 +150,9 @@ namespace PhotosCategorier
                 UpdateImage();
             }
             else
+            {
                 RemainingFileCounter.Content = "0";
+            }
         }
 
         private enum Arrow { LEFT_ARROW,RIGHT_ARROW}

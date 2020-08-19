@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddingClassifyFolder" xml:space="preserve">
+    <value>Add a new classify folder</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
@@ -177,12 +180,6 @@
   <data name="IsLastPhoto" xml:space="preserve">
     <value>Last one</value>
   </data>
-  <data name="KeepLeftFolder" xml:space="preserve">
-    <value>Keep Left-Arrow to point to a Album</value>
-  </data>
-  <data name="KeepRightFolder" xml:space="preserve">
-    <value>Keep Right-Arrow to point to a Album</value>
-  </data>
   <data name="Left" xml:space="preserve">
     <value>Left Folder</value>
   </data>
@@ -206,6 +203,12 @@
   </data>
   <data name="Right" xml:space="preserve">
     <value>Right Folder</value>
+  </data>
+  <data name="SelectLeftFolder" xml:space="preserve">
+    <value>Keep Left-Arrow to point to a Album</value>
+  </data>
+  <data name="SelectRightFolder" xml:space="preserve">
+    <value>Keep Right-Arrow to point to a Album</value>
   </data>
   <data name="Setting" xml:space="preserve">
     <value>Setting</value>

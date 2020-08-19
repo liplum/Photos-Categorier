@@ -51,7 +51,8 @@ namespace PhotosCategorier.Algorithm
             }
             catch(IOException)
             {
-                throw;
+                //等待被删除的文件夹不存在
+                ;
             }
         }
         /*/// <summary>

@@ -11,7 +11,7 @@ namespace PhotosCategorier
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Layout.Layout layout;
+        private readonly Layout.Layout layout;
         public MainWindow()
         {
             InitializeComponent();
@@ -26,11 +26,19 @@ namespace PhotosCategorier
         }
 
         private List<Photograph> photographs;
+
+        private List<string> allClassifyFolder;
+
         private int curPhoto = 0;
 
         private DirectoryInfo leftArrow, rightArrow;
 
-        private SolidBrush BackgroundBrush = new SolidBrush(Color.FromArgb(122, 240, 240, 240));
+        private readonly SolidBrush BackgroundBrush = new SolidBrush(Color.FromArgb(122, 240, 240, 240));
+
+        private void AddingClassifyFolder_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
 
         private void ResetSize(int Width, int Height)
         {

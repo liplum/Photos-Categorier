@@ -40,17 +40,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="loc\en-US.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>en-US.resx</DependentUpon>
-    </Compile>
-    
-    <Compile Update="loc\zh-CN.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>zh-CN.resx</DependentUpon>
-    </Compile>
     
     <Compile Update="Properties\Resources.zh.Designer.cs">
       <DependentUpon>Resources.zh.resx</DependentUpon>
@@ -66,14 +55,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="loc\en-US.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>en-US.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="loc\zh-CN.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>zh-CN.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Update="Properties\Resources.zh.resx">
       <LastGenOutput>Resources.zh.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -49,8 +49,10 @@
                     </MenuItem.Resources>
                     <MenuItem Header="{x:Static loc:Resources.SettingClassifyFolder}" Name="SettingClassifyFolder" Click="SettingClassifyFolder_Click"/>
                     <Separator></Separator>
-                    <MenuItem Header="{x:Static loc:Resources.KeepLeftFolder}" Name="KeepLeftFolder" Click="KeepLeftFolder_Click"/>
-                    <MenuItem Header="{x:Static loc:Resources.KeepRightFolder}" Name="KeepRightFolder" Click="KeepRightFolder_Click"/>
+                    <MenuItem Header="{x:Static loc:Resources.SelectLeftFolder}" Name="SelectLeftFolder" Click="SelectLeftFolder_Click"/>
+                    <MenuItem Header="{x:Static loc:Resources.SelectRightFolder}" Name="SelectRightFolder" Click="SelectRightFolder_Click"/>
+                    <Separator></Separator>
+                    <MenuItem Header="{x:Static loc:Resources.AddingClassifyFolder}" Name="AddingClassifyFolder" Click="AddingClassifyFolder_Click" IsEnabled="False"/>
                 </MenuItem>
                 <MenuItem Header="{x:Static loc:Resources.Setting}" Style="{StaticResource Main}">
                     <MenuItem.Resources>

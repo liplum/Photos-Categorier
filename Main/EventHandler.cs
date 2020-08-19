@@ -27,12 +27,12 @@ namespace PhotosCategorier
             DeleteThisPhoto();
         }
 
-        private void KeepLeftFolder_Click(object sender, RoutedEventArgs e)
+        private void SelectLeftFolder_Click(object sender, RoutedEventArgs e)
         {
             SetLeftFolder();
         }
 
-        private void KeepRightFolder_Click(object sender, RoutedEventArgs e)
+        private void SelectRightFolder_Click(object sender, RoutedEventArgs e)
         {
             SetRightFolder();
         }
