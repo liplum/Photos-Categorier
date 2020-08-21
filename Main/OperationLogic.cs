@@ -1,5 +1,6 @@
 ﻿using Microsoft.WindowsAPICodePack.Dialogs;
 using PhotosCategorier.Algorithm;
+using PhotosCategorier.Main;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -68,7 +69,6 @@ namespace PhotosCategorier
                         if (curAlbumImages != null)
                         {
                             photographs.AddRange(curAlbumImages);
-                            RemainingFileCounter.Content = $"{photographs.Count - curPhoto}";
                         }
                     }
 
@@ -84,9 +84,50 @@ namespace PhotosCategorier
                         return true;
                     }
                 }
+
+                UpdateFileCounter();
             }
+        }
 
+        private void ClearDuplicates()
+        {
+            var r = MessageBox.Show(Properties.Resources.ConfirmClearingDuplicates, Properties.Resources.Warnning, MessageBoxButton.OKCancel);
+            if (r == MessageBoxResult.OK)
+            {
+                if (photographs == null || photographs.Count == 0)
+                {
+                    MessageBox.Show(Properties.Resources.NotSetClassifyFolder, Properties.Resources.Error);
+                    return;
+                }
+                Refresh();
+                var window = new ClearDuplicatesWindow(photographs);
+                window.ShowDialog();
+                Refresh();
+            }
+        }
 
+        private void Refresh()
+        {
+            photographs = new List<Photograph>();
+            var needRemove = new List<Album>();
+            foreach (var album in allClassifyFolder)
+            {
+                var ps = album.GetAllPhotographs();
+                if (ps == null)
+                {
+                    needRemove.Add(album);
+                }
+                else
+                {
+                    photographs.AddRange(ps);
+
+                }
+            }
+            foreach (var album in needRemove)
+            {
+                allClassifyFolder.Remove(album);
+            }
+            InitImage();
         }
 
         private void SetLeftFolder()
@@ -166,11 +207,14 @@ namespace PhotosCategorier
             return null;
         }
 
+        /// <summary>
+        /// It'll reset <see cref="curPhoto"/> to 0 and update current Image which is displayed and file counter.
+        /// </summary>
         private void InitImage()
         {
             curPhoto = 0;
             UpdateImage();
-            RemainingFileCounter.Content = $"{photographs.Count}";
+            UpdateFileCounter();
         }
 
         private void NextImage()
@@ -178,13 +222,18 @@ namespace PhotosCategorier
             ++curPhoto;
             if (curPhoto < photographs.Count)
             {
-                RemainingFileCounter.Content = $"{photographs.Count - curPhoto}";
+                UpdateFileCounter();
                 UpdateImage();
             }
             else
             {
                 RemainingFileCounter.Content = "0";
             }
+        }
+
+        private void UpdateFileCounter()
+        {
+            RemainingFileCounter.Content = $"{photographs.Count - curPhoto}";
         }
 
         private enum Arrow { LEFT_ARROW, RIGHT_ARROW }
@@ -285,6 +334,12 @@ namespace PhotosCategorier
 
         private void UpdateImage()
         {
+            if (photographs.Count == 0)
+            {
+                MessageBox.Show(Properties.Resources.HasNoPhoto, Properties.Resources.Error);
+                return;
+            }
+
             try
             {
                 curImage.Source = photographs?[curPhoto].GetImageSource();

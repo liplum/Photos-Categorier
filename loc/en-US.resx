@@ -117,125 +117,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddingClassifyFolder" xml:space="preserve">
-    <value>Add (a) new classify folder</value>
-  </data>
-  <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
-  <data name="CannotOpen" xml:space="preserve">
-    <value>Can't open the file, Possibly because it's corrupt or in a unsupported format</value>
-  </data>
-  <data name="ClearDuplicates" xml:space="preserve">
-    <value>Clean the duplicates</value>
-  </data>
-  <data name="ClearDuplicatesSuccessfully" xml:space="preserve">
-    <value>Clear duplicates successfully !</value>
-  </data>
-  <data name="ConfirmClearingDuplicates" xml:space="preserve">
-    <value>Confirm clearing the duplicates?</value>
-  </data>
-  <data name="ConfirmDeletion" xml:space="preserve">
-    <value>Confirm Deletion?</value>
-  </data>
   <data name="DeleteThis" xml:space="preserve">
     <value>Delete</value>
-  </data>
-  <data name="DirectoryNotFound" xml:space="preserve">
-    <value>Target folder isn't existed or invalid</value>
-  </data>
-  <data name="Error" xml:space="preserve">
-    <value>Error</value>
-  </data>
-  <data name="FileHasOccupied" xml:space="preserve">
-    <value>File has occupied</value>
-  </data>
-  <data name="FileHasOccupiedOrHasDeleted" xml:space="preserve">
-    <value>File has occupied or deleted</value>
   </data>
   <data name="Folder" xml:space="preserve">
     <value>Folder</value>
   </data>
-  <data name="Formats" xml:space="preserve">
-    <value>Supported Formats</value>
+  <data name="KeepLeftFolder" xml:space="preserve">
+    <value>Keep Left-Arrow point to a Album</value>
   </data>
-  <data name="HasNoPhoto" xml:space="preserve">
-    <value>No more photo!</value>
-  </data>
-  <data name="Help" xml:space="preserve">
-    <value>Help</value>
-  </data>
-  <data name="HelpA1" xml:space="preserve">
-    <value>Use ←/A Move this photo to left album</value>
-  </data>
-  <data name="HelpA2" xml:space="preserve">
-    <value>Use ←/D Move this photo to right album</value>
-  </data>
-  <data name="HelpA3" xml:space="preserve">
-    <value>Use ↓/S Delete this photo</value>
-  </data>
-  <data name="HelpA4" xml:space="preserve">
-    <value>Use ↑/W Skip this photo</value>
-  </data>
-  <data name="HelpB1" xml:space="preserve">
-    <value>Remaining file's count on Top-Right</value>
-  </data>
-  <data name="HelpB2" xml:space="preserve">
-    <value>Click Button-Left/Right to open corresponding folder</value>
-  </data>
-  <data name="HelpC1" xml:space="preserve">
-    <value>Press F5 to refresh all photo</value>
-  </data>
-  <data name="HelpInfo" xml:space="preserve">
-    <value>Help Information</value>
-  </data>
-  <data name="HowMuchDuplicatesFound" xml:space="preserve">
-    <value>{0} duplicates found , Do you want to delete it(them) ?</value>
-  </data>
-  <data name="IsLastPhoto" xml:space="preserve">
-    <value>Last one</value>
-  </data>
-  <data name="IsScanning" xml:space="preserve">
-    <value>Scanning...</value>
+  <data name="KeepRightFolder" xml:space="preserve">
+    <value>Keep Right-Arrow point to a Album</value>
   </data>
   <data name="Left" xml:space="preserve">
     <value>Left Folder</value>
   </data>
-  <data name="NotFoundDuplicate" xml:space="preserve">
-    <value>Not found duplicate !</value>
-  </data>
-  <data name="NotHoldPhoto" xml:space="preserve">
-    <value>Selected folder has no photo Or the format is not supported</value>
-  </data>
-  <data name="NotPointLeft" xml:space="preserve">
-    <value>No album that Left-Arrow pointed to was set!</value>
-  </data>
-  <data name="NotPointRight" xml:space="preserve">
-    <value>No album that Right-Arrow pointed to was set!</value>
-  </data>
-  <data name="NotSetClassifyFolder" xml:space="preserve">
-    <value>No album to categorize was set!</value>
-  </data>
-  <data name="OK" xml:space="preserve">
-    <value>OK</value>
-  </data>
-  <data name="Return" xml:space="preserve">
-    <value>Return</value>
-  </data>
   <data name="Right" xml:space="preserve">
     <value>Right Folder</value>
-  </data>
-  <data name="SelectLeftFolder" xml:space="preserve">
-    <value>Keep Left-Arrow to point to a Album</value>
-  </data>
-  <data name="SelectRightFolder" xml:space="preserve">
-    <value>Keep Right-Arrow to point to a Album</value>
   </data>
   <data name="Setting" xml:space="preserve">
     <value>Setting</value>
   </data>
   <data name="SettingClassifyFolder" xml:space="preserve">
-    <value>Set a album to categorize</value>
+    <value>Set a album to classify</value>
   </data>
   <data name="SettingWindowSize" xml:space="preserve">
     <value>Set window's size</value>
@@ -243,40 +147,10 @@
   <data name="SkipThis" xml:space="preserve">
     <value>Skip</value>
   </data>
-  <data name="Success" xml:space="preserve">
-    <value>Success</value>
-  </data>
-  <data name="Support" xml:space="preserve">
-    <value>Technical Support</value>
-  </data>
-  <data name="SupportedFormats" xml:space="preserve">
-    <value>Supported Formats: *.jpg *.png *.gif *.jpeg</value>
-  </data>
-  <data name="Tip" xml:space="preserve">
-    <value>Tip</value>
-  </data>
-  <data name="Title" xml:space="preserve">
-    <value>Photos Categorier</value>
-  </data>
   <data name="ToLeft" xml:space="preserve">
     <value>To Left</value>
   </data>
-  <data name="Tool" xml:space="preserve">
-    <value>Tool</value>
-  </data>
   <data name="ToRight" xml:space="preserve">
     <value>To Right</value>
-  </data>
-  <data name="UnauthorizedAccess" xml:space="preserve">
-    <value>Can't opreate,Possibly because you has no access or the file is read-only</value>
-  </data>
-  <data name="VersionInfo" xml:space="preserve">
-    <value>Version</value>
-  </data>
-  <data name="Warnning" xml:space="preserve">
-    <value>Warnning</value>
-  </data>
-  <data name="WindowSize" xml:space="preserve">
-    <value>Window's Size</value>
   </data>
 </root>

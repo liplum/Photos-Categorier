@@ -200,6 +200,23 @@ namespace PhotosCategorier
             return new WriteableBitmap(bitmapSource);
         }
 
+        public override bool Equals(object obj)
+        {
+            if (obj is Photograph p)
+            {
+                if(this.FilePath == p.FilePath)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
         public class NotInitPhotographException : Exception
         {
             public NotInitPhotographException(string message) : base(message) { }

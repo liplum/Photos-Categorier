@@ -53,6 +53,11 @@ namespace PhotosCategorier
             AddClassifyFolder();
         }
 
+        private void ClearingDuplicates_Click(object sender, RoutedEventArgs e)
+        {
+            ClearDuplicates();
+        }
+
         private void ToLeft_Click(object sender, RoutedEventArgs e)
         {
             MoveThisTo(Arrow.LEFT_ARROW);
@@ -112,6 +117,14 @@ namespace PhotosCategorier
                             MessageBox.Show(Properties.Resources.NotSetClassifyFolder, Properties.Resources.Error);
                         else
                             MoveThisTo(Arrow.RIGHT_ARROW);
+                    }
+                    break;
+                case Key.F5:
+                    {
+                        if(allClassifyFolder != null && allClassifyFolder.Count != 0)
+                        {
+                            Refresh();
+                        }
                     }
                     break;
             }

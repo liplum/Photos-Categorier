@@ -78,6 +78,8 @@
                                 <Separator></Separator>
                                 <Label Content="{x:Static loc:Resources.HelpB1}"></Label>
                                 <Label Content="{x:Static loc:Resources.HelpB2}"></Label>
+                                <Separator></Separator>
+                                <Label Content="{x:Static loc:Resources.HelpC1}"></Label>
                             </StackPanel>
                         </MenuItem.ToolTip>
                     </MenuItem>
@@ -90,6 +92,15 @@
                         <MenuItem.ToolTip>
                             <Label Content="{StaticResource Version}"></Label>
                         </MenuItem.ToolTip>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="{x:Static loc:Resources.Tool}" Style="{StaticResource Main}">
+                    <MenuItem.Resources>
+                        <Style TargetType="MenuItem">
+                            <Setter Property="FontSize" Value="{Binding ItemFontSize,Source={StaticResource CurLayout}}"></Setter>
+                        </Style>
+                    </MenuItem.Resources>
+                    <MenuItem Header="{x:Static loc:Resources.ClearDuplicates}" Name="ClearingDuplicates" Click="ClearingDuplicates_Click">
                     </MenuItem>
                 </MenuItem>
             </Menu>

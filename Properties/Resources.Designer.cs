@@ -88,6 +88,33 @@ namespace PhotosCategorier.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Clean the duplicates 的本地化字符串。
+        /// </summary>
+        public static string ClearDuplicates {
+            get {
+                return ResourceManager.GetString("ClearDuplicates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Clear duplicates successfully ! 的本地化字符串。
+        /// </summary>
+        public static string ClearDuplicatesSuccessfully {
+            get {
+                return ResourceManager.GetString("ClearDuplicatesSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Confirm clearing the duplicates? 的本地化字符串。
+        /// </summary>
+        public static string ConfirmClearingDuplicates {
+            get {
+                return ResourceManager.GetString("ConfirmClearingDuplicates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Confirm Deletion? 的本地化字符串。
         /// </summary>
         public static string ConfirmDeletion {
@@ -232,11 +259,29 @@ namespace PhotosCategorier.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Press F5 to refresh all photo 的本地化字符串。
+        /// </summary>
+        public static string HelpC1 {
+            get {
+                return ResourceManager.GetString("HelpC1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Help Information 的本地化字符串。
         /// </summary>
         public static string HelpInfo {
             get {
                 return ResourceManager.GetString("HelpInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 {0} duplicates found , Do you want to delete it(them) ? 的本地化字符串。
+        /// </summary>
+        public static string HowMuchDuplicatesFound {
+            get {
+                return ResourceManager.GetString("HowMuchDuplicatesFound", resourceCulture);
             }
         }
         
@@ -250,11 +295,29 @@ namespace PhotosCategorier.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Scanning... 的本地化字符串。
+        /// </summary>
+        public static string IsScanning {
+            get {
+                return ResourceManager.GetString("IsScanning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Left Folder 的本地化字符串。
         /// </summary>
         public static string Left {
             get {
                 return ResourceManager.GetString("Left", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Not found duplicate ! 的本地化字符串。
+        /// </summary>
+        public static string NotFoundDuplicate {
+            get {
+                return ResourceManager.GetString("NotFoundDuplicate", resourceCulture);
             }
         }
         
@@ -376,6 +439,15 @@ namespace PhotosCategorier.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Success 的本地化字符串。
+        /// </summary>
+        public static string Success {
+            get {
+                return ResourceManager.GetString("Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Technical Support 的本地化字符串。
         /// </summary>
         public static string Support {
@@ -417,6 +489,15 @@ namespace PhotosCategorier.Properties {
         public static string ToLeft {
             get {
                 return ResourceManager.GetString("ToLeft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Tool 的本地化字符串。
+        /// </summary>
+        public static string Tool {
+            get {
+                return ResourceManager.GetString("Tool", resourceCulture);
             }
         }
         

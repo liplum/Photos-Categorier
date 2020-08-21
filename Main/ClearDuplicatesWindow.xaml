@@ -1,0 +1,32 @@
+﻿<Window x:Class="PhotosCategorier.Main.ClearDuplicatesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PhotosCategorier.Main"
+        mc:Ignorable="d"
+        xmlns:loc="clr-namespace:PhotosCategorier.Properties"
+        Title="{x:Static loc:Resources.ClearDuplicates}" Height="150" Width="350"
+        ResizeMode="NoResize" Loaded="Window_Loaded" >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.Resources>
+            <Style TargetType="Button">
+                <Setter Property="Margin" Value="30,5"></Setter>
+            </Style>
+        </Grid.Resources>
+        <Label Name="Counter" Content="{x:Static loc:Resources.IsScanning}" Grid.ColumnSpan="2" FontSize="20"></Label>
+        <ProgressBar Name="progress" Grid.Row="1" Grid.ColumnSpan="2" Height="auto" Margin="5"></ProgressBar>
+        <Button Content="{x:Static loc:Resources.OK}" Name="OK" Grid.Row="2" IsEnabled="False" Click="OK_Click"></Button>
+        <Button Content="{x:Static loc:Resources.Cancel}" Name="Cancel" Grid.Row="2" Grid.Column="2" IsEnabled="False" IsDefault="True" Click="Cancel_Click"></Button>
+    </Grid>
+</Window>

@@ -126,6 +126,15 @@
   <data name="CannotOpen" xml:space="preserve">
     <value>无法打开文件，可能因为文件已损坏或格式不支持</value>
   </data>
+  <data name="ClearDuplicates" xml:space="preserve">
+    <value>清除重复项</value>
+  </data>
+  <data name="ClearDuplicatesSuccessfully" xml:space="preserve">
+    <value>成功清除重复项！</value>
+  </data>
+  <data name="ConfirmClearingDuplicates" xml:space="preserve">
+    <value>是否清除重复项？</value>
+  </data>
   <data name="ConfirmDeletion" xml:space="preserve">
     <value>是否删除？</value>
   </data>
@@ -174,14 +183,26 @@
   <data name="HelpB2" xml:space="preserve">
     <value>左/右下角标签点击后可打开相应的文件夹</value>
   </data>
+  <data name="HelpC1" xml:space="preserve">
+    <value>按下 F5 刷新所有图片</value>
+  </data>
   <data name="HelpInfo" xml:space="preserve">
     <value>帮助信息</value>
+  </data>
+  <data name="HowMuchDuplicatesFound" xml:space="preserve">
+    <value>共找到 {0} 个重复项，你想要删除它（它们）吗？</value>
   </data>
   <data name="IsLastPhoto" xml:space="preserve">
     <value>这是最后一张了哦</value>
   </data>
+  <data name="IsScanning" xml:space="preserve">
+    <value>正在进行扫描……</value>
+  </data>
   <data name="Left" xml:space="preserve">
     <value>左箭头</value>
+  </data>
+  <data name="NotFoundDuplicate" xml:space="preserve">
+    <value>未找到重复项！</value>
   </data>
   <data name="NotHoldPhoto" xml:space="preserve">
     <value>所选文件夹内没有图片或格式不支持！</value>
@@ -222,6 +243,9 @@
   <data name="SkipThis" xml:space="preserve">
     <value>跳过</value>
   </data>
+  <data name="Success" xml:space="preserve">
+    <value>成功</value>
+  </data>
   <data name="Support" xml:space="preserve">
     <value>技术支持</value>
   </data>
@@ -236,6 +260,9 @@
   </data>
   <data name="ToLeft" xml:space="preserve">
     <value>置左</value>
+  </data>
+  <data name="Tool" xml:space="preserve">
+    <value>工具</value>
   </data>
   <data name="ToRight" xml:space="preserve">
     <value>置右</value>
