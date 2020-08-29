@@ -61,6 +61,7 @@
                         </Style>
                     </MenuItem.Resources>
                     <MenuItem Header="{x:Static loc:Resources.SettingWindowSize}" Name="SettingWindowSize" Click="SettingWindowSize_Click"/>
+                    <MenuItem Header="{x:Static loc:Resources.SettingLanguage}" Name="SettingLanguage" Click="SettingLanguage_Click"/>
                 </MenuItem>
                 <MenuItem Header="{x:Static loc:Resources.Help}" Style="{StaticResource Main}">
                     <MenuItem.Resources>

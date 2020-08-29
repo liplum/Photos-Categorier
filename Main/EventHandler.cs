@@ -1,4 +1,5 @@
 ﻿using PhotosCategorier.Layout;
+using PhotosCategorier.Main;
 using System.Windows;
 using System.Windows.Input;
 
@@ -41,6 +42,11 @@ namespace PhotosCategorier
         {
             new SetSizeWindow().ShowDialog();
             ResetSize(layout.LayoutType.GetWidth(), layout.LayoutType.GetHeight());
+        }
+
+        private void SettingLanguage_Click(object sender, RoutedEventArgs e)
+        {
+            new SetLanguageWindow().ShowDialog();
         }
 
         private void SettingClassifyFolder_Click(object sender, RoutedEventArgs e)

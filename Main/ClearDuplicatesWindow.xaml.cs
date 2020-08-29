@@ -13,7 +13,7 @@ namespace PhotosCategorier.Main
     /// <summary>
     /// ClearDuplicatesWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class ClearDuplicatesWindow : Window, INotifyPropertyChanged
+    public sealed partial class ClearDuplicatesWindow : Window, INotifyPropertyChanged
     {
         private bool HasDuplicates { get => duplicates.Count != 0; }
 

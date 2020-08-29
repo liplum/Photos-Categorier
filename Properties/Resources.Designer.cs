@@ -304,6 +304,15 @@ namespace PhotosCategorier.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Language 的本地化字符串。
+        /// </summary>
+        public static string Language {
+            get {
+                return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Left Folder 的本地化字符串。
         /// </summary>
         public static string Left {
@@ -417,6 +426,15 @@ namespace PhotosCategorier.Properties {
         public static string SettingClassifyFolder {
             get {
                 return ResourceManager.GetString("SettingClassifyFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Set language 的本地化字符串。
+        /// </summary>
+        public static string SettingLanguage {
+            get {
+                return ResourceManager.GetString("SettingLanguage", resourceCulture);
             }
         }
         

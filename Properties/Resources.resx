@@ -198,6 +198,9 @@
   <data name="IsScanning" xml:space="preserve">
     <value>Scanning...</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
   <data name="Left" xml:space="preserve">
     <value>Left Folder</value>
   </data>
@@ -236,6 +239,9 @@
   </data>
   <data name="SettingClassifyFolder" xml:space="preserve">
     <value>Set a album to categorize</value>
+  </data>
+  <data name="SettingLanguage" xml:space="preserve">
+    <value>Set language</value>
   </data>
   <data name="SettingWindowSize" xml:space="preserve">
     <value>Set window's size</value>

@@ -9,7 +9,7 @@ namespace PhotosCategorier
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public sealed partial class MainWindow : Window
     {
         private readonly Layout.Layout layout;
         public MainWindow()
@@ -33,6 +33,7 @@ namespace PhotosCategorier
 
         private readonly SolidBrush BackgroundBrush = new SolidBrush(Color.FromArgb(122, 240, 240, 240));
 
+        
         private void ResetSize(int Width, int Height)
         {
             this.Width = Width;

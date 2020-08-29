@@ -7,10 +7,22 @@ namespace PhotosCategorier
     /// </summary>
     public partial class App : Application
     {
+        public const string Language_zh = "zh";
+        public const string Language_en = "en";
+
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            //PhotosCategorier.Properties.Resources.Culture = new global::System.Globalization.CultureInfo("en-US");
-            //PhotosCategorier.Properties.Resources.Culture = new global::System.Globalization.CultureInfo("zh-CN");
+            switch (PhotosCategorier.Properties.Settings.Default.Language)
+            {
+                case Language_zh:
+                    PhotosCategorier.Properties.Resources.Culture = new System.Globalization.CultureInfo("zh");
+                    break;
+                case Language_en:
+                    PhotosCategorier.Properties.Resources.Culture = new System.Globalization.CultureInfo("en");
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
