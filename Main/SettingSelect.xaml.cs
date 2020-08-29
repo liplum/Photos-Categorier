@@ -27,12 +27,9 @@ namespace PhotosCategorier.Main
         public static readonly DependencyProperty LabelContentProperty =
             DependencyProperty.Register("LabelContent", typeof(string), typeof(Window));
 
-        public ComboBox ComboBox
-        {
-            get => this.Combo;
-        }
+        public ComboBox ComboBox => this.Combo;
 
-        public Button OK { get => this.OK; }
-        public Button Cancel { get => this.Cancel; }
+        public Button OK => this.OKButton;
+        public Button Cancel => this.CancelButton;
     }
 }

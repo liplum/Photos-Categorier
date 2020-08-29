@@ -7,6 +7,7 @@ namespace PhotosCategorier
     /// </summary>
     public partial class App : Application
     {
+        public const string Language_default = "default";
         public const string Language_zh = "zh";
         public const string Language_en = "en";
 
@@ -14,6 +15,8 @@ namespace PhotosCategorier
         {
             switch (PhotosCategorier.Properties.Settings.Default.Language)
             {
+                case Language_default:
+                    break;
                 case Language_zh:
                     PhotosCategorier.Properties.Resources.Culture = new System.Globalization.CultureInfo("zh");
                     break;
@@ -23,6 +26,11 @@ namespace PhotosCategorier
                 default:
                     break;
             }
+        }
+
+        public void ReloadLanguage()
+        {
+            PhotosCategorier.Properties.Resources.Culture = new System.Globalization.CultureInfo(PhotosCategorier.Properties.Settings.Default.Language);
         }
     }
 }

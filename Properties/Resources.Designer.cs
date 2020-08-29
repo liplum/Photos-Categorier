@@ -376,6 +376,15 @@ namespace PhotosCategorier.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Please reopen this program. 的本地化字符串。
+        /// </summary>
+        public static string PleaseReopen {
+            get {
+                return ResourceManager.GetString("PleaseReopen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Return 的本地化字符串。
         /// </summary>
         public static string Return {

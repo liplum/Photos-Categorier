@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace PhotosCategorier.Main
 {
@@ -10,15 +12,25 @@ namespace PhotosCategorier.Main
         public SetLanguageWindow()
         {
             InitializeComponent();
+            selector = SelectLanguage.ComboBox;
+            InitButton();
             InitCombo();
         }
 
+        private readonly ComboBox selector;
 
+        private void InitButton()
+        {
+            SelectLanguage.OK.Click += OK_Click;
+            SelectLanguage.Cancel.Click += Cancel_Click;
+        }
+
+        private static readonly string[] Languages = { App.Language_default, App.Language_en, App.Language_zh };
 
         private void InitCombo()
         {
-            //LanguageSelcet.Items.Add(App.Language_en);
-            //LanguageSelcet.Items.Add(App.Language_zh);
+            selector.ItemsSource = Languages;
+            selector.SelectedItem = Properties.Settings.Default.Language;
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
@@ -28,6 +40,15 @@ namespace PhotosCategorier.Main
 
         private void OK_Click(object sender, RoutedEventArgs e)
         {
+            var selected = selector.SelectedItem;
+            var curLan = Properties.Settings.Default.Language;
+            if (!selected.Equals(curLan))
+            {
+                Properties.Settings.Default.Language = selected.ToString();
+                Properties.Settings.Default.Save();
+                this.DialogResult = true;
+            }
+
             this.Close();
         }
     }

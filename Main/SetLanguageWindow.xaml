@@ -19,5 +19,5 @@
             <Button Content="{x:Static loc:Resources.OK}" Margin="25,10,0,10" MinWidth="80" MinHeight="30" IsDefault="True" Click="OK_Click"></Button>
         </StackPanel>
     </StackPanel>-->
-    <local:SettingSelect LabelContent="{x:Static loc:Resources.SettingLanguage}"></local:SettingSelect>
+    <local:SettingSelect x:Name="SelectLanguage" LabelContent="{x:Static loc:Resources.SettingLanguage}" ></local:SettingSelect>
 </Window>

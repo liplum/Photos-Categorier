@@ -46,7 +46,11 @@ namespace PhotosCategorier
 
         private void SettingLanguage_Click(object sender, RoutedEventArgs e)
         {
-            new SetLanguageWindow().ShowDialog();
+            var res = new SetLanguageWindow().ShowDialog();
+            if(res == true)
+            {
+                MessageBox.Show(Properties.Resources.PleaseReopen, Properties.Resources.Tip);
+            }
         }
 
         private void SettingClassifyFolder_Click(object sender, RoutedEventArgs e)

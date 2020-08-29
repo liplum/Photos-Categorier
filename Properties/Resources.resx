@@ -222,6 +222,9 @@
   <data name="OK" xml:space="preserve">
     <value>OK</value>
   </data>
+  <data name="PleaseReopen" xml:space="preserve">
+    <value>Please reopen this program.</value>
+  </data>
   <data name="Return" xml:space="preserve">
     <value>Return</value>
   </data>

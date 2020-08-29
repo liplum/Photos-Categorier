@@ -222,6 +222,9 @@
   <data name="OK" xml:space="preserve">
     <value>确定</value>
   </data>
+  <data name="PleaseReopen" xml:space="preserve">
+    <value>请您重新打开此程序。</value>
+  </data>
   <data name="Return" xml:space="preserve">
     <value>返回</value>
   </data>

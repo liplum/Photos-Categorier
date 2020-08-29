@@ -15,8 +15,8 @@
             </ComboBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Content="{x:Static loc:Resources.Cancel}" Margin="0,10,25,10" MinWidth="80" MinHeight="30"></Button>
-            <Button Content="{x:Static loc:Resources.OK}" Margin="25,10,0,10" MinWidth="80" MinHeight="30" IsDefault="True"></Button>
+            <Button Content="{x:Static loc:Resources.Cancel}" Margin="0,10,25,10" MinWidth="80" MinHeight="30" x:Name="CancelButton"></Button>
+            <Button Content="{x:Static loc:Resources.OK}" Margin="25,10,0,10" MinWidth="80" MinHeight="30" IsDefault="True" x:Name="OKButton"></Button>
         </StackPanel>
     </StackPanel>
 
