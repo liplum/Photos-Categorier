@@ -8,7 +8,7 @@
              xmlns:loc="clr-namespace:PhotosCategorier.Properties"
              mc:Ignorable="d" >
 
-    <StackPanel Margin="0,20,0,0">
+    <StackPanel>
         <StackPanel Orientation="Horizontal" Margin="5" HorizontalAlignment="Center">
             <Label Name="SettingLabel" Content="{Binding LabelContent , ElementName=Setting}" HorizontalAlignment="Center" Margin="0,0,20,0"></Label>
             <ComboBox Name="Combo" MinWidth="150">

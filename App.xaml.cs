@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using PhotosCategorier.Layout;
+using System.Windows;
+using static PhotosCategorier.Layout.LayoutSize;
 
 namespace PhotosCategorier
 {
@@ -11,7 +13,18 @@ namespace PhotosCategorier
         public const string Language_zh = "zh";
         public const string Language_en = "en";
 
+        public App()
+        {
+            
+        }
+
         private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            CheckLanguage();
+            CheckLayout();
+        }
+
+        private static void CheckLanguage()
         {
             switch (PhotosCategorier.Properties.Settings.Default.Language)
             {
@@ -28,9 +41,59 @@ namespace PhotosCategorier
             }
         }
 
-        public void ReloadLanguage()
+        private void CheckLayout()
         {
-            PhotosCategorier.Properties.Resources.Culture = new System.Globalization.CultureInfo(PhotosCategorier.Properties.Settings.Default.Language);
+            var layout = (Layout.Layout)Current.Resources["CurLayout"];
+            var settings = PhotosCategorier.Properties.Settings.Default;
+            if (settings.IsFirstOpen)
+            {
+                settings.Width = layout.LayoutType.GetWidth();
+                settings.Height = layout.LayoutType.GetHeight();
+                settings.IsFirstOpen = false;
+                settings.Save();
+            }
+            else
+            {
+                try
+                {
+                    var settingLayout = LayoutSize.GenerateLayout(settings.Width, settings.Height);
+                    layout.SetLayout(settingLayout);
+                }
+                catch (GenrateLayoutFailedException)
+                {
+                    ;
+                }
+            }
+
+        }
+
+        public static bool SetWidth_Height(int width,int height)
+        {
+            if (width <= 0 || height <= 0)
+            {
+                return false;
+            }
+            var settings = PhotosCategorier.Properties.Settings.Default;
+            settings.Width = width;
+            settings.Height = height;
+            settings.Save();
+            return true;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="lan"></param>
+        /// <returns>It returns True when it sucessfully sets language .It returns False only when the original setting is the same as new setting.</returns>
+        public static bool SetLanguage(string lan)
+        {
+            var settings = PhotosCategorier.Properties.Settings.Default;
+            if (!settings.Language.Equals(lan))
+            {
+                settings.Language = lan;
+                settings.Save();
+                return true;
+            }
+            return false;
         }
     }
 }

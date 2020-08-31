@@ -14,6 +14,13 @@ namespace PhotosCategorier
             InitializeComponent();
             curLayout = (Layout.Layout)App.Current.Resources["CurLayout"];
             InitCombo();
+            InitButton();
+        }
+
+        private void InitButton()
+        {
+            SelectSize.OK.Click += OK_Click;
+            SelectSize.Cancel.Click += Cancel_Click;
         }
 
         private readonly Layout.Layout curLayout;
@@ -24,15 +31,15 @@ namespace PhotosCategorier
             var all = Enum.GetValues(typeof(LayoutType));
             int len = all.Length;
             layoutTypes = new LayoutType[len];
+            var names = new string[len];
             for (int i = 0; i < len; ++i)
             {
                 layoutTypes[i] = (LayoutType)all.GetValue(i);
+                names[i] = layoutTypes[i].GetName();
             }
-            foreach (LayoutType t in layoutTypes)
-            {
-                SizeSelcet.Items.Add(t.GetName());
-            }
-            SizeSelcet.SelectedItem = curLayout.LayoutType.GetName();
+            var combo = SelectSize.ComboBox;
+            combo.ItemsSource = names;
+            combo.SelectedItem = curLayout.LayoutType.GetName();
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
@@ -42,7 +49,8 @@ namespace PhotosCategorier
 
         private void OK_Click(object sender, RoutedEventArgs e)
         {
-            int index = SizeSelcet.SelectedIndex;
+            var combo = SelectSize.ComboBox;
+            int index = combo.SelectedIndex;
             if (index >= 0 && index < layoutTypes.Length)
                 curLayout.LayoutType = layoutTypes[index];
             this.Close();

@@ -33,11 +33,12 @@ namespace PhotosCategorier
 
         private readonly SolidBrush BackgroundBrush = new SolidBrush(Color.FromArgb(122, 240, 240, 240));
 
-        
+
         private void ResetSize(int Width, int Height)
         {
             this.Width = Width;
             this.Height = Height;
+            App.SetWidth_Height(Width, Height);
             Photograph.SetSize(Width, Height);
             UpdateImage();
         }

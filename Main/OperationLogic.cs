@@ -334,7 +334,7 @@ namespace PhotosCategorier
 
         private void UpdateImage()
         {
-            if (photographs.Count == 0)
+            if (photographs?.Count == 0)
             {
                 MessageBox.Show(Properties.Resources.HasNoPhoto, Properties.Resources.Error);
                 return;

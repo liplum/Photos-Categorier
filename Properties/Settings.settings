@@ -5,14 +5,17 @@
     <Setting Name="Language" Type="System.String" Scope="User">
       <Value Profile="(Default)">default</Value>
     </Setting>
-    <Setting Name="Width" Type="System.Int32" Scope="Application">
+    <Setting Name="Width" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="Height" Type="System.Int32" Scope="Application">
+    <Setting Name="Height" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="SearchSubfolder" Type="System.Boolean" Scope="Application">
+    <Setting Name="SearchSubfolder" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="IsFirstOpen" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

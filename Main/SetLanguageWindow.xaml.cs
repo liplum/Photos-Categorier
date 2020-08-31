@@ -41,14 +41,7 @@ namespace PhotosCategorier.Main
         private void OK_Click(object sender, RoutedEventArgs e)
         {
             var selected = selector.SelectedItem;
-            var curLan = Properties.Settings.Default.Language;
-            if (!selected.Equals(curLan))
-            {
-                Properties.Settings.Default.Language = selected.ToString();
-                Properties.Settings.Default.Save();
-                this.DialogResult = true;
-            }
-
+            this.DialogResult = App.SetLanguage(selected.ToString());
             this.Close();
         }
     }
