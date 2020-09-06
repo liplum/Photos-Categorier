@@ -126,6 +126,9 @@
   <data name="CannotOpen" xml:space="preserve">
     <value>无法打开文件，可能因为文件已损坏或格式不支持</value>
   </data>
+  <data name="Clear" xml:space="preserve">
+    <value>清空</value>
+  </data>
   <data name="ClearDuplicates" xml:space="preserve">
     <value>清除重复项</value>
   </data>
@@ -170,7 +173,8 @@
 按下 →/D 把图片移动到右边的相册中
 按下 ↓/S 删除这张图片
 按下 ↑/W 跳过这张
-按下 F5 刷新所有图片</value>
+按下 F5 刷新所有图片
+按下 C 清空所有剩余照片</value>
   </data>
   <data name="HelpContentB" xml:space="preserve">
     <value>右上角为剩余的图片计数
@@ -197,6 +201,9 @@
   <data name="Left" xml:space="preserve">
     <value>左箭头</value>
   </data>
+  <data name="Menu" xml:space="preserve">
+    <value>菜单</value>
+  </data>
   <data name="NotFoundDuplicate" xml:space="preserve">
     <value>未找到重复项！</value>
   </data>
@@ -217,6 +224,9 @@
   </data>
   <data name="PleaseReopen" xml:space="preserve">
     <value>请您重新打开此程序。</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>刷新</value>
   </data>
   <data name="Return" xml:space="preserve">
     <value>返回</value>

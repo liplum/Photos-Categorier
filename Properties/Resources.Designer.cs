@@ -88,6 +88,15 @@ namespace PhotosCategorier.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Clear 的本地化字符串。
+        /// </summary>
+        public static string Clear {
+            get {
+                return ResourceManager.GetString("Clear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Clean the duplicates 的本地化字符串。
         /// </summary>
         public static string ClearDuplicates {
@@ -207,9 +216,10 @@ namespace PhotosCategorier.Properties {
         /// <summary>
         ///   查找类似 Press ←/A to Move this photo to left album
         ///Press ←/D to Move this photo to right album
-        ///Press ↓/S to Delete this photo
-        ///Press ↑/W to Skip this photo
-        ///Press F5 to Refresh all photo 的本地化字符串。
+        ///Press ↓/S/Delete to Delete this photo
+        ///Press ↑/W to Skip this photos
+        ///Press F5 to Refresh all photos
+        ///Press C to Clear all the leftover photos 的本地化字符串。
         /// </summary>
         public static string HelpContentA {
             get {
@@ -291,6 +301,15 @@ namespace PhotosCategorier.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Menu 的本地化字符串。
+        /// </summary>
+        public static string Menu {
+            get {
+                return ResourceManager.GetString("Menu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Not found duplicate ! 的本地化字符串。
         /// </summary>
         public static string NotFoundDuplicate {
@@ -350,6 +369,15 @@ namespace PhotosCategorier.Properties {
         public static string PleaseReopen {
             get {
                 return ResourceManager.GetString("PleaseReopen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Refresh 的本地化字符串。
+        /// </summary>
+        public static string Refresh {
+            get {
+                return ResourceManager.GetString("Refresh", resourceCulture);
             }
         }
         

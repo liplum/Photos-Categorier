@@ -46,6 +46,7 @@ namespace PhotosCategorier.Main
                 Source = this,
                 Path = new PropertyPath(nameof(Progress))
             });
+            Cancel.IsEnabled = true;
         }
 
         private readonly List<Photograph> photographs;
@@ -64,7 +65,7 @@ namespace PhotosCategorier.Main
             {
                 Counter.Content = string.Format(Properties.Resources.HowMuchDuplicatesFound, count);
                 Counter.FontSize = 15;
-                Cancel.IsEnabled = OK.IsEnabled = true;
+                OK.IsEnabled = true;
             }
         }
 

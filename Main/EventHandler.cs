@@ -1,5 +1,6 @@
 ﻿using PhotosCategorier.Layout;
 using PhotosCategorier.Main;
+using System;
 using System.Windows;
 using System.Windows.Input;
 
@@ -47,7 +48,7 @@ namespace PhotosCategorier
         private void SettingLanguage_Click(object sender, RoutedEventArgs e)
         {
             var res = new SetLanguageWindow().ShowDialog();
-            if(res == true)
+            if (res == true)
             {
                 MessageBox.Show(Properties.Resources.PleaseReopen, Properties.Resources.Tip);
             }
@@ -55,12 +56,12 @@ namespace PhotosCategorier
 
         private void SettingClassifyFolder_Click(object sender, RoutedEventArgs e)
         {
-            SetClassifyFolder();
+            SetClassifyFolderWithSelection();
         }
 
         private void AddingClassifyFolder_Click(object sender, RoutedEventArgs e)
         {
-            AddClassifyFolder();
+            AddClassifyFolderWithSelection();
         }
 
         private void ClearingDuplicates_Click(object sender, RoutedEventArgs e)
@@ -83,8 +84,47 @@ namespace PhotosCategorier
             SkipThisPhoto();
         }
 
+        private void RefreshButton_Click(object sender, RoutedEventArgs e)
+        {
+            Refresh();
+        }
+
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
+        {
+            Clear();
+        }
+
+        private void MainWin_PreviewDrop(object sender, DragEventArgs e)
+        {
+            var array = (Array)e.Data.GetData(DataFormats.FileDrop);
+            if (array == null)
+            {
+                e.Handled = true;
+            }
+            else
+            {
+                DropFolder(array);
+            }
+        }
+
+        private void MainWin_PreviewDragOver(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effects = DragDropEffects.Link;
+                e.Handled = true;
+            }
+            else
+            {
+                e.Effects = DragDropEffects.None;
+            }
+        }
+
+
         private void Window_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
+            this.Focus();
+
             switch (e.Key)
             {
                 case Key.W:
@@ -98,6 +138,7 @@ namespace PhotosCategorier
                     break;
                 case Key.S:
                 case Key.Down:
+                case Key.Delete:
                     {
                         if (photographs != null)
                             DeleteThisPhoto();
@@ -131,13 +172,19 @@ namespace PhotosCategorier
                     break;
                 case Key.F5:
                     {
-                        if(allClassifyFolder != null && allClassifyFolder.Count != 0)
+                        if (allClassifyFolder != null && allClassifyFolder.Count != 0)
                         {
                             Refresh();
                         }
                     }
                     break;
+                case Key.C:
+                    {
+                        Clear();
+                    }
+                    break;
             }
+
         }
     }
 }

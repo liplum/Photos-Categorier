@@ -2,6 +2,7 @@
 using PhotosCategorier.Algorithm;
 using PhotosCategorier.Main;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -20,10 +21,14 @@ namespace PhotosCategorier
         /// 设置需分类的文件夹
         /// 使 删除 和 跳过 按钮可用
         /// </summary>
-        private void SetClassifyFolder()
+        private void SetClassifyFolderWithSelection()
         {
             var directories = SelectFolders(Properties.Resources.SettingClassifyFolder);
+            SetClassifyFolder(directories);
+        }
 
+        private void SetClassifyFolder(DirectoryInfo[] directories)
+        {
             if (directories != null)
             {
                 photographs = new List<Photograph>();
@@ -38,6 +43,7 @@ namespace PhotosCategorier
                 {
                     DeleteThis.IsEnabled = SkipThis.IsEnabled = true;
                     AddingClassifyFolder.IsEnabled = true;
+                    RefreshButton.IsEnabled = ClearButton.IsEnabled = true;
                     InitImage();
                 }
                 else
@@ -67,18 +73,29 @@ namespace PhotosCategorier
             }
         }
 
-        private void AddClassifyFolder()
+        private void AddClassifyFolderWithSelection()
         {
             var directories = SelectFolders(Properties.Resources.AddingClassifyFolder);
+            AaddClassifyFolder(directories);
+        }
 
+        private void AaddClassifyFolder(DirectoryInfo[] directories)
+        {
             if (directories != null)
             {
-                foreach (var dir in directories)
+                if (allClassifyFolder == null)
                 {
-                    AddClassifyFolderFunc(dir, IsIncludeSubfolder);
+                    SetClassifyFolder(directories);
                 }
+                else
+                {
+                    foreach (var dir in directories)
+                    {
+                        AddClassifyFolderFunc(dir, IsIncludeSubfolder);
+                    }
 
-                UpdateFileCounter();
+                    UpdateFileCounter();
+                }
             }
 
             void AddClassifyFolderFunc(DirectoryInfo dir, bool isIncludeSubfolder)
@@ -106,14 +123,15 @@ namespace PhotosCategorier
 
                 bool NotHas()
                 {
+                    bool notHas = true;
                     foreach (var folder in allClassifyFolder)
                     {
                         if (curAlbum.Equals(folder))
                         {
-                            return false;
+                            notHas = false;
                         }
                     }
-                    return true;
+                    return notHas;
                 }
             }
         }
@@ -133,6 +151,21 @@ namespace PhotosCategorier
                 window.ShowDialog();
                 Refresh();
             }
+        }
+
+        private void DropFolder(Array array)
+        {
+            var allDir = new List<DirectoryInfo>();
+            foreach(var item in array)
+            {
+                var dir = new DirectoryInfo(item.ToString());
+                if (dir.Exists)
+                {
+                    allDir.Add(dir);
+                }
+            }
+            var dirs = allDir.ToArray();
+            AaddClassifyFolder(dirs);
         }
 
         public bool IsIncludeSubfolder
@@ -171,6 +204,13 @@ namespace PhotosCategorier
             {
                 allClassifyFolder.Remove(album);
             }
+            InitImage();
+        }
+
+        private void Clear()
+        {
+            photographs = new List<Photograph>();
+            var needRemove = new List<Album>();
             InitImage();
         }
 

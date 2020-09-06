@@ -126,6 +126,9 @@
   <data name="CannotOpen" xml:space="preserve">
     <value>Can't open the file, Possibly because it's corrupt or in a unsupported format</value>
   </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
   <data name="ClearDuplicates" xml:space="preserve">
     <value>Clean the duplicates</value>
   </data>
@@ -168,9 +171,10 @@
   <data name="HelpContentA" xml:space="preserve">
     <value>Press ←/A to Move this photo to left album
 Press ←/D to Move this photo to right album
-Press ↓/S to Delete this photo
-Press ↑/W to Skip this photo
-Press F5 to Refresh all photo</value>
+Press ↓/S/Delete to Delete this photo
+Press ↑/W to Skip this photos
+Press F5 to Refresh all photos
+Press C to Clear all the leftover photos</value>
   </data>
   <data name="HelpContentB" xml:space="preserve">
     <value>Remaining file's count on Top-Right
@@ -197,6 +201,9 @@ Click Button-Left/Right to open corresponding folder</value>
   <data name="Left" xml:space="preserve">
     <value>Left Folder</value>
   </data>
+  <data name="Menu" xml:space="preserve">
+    <value>Menu</value>
+  </data>
   <data name="NotFoundDuplicate" xml:space="preserve">
     <value>Not found duplicate !</value>
   </data>
@@ -217,6 +224,9 @@ Click Button-Left/Right to open corresponding folder</value>
   </data>
   <data name="PleaseReopen" xml:space="preserve">
     <value>Please reopen this program.</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Refresh</value>
   </data>
   <data name="Return" xml:space="preserve">
     <value>Return</value>
