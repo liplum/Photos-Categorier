@@ -15,13 +15,23 @@ namespace PhotosCategorier
 
         public App()
         {
-            
+             
         }
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             CheckLanguage();
             CheckLayout();
+        }
+
+        private void Application_Exit(object sender, ExitEventArgs e)
+        {
+            SaveProperties();
+        }
+
+        private void SaveProperties()
+        {
+            PhotosCategorier.Properties.Settings.Default.Save();
         }
 
         private static void CheckLanguage()
@@ -50,12 +60,11 @@ namespace PhotosCategorier
                 settings.Width = layout.LayoutType.GetWidth();
                 settings.Height = layout.LayoutType.GetHeight();
                 settings.IsFirstOpen = false;
-                settings.Save();
             }
             else
             {
                 try
-                {
+                { 
                     var settingLayout = LayoutSize.GenerateLayout(settings.Width, settings.Height);
                     layout.SetLayout(settingLayout);
                 }
@@ -76,7 +85,6 @@ namespace PhotosCategorier
             var settings = PhotosCategorier.Properties.Settings.Default;
             settings.Width = width;
             settings.Height = height;
-            settings.Save();
             return true;
         }
         /// <summary>
@@ -90,7 +98,6 @@ namespace PhotosCategorier
             if (!settings.Language.Equals(lan))
             {
                 settings.Language = lan;
-                settings.Save();
                 return true;
             }
             return false;

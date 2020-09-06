@@ -62,12 +62,12 @@ namespace PhotosCategorier.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool SearchSubfolder {
+        public bool IncludeSubfolder {
             get {
-                return ((bool)(this["SearchSubfolder"]));
+                return ((bool)(this["IncludeSubfolder"]));
             }
             set {
-                this["SearchSubfolder"] = value;
+                this["IncludeSubfolder"] = value;
             }
         }
         

@@ -10,7 +10,8 @@
         Title="{x:Static loc:Resources.Title}" 
         Width="{Binding WINDOW_WIDTH,Source={StaticResource CurLayout}}" 
         Height="{Binding WINDOW_HEIGHT,Source={StaticResource CurLayout}}"
-        ResizeMode="NoResize" KeyUp="Window_KeyUp">
+        ResizeMode="NoResize" KeyUp="Window_KeyUp"
+          x:Name="MainWin">
     <Window.Resources>
         <SolidColorBrush x:Key="Translucent" Color="White" Opacity="0.8"></SolidColorBrush>
         <Style TargetType="MenuItem">
@@ -62,6 +63,8 @@
                     </MenuItem.Resources>
                     <MenuItem Header="{x:Static loc:Resources.SettingWindowSize}" Name="SettingWindowSize" Click="SettingWindowSize_Click"/>
                     <MenuItem Header="{x:Static loc:Resources.SettingLanguage}" Name="SettingLanguage" Click="SettingLanguage_Click"/>
+                    <MenuItem Header="{x:Static loc:Resources.IncludeSubfolder}" IsCheckable="True" x:Name="IncludeSubfolder" IsChecked="{Binding ElementName=MainWin , Path=IsIncludeSubfolder , Mode=TwoWay}">
+                    </MenuItem>
                 </MenuItem>
                 <MenuItem Header="{x:Static loc:Resources.Help}" Style="{StaticResource Main}">
                     <MenuItem.Resources>
@@ -72,15 +75,9 @@
                     <MenuItem Header="{x:Static loc:Resources.HelpInfo}">
                         <MenuItem.ToolTip>
                             <StackPanel>
-                                <Label Content="{x:Static loc:Resources.HelpA1}" ></Label>
-                                <Label Content="{x:Static loc:Resources.HelpA2}" ></Label>
-                                <Label Content="{x:Static loc:Resources.HelpA3}" ></Label>
-                                <Label Content="{x:Static loc:Resources.HelpA4}" ></Label>
+                                <Label Content="{x:Static loc:Resources.HelpContentA}" ></Label>
                                 <Separator></Separator>
-                                <Label Content="{x:Static loc:Resources.HelpB1}"></Label>
-                                <Label Content="{x:Static loc:Resources.HelpB2}"></Label>
-                                <Separator></Separator>
-                                <Label Content="{x:Static loc:Resources.HelpC1}"></Label>
+                                <Label Content="{x:Static loc:Resources.HelpContentB}"></Label>
                             </StackPanel>
                         </MenuItem.ToolTip>
                     </MenuItem>

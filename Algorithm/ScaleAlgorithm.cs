@@ -54,5 +54,52 @@ namespace PhotosCategorier.Algorithm
 
             double 归一化(double 值) => 值 / 长度;
         }
+
+        public static (int ScaleWidth, int ScaleHeight) 比例缩放法((int Width, int Height) ImageSize)
+        {
+            int 原宽度 = ImageSize.Width,
+                原高度 = ImageSize.Height;
+            int 最大宽度 = Photograph.MaxWidth,
+                最大高度 = Photograph.MaxHeight;
+            int 新宽度,
+                新高度;
+
+            const double 边距 = 5f / 6f;
+
+            double 宽比高 = (double)原宽度 / 原高度;
+
+            if (最大宽度 > 最大高度)
+            {
+                获取新宽高(较小的宽或高:最大高度);
+            }
+            else
+            {
+                获取新宽高(较小的宽或高:最大宽度);
+            }
+            return (新宽度, 新高度);
+
+            void 获取新宽高(int 较小的宽或高)
+            {
+                if (原宽度 > 原高度)
+                {
+                    新宽度 = 有边距化(最大宽度);
+                    新高度 = (int)(新宽度 / 宽比高);
+                }
+                else if (原高度 > 原宽度)
+                {
+                    新高度 = 有边距化(最大高度);
+                    新宽度 = (int)(新高度 * 宽比高);
+                }
+                else
+                {
+                    新高度 = 新宽度 = 有边距化(较小的宽或高);
+                }
+
+                static int 有边距化(int 需要添加边距的高或宽)
+                {
+                    return (int)(需要添加边距的高或宽 * 边距);
+                }
+            }
+        }
     }
 }

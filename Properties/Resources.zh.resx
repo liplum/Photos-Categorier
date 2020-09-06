@@ -165,32 +165,25 @@
   <data name="Help" xml:space="preserve">
     <value>帮助</value>
   </data>
-  <data name="HelpA1" xml:space="preserve">
-    <value>使用 ←/A 把图片移动到左边的相册中</value>
+  <data name="HelpContentA" xml:space="preserve">
+    <value>按下 ←/A 把图片移动到左边的相册中
+按下 →/D 把图片移动到右边的相册中
+按下 ↓/S 删除这张图片
+按下 ↑/W 跳过这张
+按下 F5 刷新所有图片</value>
   </data>
-  <data name="HelpA2" xml:space="preserve">
-    <value>使用 →/D 把图片移动到右边的相册中</value>
-  </data>
-  <data name="HelpA3" xml:space="preserve">
-    <value>使用 ↓/S 删除这张图片</value>
-  </data>
-  <data name="HelpA4" xml:space="preserve">
-    <value>使用 ↑/W 跳过这张</value>
-  </data>
-  <data name="HelpB1" xml:space="preserve">
-    <value>右上角为剩余的图片计数</value>
-  </data>
-  <data name="HelpB2" xml:space="preserve">
-    <value>左/右下角标签点击后可打开相应的文件夹</value>
-  </data>
-  <data name="HelpC1" xml:space="preserve">
-    <value>按下 F5 刷新所有图片</value>
+  <data name="HelpContentB" xml:space="preserve">
+    <value>右上角为剩余的图片计数
+左/右下角标签点击后可打开相应的文件夹</value>
   </data>
   <data name="HelpInfo" xml:space="preserve">
     <value>帮助信息</value>
   </data>
   <data name="HowMuchDuplicatesFound" xml:space="preserve">
     <value>共找到 {0} 个重复项，你想要删除它（它们）吗？</value>
+  </data>
+  <data name="IncludeSubfolder" xml:space="preserve">
+    <value>包含子文件夹</value>
   </data>
   <data name="IsLastPhoto" xml:space="preserve">
     <value>这是最后一张了哦</value>

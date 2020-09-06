@@ -75,6 +75,8 @@ namespace PhotosCategorier.Layout
             Size1280x960,
             [Size(1080, 720), FontSize(25)]
             Size1080x720,
+            [Size(720, 1080), FontSize(25)]
+            Size720x1080,
             [Size(960, 640), FontSize(23)]
             Size960x640,
             [Size(720, 480), FontSize(22)]

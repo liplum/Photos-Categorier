@@ -123,7 +123,7 @@ namespace PhotosCategorier
             using Graphics G = Graphics.FromImage(img);
             int deltaX = (MaxWidth - NeedCenteredImage.Width) / 2;
             int deltaY = (MaxHeight - NeedCenteredImage.Height) / 2;
-            G.DrawImage(NeedCenteredImage, new Rectangle(deltaX, deltaY, NeedCenteredImage.Width, NeedCenteredImage.Height),
+            G.DrawImage(NeedCenteredImage, new Rectangle(deltaX, deltaY / 2, NeedCenteredImage.Width, NeedCenteredImage.Height),
                 new Rectangle(0, 0, NeedCenteredImage.Width, NeedCenteredImage.Height), GraphicsUnit.Pixel);
             return img;
         }

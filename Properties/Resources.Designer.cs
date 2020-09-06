@@ -205,65 +205,25 @@ namespace PhotosCategorier.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Use ←/A Move this photo to left album 的本地化字符串。
+        ///   查找类似 Press ←/A to Move this photo to left album
+        ///Press ←/D to Move this photo to right album
+        ///Press ↓/S to Delete this photo
+        ///Press ↑/W to Skip this photo
+        ///Press F5 to Refresh all photo 的本地化字符串。
         /// </summary>
-        public static string HelpA1 {
+        public static string HelpContentA {
             get {
-                return ResourceManager.GetString("HelpA1", resourceCulture);
+                return ResourceManager.GetString("HelpContentA", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   查找类似 Use ←/D Move this photo to right album 的本地化字符串。
+        ///   查找类似 Remaining file&apos;s count on Top-Right
+        ///Click Button-Left/Right to open corresponding folder 的本地化字符串。
         /// </summary>
-        public static string HelpA2 {
+        public static string HelpContentB {
             get {
-                return ResourceManager.GetString("HelpA2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Use ↓/S Delete this photo 的本地化字符串。
-        /// </summary>
-        public static string HelpA3 {
-            get {
-                return ResourceManager.GetString("HelpA3", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Use ↑/W Skip this photo 的本地化字符串。
-        /// </summary>
-        public static string HelpA4 {
-            get {
-                return ResourceManager.GetString("HelpA4", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Remaining file&apos;s count on Top-Right 的本地化字符串。
-        /// </summary>
-        public static string HelpB1 {
-            get {
-                return ResourceManager.GetString("HelpB1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Click Button-Left/Right to open corresponding folder 的本地化字符串。
-        /// </summary>
-        public static string HelpB2 {
-            get {
-                return ResourceManager.GetString("HelpB2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Press F5 to refresh all photo 的本地化字符串。
-        /// </summary>
-        public static string HelpC1 {
-            get {
-                return ResourceManager.GetString("HelpC1", resourceCulture);
+                return ResourceManager.GetString("HelpContentB", resourceCulture);
             }
         }
         
@@ -282,6 +242,15 @@ namespace PhotosCategorier.Properties {
         public static string HowMuchDuplicatesFound {
             get {
                 return ResourceManager.GetString("HowMuchDuplicatesFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Include subfolder 的本地化字符串。
+        /// </summary>
+        public static string IncludeSubfolder {
+            get {
+                return ResourceManager.GetString("IncludeSubfolder", resourceCulture);
             }
         }
         

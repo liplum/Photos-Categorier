@@ -63,6 +63,7 @@ namespace PhotosCategorier.Main
             else
             {
                 Counter.Content = string.Format(Properties.Resources.HowMuchDuplicatesFound, count);
+                Counter.FontSize = 15;
                 Cancel.IsEnabled = OK.IsEnabled = true;
             }
         }

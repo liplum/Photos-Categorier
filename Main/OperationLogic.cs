@@ -3,6 +3,7 @@ using PhotosCategorier.Algorithm;
 using PhotosCategorier.Main;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -10,7 +11,7 @@ using static PhotosCategorier.Algorithm.FileAlgorithm;
 
 namespace PhotosCategorier
 {
-    public partial class MainWindow
+    public partial class MainWindow : INotifyPropertyChanged
     {
 
         private List<Album> allClassifyFolder;
@@ -30,13 +31,7 @@ namespace PhotosCategorier
 
                 foreach (var dir in directories)
                 {
-                    var curAlbum = new Album(dir);
-                    allClassifyFolder.Add(curAlbum);
-                    var curAlbumImages = curAlbum.GetAllPhotographs();
-                    if (curAlbumImages != null)
-                    {
-                        photographs.AddRange(curAlbumImages);
-                    }
+                    SetClassifyFolderFunc(dir, IsIncludeSubfolder);
                 }
 
                 if (photographs.Count > 0)
@@ -50,6 +45,26 @@ namespace PhotosCategorier
                     MessageBox.Show(Properties.Resources.NotHoldPhoto, Properties.Resources.Error);
                 }
             }
+
+            void SetClassifyFolderFunc(DirectoryInfo dir, bool isIncludeSubfolder)
+            {
+                var curAlbum = new Album(dir);
+                allClassifyFolder.Add(curAlbum);
+                var curAlbumImages = curAlbum.GetAllPhotographs();
+                if (curAlbumImages != null)
+                {
+                    photographs.AddRange(curAlbumImages);
+                }
+
+                if (isIncludeSubfolder)
+                {
+                    var subFolders = dir.GetDirectories();
+                    foreach (var sub in subFolders)
+                    {
+                        SetClassifyFolderFunc(sub, isIncludeSubfolder);
+                    }
+                }
+            }
         }
 
         private void AddClassifyFolder()
@@ -60,32 +75,46 @@ namespace PhotosCategorier
             {
                 foreach (var dir in directories)
                 {
-                    var curAlbum = new Album(dir);
-
-                    if (NotHas())
-                    {
-                        allClassifyFolder.Add(curAlbum);
-                        var curAlbumImages = curAlbum.GetAllPhotographs();
-                        if (curAlbumImages != null)
-                        {
-                            photographs.AddRange(curAlbumImages);
-                        }
-                    }
-
-                    bool NotHas()
-                    {
-                        foreach (var folder in allClassifyFolder)
-                        {
-                            if (curAlbum.Equals(folder))
-                            {
-                                return false;
-                            }
-                        }
-                        return true;
-                    }
+                    AddClassifyFolderFunc(dir, IsIncludeSubfolder);
                 }
 
                 UpdateFileCounter();
+            }
+
+            void AddClassifyFolderFunc(DirectoryInfo dir, bool isIncludeSubfolder)
+            {
+                var curAlbum = new Album(dir);
+
+                if (NotHas())
+                {
+                    allClassifyFolder.Add(curAlbum);
+                    var curAlbumImages = curAlbum.GetAllPhotographs();
+                    if (curAlbumImages != null)
+                    {
+                        photographs.AddRange(curAlbumImages);
+                    }
+                }
+
+                if (isIncludeSubfolder)
+                {
+                    var subFolders = dir.GetDirectories();
+                    foreach (var sub in subFolders)
+                    {
+                        AddClassifyFolderFunc(sub, isIncludeSubfolder);
+                    }
+                }
+
+                bool NotHas()
+                {
+                    foreach (var folder in allClassifyFolder)
+                    {
+                        if (curAlbum.Equals(folder))
+                        {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
             }
         }
 
@@ -103,6 +132,21 @@ namespace PhotosCategorier
                 var window = new ClearDuplicatesWindow(photographs);
                 window.ShowDialog();
                 Refresh();
+            }
+        }
+
+        public bool IsIncludeSubfolder
+        {
+            get => Properties.Settings.Default.IncludeSubfolder;
+            set
+            {
+                var settings = Properties.Settings.Default;
+
+                if (settings.IncludeSubfolder != value)
+                {
+                    settings.IncludeSubfolder = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsIncludeSubfolder)));
+                }
             }
         }
 

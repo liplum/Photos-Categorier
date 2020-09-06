@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:PhotosCategorier.Main"
         mc:Ignorable="d"
         xmlns:loc="clr-namespace:PhotosCategorier.Properties"
-        Title="{x:Static loc:Resources.ClearDuplicates}" Height="150" Width="350"
-        ResizeMode="NoResize" Loaded="Window_Loaded" >
+        Title="{x:Static loc:Resources.ClearDuplicates}" Height="150" MinWidth="350"
+        ResizeMode="NoResize" Loaded="Window_Loaded" SizeToContent="Width">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -24,7 +24,7 @@
                 <Setter Property="Margin" Value="30,5"></Setter>
             </Style>
         </Grid.Resources>
-        <Label Name="Counter" Content="{x:Static loc:Resources.IsScanning}" Grid.ColumnSpan="2" FontSize="20"></Label>
+        <Label Name="Counter" Content="{x:Static loc:Resources.IsScanning}" Grid.ColumnSpan="2" FontSize="20" VerticalContentAlignment="Center"></Label>
         <ProgressBar Name="progress" Grid.Row="1" Grid.ColumnSpan="2" Height="auto" Margin="5"></ProgressBar>
         <Button Content="{x:Static loc:Resources.OK}" Name="OK" Grid.Row="2" IsEnabled="False" Click="OK_Click"></Button>
         <Button Content="{x:Static loc:Resources.Cancel}" Name="Cancel" Grid.Row="2" Grid.Column="2" IsEnabled="False" IsDefault="True" Click="Cancel_Click"></Button>

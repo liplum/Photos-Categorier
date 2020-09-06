@@ -1,5 +1,6 @@
 ﻿using PhotosCategorier.Algorithm;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Windows;
@@ -20,7 +21,7 @@ namespace PhotosCategorier
         }
         public void InitPhotograph()
         {
-            Photograph.GetScaleSize = ScaleAlgorithm.折半缩放法;
+            Photograph.GetScaleSize = ScaleAlgorithm.比例缩放法;
             Photograph.BackgroundBrush = BackgroundBrush;
             Photograph.SetSize(layout.WINDOW_WIDTH, layout.WINDOW_HEIGHT);
         }
@@ -33,6 +34,7 @@ namespace PhotosCategorier
 
         private readonly SolidBrush BackgroundBrush = new SolidBrush(Color.FromArgb(122, 240, 240, 240));
 
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private void ResetSize(int Width, int Height)
         {
