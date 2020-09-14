@@ -23,9 +23,6 @@
             x:Key="Translucent"
             Opacity="0.8"
             Color="White" />
-        <Style TargetType="MenuItem">
-            <Setter Property="FontSize" Value="{Binding FontSize, Source={StaticResource CurLayout}}" />
-        </Style>
         <Style TargetType="Label">
             <Setter Property="FontSize" Value="{Binding FontSize, Source={StaticResource CurLayout}}" />
         </Style>

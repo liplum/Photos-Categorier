@@ -5,7 +5,7 @@ namespace PhotosCategorier.Algorithm
 {
     public static class FileAlgorithm
     {
-        public static string GetNameFromPath(string filePath)
+        public static string GetLastName(this string filePath)
         {
             var strs = filePath.Split('\\');
             return strs[^1];
@@ -27,7 +27,7 @@ namespace PhotosCategorier.Algorithm
             try
             {
                 //文件不存在
-                File.Move(filePath, directory.FullName + @"\" + GetNameFromPath(filePath));
+                File.Move(filePath, directory.FullName + @"\" + filePath.GetLastName());
             }
             catch (DirectoryNotFoundException)
             {
@@ -55,20 +55,6 @@ namespace PhotosCategorier.Algorithm
                 ;
             }
         }
-        /*/// <summary>
-        /// 目标文件夹不存在，文件被占用
-        /// </summary>
-        public class FolderNonexistentOrHasOccupiedException : Exception
-        {
-            public FolderNonexistentOrHasOccupiedException(string message) : base(message) { }
-        }
-        /// <summary>
-        /// 文件不存在
-        /// </summary>
-        public class FileNonexistentException : Exception
-        {
-            public FileNonexistentException(string message) : base(message) { }
-        }*/
     }
 }
 
