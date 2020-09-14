@@ -398,7 +398,7 @@ namespace PhotosCategorier
 
                 var photo = photographs[curPhoto];
                 var file = photo.FilePath;
-                var r = MessageBox.Show($"{Properties.Resources.ConfirmDeletion}\n{GetLastName(file)}",
+                var r = MessageBox.Show($"{Properties.Resources.ConfirmDeletion}\n{file.GetLastName()}",
                     Properties.Resources.Warnning, MessageBoxButton.OKCancel);
                 if (r == MessageBoxResult.OK)
                 {
