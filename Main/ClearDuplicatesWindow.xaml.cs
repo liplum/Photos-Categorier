@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using static PhotosCategorier.Algorithm.FileAlgorithm;
+using static PhotosCategorier.Algorithm.FileTool;
 
 namespace PhotosCategorier.Main
 {
@@ -129,7 +129,7 @@ namespace PhotosCategorier.Main
 
                 foreach (var duplcate in duplicates)
                 {
-                    duplcate.DeleteFile();
+                    duplcate.DeleteFileToRecycleBin();
                     Progress += per;
                 }
                 Progress = MAX_PROGRESS;

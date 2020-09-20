@@ -8,7 +8,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
-using static PhotosCategorier.Algorithm.FileAlgorithm;
+using static PhotosCategorier.Algorithm.FileTool;
 
 namespace PhotosCategorier
 {
@@ -210,7 +210,7 @@ namespace PhotosCategorier
         private void Clear()
         {
             photographs = new List<Photograph>();
-            var needRemove = new List<Album>();
+            allClassifyFolder = new List<Album>();
             InitImage();
         }
 
@@ -404,7 +404,7 @@ namespace PhotosCategorier
                 {
                     try
                     {
-                        file.DeleteFile();
+                        file.DeleteFileToRecycleBin();
                     }
                     catch (IOException)
                     {
@@ -434,7 +434,7 @@ namespace PhotosCategorier
                 var r = MessageBox.Show($"{Properties.Resources.CannotOpen}\n{file.GetLastName()}\n{Properties.Resources.ConfirmDeletion}", Properties.Resources.Error, MessageBoxButton.OKCancel);
                 if (r == MessageBoxResult.OK)
                 {
-                    file.DeleteFile();
+                    file.DeleteFileToRecycleBin();
                 }
                 NextImage();
             }

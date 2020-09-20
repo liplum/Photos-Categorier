@@ -1,9 +1,10 @@
 ﻿using System;
 using System.IO;
+using Microsoft.VisualBasic.FileIO;
 
 namespace PhotosCategorier.Algorithm
 {
-    public static class FileAlgorithm
+    public static class FileTool
     {
         public static string GetLastName(this string filePath)
         {
@@ -52,6 +53,18 @@ namespace PhotosCategorier.Algorithm
             catch (IOException)
             {
                 //等待被删除的文件夹不存在
+                ;
+            }
+        }
+
+        public static void DeleteFileToRecycleBin(this string filePath)
+        {
+            try
+            {
+                FileSystem.DeleteFile(filePath, UIOption.AllDialogs, RecycleOption.SendToRecycleBin);
+            }
+            catch (Exception)
+            {
                 ;
             }
         }
