@@ -42,7 +42,7 @@
             Grid.ColumnSpan="2"
             Height="auto"
             Margin="5"
-            Value="{Binding,Path=Progress,Mode=OneWayToSource,ElementName=ClearWindow}" />
+            Value="{Binding Path=Progress, ElementName=ClearWindow, Mode=OneWay}" />
         <Button
             Name="OK"
             Grid.Row="2"

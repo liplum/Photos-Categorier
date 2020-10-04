@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
 using static PhotosCategorier.Algorithm.FileTool;
 
 namespace PhotosCategorier.Main
@@ -41,11 +39,6 @@ namespace PhotosCategorier.Main
             InitializeComponent();
             this.photographs = photographs;
             progress.Maximum = MAX_PROGRESS;
-            progress.SetBinding(ProgressBar.ValueProperty, new Binding()
-            {
-                Source = this,
-                Path = new PropertyPath(nameof(Progress))
-            });
             Cancel.IsEnabled = true;
         }
 
@@ -111,7 +104,7 @@ namespace PhotosCategorier.Main
             if (HasDuplicates)
             {
                 await ClearDuplicates();
-                MessageBox.Show(Properties.Resources.ClearDuplicatesSuccessfully,Properties.Resources.Success);
+                MessageBox.Show(Properties.Resources.ClearDuplicatesSuccessfully, Properties.Resources.Success);
                 this.DialogResult = true;
             }
             this.Close();

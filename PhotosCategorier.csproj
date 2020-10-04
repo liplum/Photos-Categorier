@@ -48,9 +48,9 @@
     </Compile>
     
     <Compile Update="Properties\Resources.zh.Designer.cs">
-      <DependentUpon>Resources.zh.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.zh.resx</DependentUpon>
     </Compile>
     
     <Compile Update="Properties\Settings.Designer.cs">
