@@ -400,7 +400,7 @@ namespace PhotosCategorier.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Keep Left-Arrow to point to a Album 的本地化字符串。
+        ///   查找类似 Select Left-Arrow to point to a Album 的本地化字符串。
         /// </summary>
         public static string SelectLeftFolder {
             get {
@@ -409,7 +409,7 @@ namespace PhotosCategorier.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Keep Right-Arrow to point to a Album 的本地化字符串。
+        ///   查找类似 Select Right-Arrow to point to a Album 的本地化字符串。
         /// </summary>
         public static string SelectRightFolder {
             get {

@@ -2,7 +2,6 @@
 using PhotosCategorier.Algorithm;
 using PhotosCategorier.Main;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -16,6 +15,36 @@ namespace PhotosCategorier
     {
 
         private List<Album> allClassifyFolder;
+
+        public bool IsIncludeSubfolder
+        {
+            get => Properties.Settings.Default.IncludeSubfolder;
+            set
+            {
+                var settings = Properties.Settings.Default;
+
+                if (settings.IncludeSubfolder != value)
+                {
+                    settings.IncludeSubfolder = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsIncludeSubfolder)));
+                }
+            }
+        }
+
+        private int remainingFiles = 0;
+
+        public int RemainingFiles
+        {
+            get => remainingFiles;
+            set
+            {
+                if (remainingFiles != value)
+                {
+                    remainingFiles = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(RemainingFiles)));
+                }
+            }
+        }
 
         /// <summary>
         /// 设置需分类的文件夹
@@ -31,7 +60,7 @@ namespace PhotosCategorier
         {
             if (directories != null)
             {
-                photographs = new List<Photograph>();
+                photographs.Clear();
                 allClassifyFolder = new List<Album>();
 
                 foreach (var dir in directories)
@@ -76,10 +105,10 @@ namespace PhotosCategorier
         private void AddClassifyFolderWithSelection()
         {
             var directories = SelectFolders(Properties.Resources.AddingClassifyFolder);
-            AaddClassifyFolder(directories);
+            AddClassifyFolder(directories);
         }
 
-        private void AaddClassifyFolder(DirectoryInfo[] directories)
+        private void AddClassifyFolder(DirectoryInfo[] directories)
         {
             if (directories != null)
             {
@@ -94,7 +123,7 @@ namespace PhotosCategorier
                         AddClassifyFolderFunc(dir, IsIncludeSubfolder);
                     }
 
-                    UpdateFileCounter();
+                    UpdateRemainingFileCounter();
                 }
             }
 
@@ -141,51 +170,45 @@ namespace PhotosCategorier
             var r = MessageBox.Show(Properties.Resources.ConfirmClearingDuplicates, Properties.Resources.Warnning, MessageBoxButton.OKCancel);
             if (r == MessageBoxResult.OK)
             {
-                if (photographs == null || photographs.Count == 0)
+                if (photographs.IsEmpty)
                 {
                     MessageBox.Show(Properties.Resources.NotSetClassifyFolder, Properties.Resources.Error);
                     return;
                 }
                 Refresh();
-                var window = new ClearDuplicatesWindow(photographs);
+                var window = new ClearDuplicatesWindow(photographs.AllPhotographs);
                 window.ShowDialog();
                 Refresh();
             }
         }
 
-        private void DropFolder(Array array)
+        private void DropFolderOrFile(Array array)
         {
-            var allDir = new List<DirectoryInfo>();
-            foreach(var item in array)
+            var len = array.Length;
+            var allPath = new string[len];
+            for (int i = 0; i < len; i++)
             {
-                var dir = new DirectoryInfo(item.ToString());
-                if (dir.Exists)
-                {
-                    allDir.Add(dir);
-                }
+                allPath[i] = array.GetValue(i).ToString();
             }
-            var dirs = allDir.ToArray();
-            AaddClassifyFolder(dirs);
+            DropFolder(allPath);
+            DropFile(allPath);
         }
 
-        public bool IsIncludeSubfolder
+        private void DropFolder(string[] allPath)
         {
-            get => Properties.Settings.Default.IncludeSubfolder;
-            set
-            {
-                var settings = Properties.Settings.Default;
+            var allDirs = (from item in allPath where new DirectoryInfo(item).Exists select new DirectoryInfo(item)).ToArray();
+            AddClassifyFolder(allDirs);
+        }
 
-                if (settings.IncludeSubfolder != value)
-                {
-                    settings.IncludeSubfolder = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsIncludeSubfolder)));
-                }
-            }
+        private void DropFile(string[] allPath)
+        {
+            var allPhotos = (from item in allPath where new FileInfo(item).IsPhotograph() select new Photograph(item)).ToList();
+            photographs.AddRange(allPhotos);
         }
 
         private void Refresh()
         {
-            photographs = new List<Photograph>();
+            photographs.Clear();
             var needRemove = new List<Album>();
             foreach (var album in allClassifyFolder)
             {
@@ -209,9 +232,9 @@ namespace PhotosCategorier
 
         private void Clear()
         {
-            photographs = new List<Photograph>();
+            photographs.Clear();
             allClassifyFolder = new List<Album>();
-            InitImage();
+            ClearCurImage();
         }
 
         private void SetLeftFolder()
@@ -296,43 +319,64 @@ namespace PhotosCategorier
         /// </summary>
         private void InitImage()
         {
-            curPhoto = 0;
+            photographs.Reset();
             UpdateImage();
-            UpdateFileCounter();
+            UpdateRemainingFileCounter();
         }
 
         private void NextImage()
         {
-            ++curPhoto;
-            if (curPhoto < photographs.Count)
+            if (photographs.MoveNext())
             {
-                UpdateFileCounter();
                 UpdateImage();
             }
-            else
+            UpdateRemainingFileCounter();
+        }
+
+        private void UpdateRemainingFileCounter()
+        {
+            RemainingFiles = photographs.RemainingFiles;
+        }
+
+        private void RenderImage(Photograph photo)
+        {
+            try
             {
-                RemainingFileCounter.Content = "0";
+                curImage.Source = photo.GetImageSource();
+            }
+            catch
+            {
+                ClearCurImage();
+                throw;
             }
         }
 
-        private void UpdateFileCounter()
+        private void ClearCurImage()
         {
-            RemainingFileCounter.Content = $"{photographs.Count - curPhoto}";
+            curImage.Source = null;
         }
 
         private enum Arrow { LEFT_ARROW, RIGHT_ARROW }
 
+        /// <summary>
+        /// Checking whether current photo is the last one
+        /// </summary>
+        /// <returns>If the current photo is the last one or it hasn't arrived yet,it would return true.Otherwise,it had ended and return false.</returns>
+        private bool CheckLastOne()
+        {
+            if (!photographs.HasNext)
+            {
+                ClearCurImage();
+                MessageBox.Show(Properties.Resources.HasNoPhoto, Properties.Resources.Error);
+                return false;
+            }
+            return true;
+        }
         private void MoveThisTo(Arrow arrow)
         {
-            if (curPhoto >= photographs.Count)
+            if (CheckLastOne())
             {
-                MessageBox.Show(Properties.Resources.HasNoPhoto, Properties.Resources.Error);
-            }
-            else
-            {
-                if (curPhoto == photographs.Count - 1)
-                    MessageBox.Show(Properties.Resources.IsLastPhoto, Properties.Resources.Tip);
-                var photo = photographs[curPhoto];
+                var photo = photographs.Current;
                 try
                 {
                     switch (arrow)
@@ -373,30 +417,17 @@ namespace PhotosCategorier
 
         private void SkipThisPhoto()
         {
-            if (curPhoto >= photographs.Count)
+            if (CheckLastOne())
             {
-                MessageBox.Show(Properties.Resources.HasNoPhoto, Properties.Resources.Error);
-            }
-            else
-            {
-                if (curPhoto == photographs.Count - 1)
-                    MessageBox.Show(Properties.Resources.IsLastPhoto, Properties.Resources.Tip);
                 NextImage();
             }
         }
 
         private void DeleteThisPhoto()
         {
-            if (curPhoto >= photographs.Count)
+            if (CheckLastOne())
             {
-                MessageBox.Show(Properties.Resources.HasNoPhoto, Properties.Resources.Error);
-            }
-            else
-            {
-                if (curPhoto == photographs.Count - 1)
-                    MessageBox.Show(Properties.Resources.IsLastPhoto, Properties.Resources.Tip);
-
-                var photo = photographs[curPhoto];
+                var photo = photographs.Current;
                 var file = photo.FilePath;
                 var r = MessageBox.Show($"{Properties.Resources.ConfirmDeletion}\n{file.GetLastName()}",
                     Properties.Resources.Warnning, MessageBoxButton.OKCancel);
@@ -418,25 +449,24 @@ namespace PhotosCategorier
 
         private void UpdateImage()
         {
-            if (photographs?.Count == 0)
+            if (photographs.IsEmpty)
             {
+                ClearCurImage();
                 MessageBox.Show(Properties.Resources.HasNoPhoto, Properties.Resources.Error);
                 return;
             }
-
+            var curPhoto = photographs.Current;
             try
             {
-                curImage.Source = photographs?[curPhoto].GetImageSource();
+                RenderImage(curPhoto);
             }
             catch
             {
-                var file = photographs[curPhoto].FilePath;
-                var r = MessageBox.Show($"{Properties.Resources.CannotOpen}\n{file.GetLastName()}\n{Properties.Resources.ConfirmDeletion}", Properties.Resources.Error, MessageBoxButton.OKCancel);
+                var r = MessageBox.Show($"{Properties.Resources.CannotOpen}\n{curPhoto.FilePath.GetLastName()}\n{Properties.Resources.ConfirmDeletion}", Properties.Resources.Error, MessageBoxButton.OKCancel);
                 if (r == MessageBoxResult.OK)
                 {
-                    file.DeleteFileToRecycleBin();
+                    curPhoto.FilePath.DeleteFileToRecycleBin();
                 }
-                NextImage();
             }
         }
     }

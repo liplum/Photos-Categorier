@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using PhotosCategorier.Algorithm;
+using System.IO;
 using System.Linq;
 
 namespace PhotosCategorier
@@ -18,8 +19,7 @@ namespace PhotosCategorier
 
             var selectedFiles = from file in allFiles
                                 where
-           file.Name.EndsWith(".png") || file.Name.EndsWith(".jpg") || file.Name.EndsWith(".gif")
-           || file.Name.EndsWith(".jpeg")
+           file.IsPhotograph() 
                                 select file;
 
             var imageFiles = selectedFiles.ToArray();

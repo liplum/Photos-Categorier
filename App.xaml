@@ -1,12 +1,15 @@
-﻿<Application x:Class="PhotosCategorier.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:PhotosCategorier" xmlns:layout="clr-namespace:PhotosCategorier.Layout"
-             StartupUri="/Main/MainWindow.xaml" Startup="Application_Startup"
-             xmlns:system="clr-namespace:System;assembly=System.Runtime"
-             Exit="Application_Exit">
+﻿<Application
+    x:Class="PhotosCategorier.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:layout="clr-namespace:PhotosCategorier.Layout"
+    xmlns:local="clr-namespace:PhotosCategorier"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    Exit="Application_Exit"
+    Startup="Application_Startup"
+    StartupUri="/Main/MainWindow.xaml">
     <Application.Resources>
-        <layout:Layout x:Name="CurLayout" x:Key="CurLayout"></layout:Layout>
-        <system:String x:Key="Version">1.4.0</system:String>
+        <layout:Layout x:Key="CurLayout" x:Name="CurLayout" />
+        <system:String x:Key="Version">1.5</system:String>
     </Application.Resources>
 </Application>

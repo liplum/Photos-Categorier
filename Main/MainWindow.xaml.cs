@@ -1,4 +1,5 @@
 ﻿using PhotosCategorier.Algorithm;
+using PhotosCategorier.Main;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -26,9 +27,7 @@ namespace PhotosCategorier
             Photograph.SetSize(layout.WINDOW_WIDTH, layout.WINDOW_HEIGHT);
         }
 
-        private List<Photograph> photographs;
-
-        private int curPhoto = 0;
+        private readonly PhotographsGenerator photographs = new PhotographsGenerator();
 
         private DirectoryInfo leftArrow, rightArrow;
 

@@ -12,6 +12,35 @@ namespace PhotosCategorier.Algorithm
             return strs[^1];
         }
 
+        public static bool IsPhotograph(this FileInfo file)
+        {
+            return file.Exists &&( file.Name.EndsWith(".png") || file.Name.EndsWith(".jpg") || file.Name.EndsWith(".gif")
+           || file.Name.EndsWith(".jpeg"));
+        }
+
+        public static bool IsPhotograph(this string filePath,out FileInfo file)
+        {
+            var f = new FileInfo(filePath);
+            if (f.Exists)
+            {
+                file = f;
+                return f.Name.EndsWith(".png") || f.Name.EndsWith(".jpg") || f.Name.EndsWith(".gif")
+           || f.Name.EndsWith(".jpeg");
+            }
+            file = null;
+            return false;
+        }
+        public static bool IsPhotograph(this string filePath)
+        {
+            var f = new FileInfo(filePath);
+            if (f.Exists)
+            {
+                return f.Name.EndsWith(".png") || f.Name.EndsWith(".jpg") || f.Name.EndsWith(".gif")
+           || f.Name.EndsWith(".jpeg");
+            }
+            return false;
+        }
+
         /// <summary>
         /// 移动到指定文件夹
         /// </summary>

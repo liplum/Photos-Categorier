@@ -235,10 +235,10 @@ Click Button-Left/Right to open corresponding folder</value>
     <value>Right Folder</value>
   </data>
   <data name="SelectLeftFolder" xml:space="preserve">
-    <value>Keep Left-Arrow to point to a Album</value>
+    <value>Select Left-Arrow to point to a Album</value>
   </data>
   <data name="SelectRightFolder" xml:space="preserve">
-    <value>Keep Right-Arrow to point to a Album</value>
+    <value>Select Right-Arrow to point to a Album</value>
   </data>
   <data name="Setting" xml:space="preserve">
     <value>Setting</value>

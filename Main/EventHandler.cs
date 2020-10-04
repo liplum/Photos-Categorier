@@ -103,7 +103,7 @@ namespace PhotosCategorier
             }
             else
             {
-                DropFolder(array);
+                DropFolderOrFile(array);
             }
         }
 
@@ -130,7 +130,7 @@ namespace PhotosCategorier
                 case Key.W:
                 case Key.Up:
                     {
-                        if (photographs != null)
+                        if (!photographs.IsEmpty)
                             SkipThisPhoto();
                         else
                             MessageBox.Show(Properties.Resources.NotSetClassifyFolder, Properties.Resources.Error);
@@ -140,7 +140,7 @@ namespace PhotosCategorier
                 case Key.Down:
                 case Key.Delete:
                     {
-                        if (photographs != null)
+                        if (!photographs.IsEmpty)
                             DeleteThisPhoto();
                         else
                             MessageBox.Show(Properties.Resources.NotSetClassifyFolder, Properties.Resources.Error);
@@ -152,7 +152,7 @@ namespace PhotosCategorier
 
                         if (leftArrow == null)
                             MessageBox.Show(Properties.Resources.NotPointLeft, Properties.Resources.Error);
-                        else if (photographs == null)
+                        else if (!photographs.IsEmpty)
                             MessageBox.Show(Properties.Resources.NotSetClassifyFolder, Properties.Resources.Error);
                         else
                             MoveThisTo(Arrow.LEFT_ARROW);
@@ -164,7 +164,7 @@ namespace PhotosCategorier
                     {
                         if (rightArrow == null)
                             MessageBox.Show(Properties.Resources.NotPointRight, Properties.Resources.Error);
-                        else if (photographs == null)
+                        else if (!photographs.IsEmpty)
                             MessageBox.Show(Properties.Resources.NotSetClassifyFolder, Properties.Resources.Error);
                         else
                             MoveThisTo(Arrow.RIGHT_ARROW);

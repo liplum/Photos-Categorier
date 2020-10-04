@@ -6,6 +6,7 @@
     xmlns:loc="clr-namespace:PhotosCategorier.Properties"
     xmlns:local="clr-namespace:PhotosCategorier.Main"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="ClearWindow"
     Title="{x:Static loc:Resources.ClearDuplicates}"
     Height="150"
     MinWidth="350"
@@ -40,7 +41,8 @@
             Grid.Row="1"
             Grid.ColumnSpan="2"
             Height="auto"
-            Margin="5" />
+            Margin="5"
+            Value="{Binding,Path=Progress,Mode=OneWayToSource,ElementName=ClearWindow}" />
         <Button
             Name="OK"
             Grid.Row="2"

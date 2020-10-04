@@ -21,7 +21,7 @@
     <Window.Resources>
         <SolidColorBrush
             x:Key="Translucent"
-            Opacity="0.8"
+            Opacity="0.4"
             Color="White" />
         <Style TargetType="Label">
             <Setter Property="FontSize" Value="{Binding FontSize, Source={StaticResource CurLayout}}" />
@@ -183,7 +183,7 @@
                     Canvas.Right="{calc:Binding WINDOW_WIDTH / 12,
                                                 Source={StaticResource CurLayout}}"
                     Background="{StaticResource Translucent}"
-                    Content=""
+                    Content="{Binding Path=RemainingFiles, ElementName=MainWin, Mode=TwoWay}"
                     FontWeight="Bold" />
             </Canvas>
             <DockPanel
