@@ -97,7 +97,7 @@ namespace PhotosCategorier.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Clean the duplicates 的本地化字符串。
+        ///   查找类似 Clean the Duplicates 的本地化字符串。
         /// </summary>
         public static string ClearDuplicates {
             get {
@@ -196,7 +196,7 @@ namespace PhotosCategorier.Properties {
         }
         
         /// <summary>
-        ///   查找类似 No more photo! 的本地化字符串。
+        ///   查找类似 No more photo. 的本地化字符串。
         /// </summary>
         public static string HasNoPhoto {
             get {

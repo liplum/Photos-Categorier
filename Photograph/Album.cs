@@ -1,8 +1,8 @@
-﻿using PhotosCategorier.Algorithm;
+﻿using PhotosCategorier.Utils;
 using System.IO;
 using System.Linq;
 
-namespace PhotosCategorier
+namespace PhotosCategorier.Photo
 {
     public class Album
     {
@@ -13,6 +13,10 @@ namespace PhotosCategorier
             Directory = directory;
         }
 
+        /// <summary>
+        /// Geting all photos in the album
+        /// </summary>
+        /// <returns>All photos the album has.If it has no photos,it would return null.</returns>
         public Photograph[] GetAllPhotographs()
         {
             var allFiles = Directory.GetFiles();

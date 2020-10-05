@@ -1,6 +1,7 @@
-﻿using System;
+﻿using PhotosCategorier.Photo;
+using System;
 
-namespace PhotosCategorier.Algorithm
+namespace PhotosCategorier.Utils
 {
     public static class ScaleAlgorithm
     {

@@ -1,12 +1,13 @@
-﻿using PhotosCategorier.Algorithm;
+﻿using PhotosCategorier.Utils;
 using PhotosCategorier.Main;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Windows;
+using PhotosCategorier.Photo;
+using System.Collections.Generic;
 
-namespace PhotosCategorier
+namespace PhotosCategorier.Main
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -29,6 +30,8 @@ namespace PhotosCategorier
 
         private readonly PhotographsGenerator photographs = new PhotographsGenerator();
 
+        private List<Album> allClassifyFolder = new List<Album>();
+
         private DirectoryInfo leftArrow, rightArrow;
 
         private readonly SolidBrush BackgroundBrush = new SolidBrush(Color.FromArgb(122, 240, 240, 240));
@@ -41,7 +44,10 @@ namespace PhotosCategorier
             this.Height = Height;
             App.SetWidth_Height(Width, Height);
             Photograph.SetSize(Width, Height);
-            UpdateImage();
+            if (photographs.HasNext)
+            {
+                UpdateImage();
+            }
         }
     }
 }

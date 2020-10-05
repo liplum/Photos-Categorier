@@ -1,36 +1,16 @@
-﻿using Microsoft.WindowsAPICodePack.Dialogs;
-using PhotosCategorier.Algorithm;
-using PhotosCategorier.Main;
+﻿using PhotosCategorier.Photo;
+using PhotosCategorier.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
 using System.Windows;
-using static PhotosCategorier.Algorithm.FileTool;
+using static PhotosCategorier.Utils.FileTool;
 
-namespace PhotosCategorier
+namespace PhotosCategorier.Main
 {
     public partial class MainWindow : INotifyPropertyChanged
     {
-
-        private List<Album> allClassifyFolder;
-
-        public bool IsIncludeSubfolder
-        {
-            get => Properties.Settings.Default.IncludeSubfolder;
-            set
-            {
-                var settings = Properties.Settings.Default;
-
-                if (settings.IncludeSubfolder != value)
-                {
-                    settings.IncludeSubfolder = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsIncludeSubfolder)));
-                }
-            }
-        }
-
         private int remainingFiles = 0;
 
         public int RemainingFiles
@@ -46,170 +26,11 @@ namespace PhotosCategorier
             }
         }
 
-        /// <summary>
-        /// 设置需分类的文件夹
-        /// 使 删除 和 跳过 按钮可用
-        /// </summary>
-        private void SetClassifyFolderWithSelection()
-        {
-            var directories = SelectFolders(Properties.Resources.SettingClassifyFolder);
-            SetClassifyFolder(directories);
-        }
-
-        private void SetClassifyFolder(DirectoryInfo[] directories)
-        {
-            if (directories != null)
-            {
-                photographs.Clear();
-                allClassifyFolder = new List<Album>();
-
-                foreach (var dir in directories)
-                {
-                    SetClassifyFolderFunc(dir, IsIncludeSubfolder);
-                }
-
-                if (photographs.Count > 0)
-                {
-                    DeleteThis.IsEnabled = SkipThis.IsEnabled = true;
-                    AddingClassifyFolder.IsEnabled = true;
-                    RefreshButton.IsEnabled = ClearButton.IsEnabled = true;
-                    InitImage();
-                }
-                else
-                {
-                    MessageBox.Show(Properties.Resources.NotHoldPhoto, Properties.Resources.Error);
-                }
-            }
-
-            void SetClassifyFolderFunc(DirectoryInfo dir, bool isIncludeSubfolder)
-            {
-                var curAlbum = new Album(dir);
-                allClassifyFolder.Add(curAlbum);
-                var curAlbumImages = curAlbum.GetAllPhotographs();
-                if (curAlbumImages != null)
-                {
-                    photographs.AddRange(curAlbumImages);
-                }
-
-                if (isIncludeSubfolder)
-                {
-                    var subFolders = dir.GetDirectories();
-                    foreach (var sub in subFolders)
-                    {
-                        SetClassifyFolderFunc(sub, isIncludeSubfolder);
-                    }
-                }
-            }
-        }
-
-        private void AddClassifyFolderWithSelection()
-        {
-            var directories = SelectFolders(Properties.Resources.AddingClassifyFolder);
-            AddClassifyFolder(directories);
-        }
-
-        private void AddClassifyFolder(DirectoryInfo[] directories)
-        {
-            if (directories != null)
-            {
-                if (allClassifyFolder == null)
-                {
-                    SetClassifyFolder(directories);
-                }
-                else
-                {
-                    foreach (var dir in directories)
-                    {
-                        AddClassifyFolderFunc(dir, IsIncludeSubfolder);
-                    }
-
-                    UpdateRemainingFileCounter();
-                }
-            }
-
-            void AddClassifyFolderFunc(DirectoryInfo dir, bool isIncludeSubfolder)
-            {
-                var curAlbum = new Album(dir);
-
-                if (NotHas())
-                {
-                    allClassifyFolder.Add(curAlbum);
-                    var curAlbumImages = curAlbum.GetAllPhotographs();
-                    if (curAlbumImages != null)
-                    {
-                        photographs.AddRange(curAlbumImages);
-                    }
-                }
-
-                if (isIncludeSubfolder)
-                {
-                    var subFolders = dir.GetDirectories();
-                    foreach (var sub in subFolders)
-                    {
-                        AddClassifyFolderFunc(sub, isIncludeSubfolder);
-                    }
-                }
-
-                bool NotHas()
-                {
-                    bool notHas = true;
-                    foreach (var folder in allClassifyFolder)
-                    {
-                        if (curAlbum.Equals(folder))
-                        {
-                            notHas = false;
-                        }
-                    }
-                    return notHas;
-                }
-            }
-        }
-
-        private void ClearDuplicates()
-        {
-            var r = MessageBox.Show(Properties.Resources.ConfirmClearingDuplicates, Properties.Resources.Warnning, MessageBoxButton.OKCancel);
-            if (r == MessageBoxResult.OK)
-            {
-                if (photographs.IsEmpty)
-                {
-                    MessageBox.Show(Properties.Resources.NotSetClassifyFolder, Properties.Resources.Error);
-                    return;
-                }
-                Refresh();
-                var window = new ClearDuplicatesWindow(photographs.AllPhotographs);
-                window.ShowDialog();
-                Refresh();
-            }
-        }
-
-        private void DropFolderOrFile(Array array)
-        {
-            var len = array.Length;
-            var allPath = new string[len];
-            for (int i = 0; i < len; i++)
-            {
-                allPath[i] = array.GetValue(i).ToString();
-            }
-            DropFolder(allPath);
-            DropFile(allPath);
-        }
-
-        private void DropFolder(string[] allPath)
-        {
-            var allDirs = (from item in allPath where new DirectoryInfo(item).Exists select new DirectoryInfo(item)).ToArray();
-            AddClassifyFolder(allDirs);
-        }
-
-        private void DropFile(string[] allPath)
-        {
-            var allPhotos = (from item in allPath where new FileInfo(item).IsPhotograph() select new Photograph(item)).ToList();
-            photographs.AddRange(allPhotos);
-        }
-
         private void Refresh()
         {
-            photographs.Clear();
+            photographs.CleanNotExisted();
             var needRemove = new List<Album>();
+            var needAdd = new List<Photograph>();
             foreach (var album in allClassifyFolder)
             {
                 var ps = album.GetAllPhotographs();
@@ -219,7 +40,7 @@ namespace PhotosCategorier
                 }
                 else
                 {
-                    photographs.AddRange(ps);
+                    needAdd.AddRange(ps);
 
                 }
             }
@@ -227,91 +48,16 @@ namespace PhotosCategorier
             {
                 allClassifyFolder.Remove(album);
             }
+            photographs.AddRange(needAdd);
             InitImage();
         }
 
         private void Clear()
         {
             photographs.Clear();
-            allClassifyFolder = new List<Album>();
+            allClassifyFolder.Clear();
             ClearCurImage();
-        }
-
-        private void SetLeftFolder()
-        {
-            leftArrow = SelectFolder(Properties.Resources.SelectLeftFolder);
-            if (leftArrow != null)
-            {
-                this.LeftArrowPointedToFolder.Content = leftArrow.Name;
-                ToLeft.IsEnabled = true;
-            }
-        }
-        private void SetRightFolder()
-        {
-            rightArrow = SelectFolder(Properties.Resources.SelectRightFolder);
-            if (rightArrow != null)
-            {
-                this.RightArrowPointedToFolder.Content = rightArrow.Name;
-                ToRight.IsEnabled = true;
-            }
-        }
-
-        /// <summary>
-        /// 打开选择文件夹窗口
-        /// </summary>
-        /// <param name="Caption">窗口标题</param>
-        /// <returns></returns>
-        private static DirectoryInfo SelectFolder(string Caption)
-        {
-            DirectoryInfo target = null;
-
-            using var dialog = new CommonOpenFileDialog(Caption)
-            {
-                IsFolderPicker = true,
-            };
-
-            var mode = dialog.ShowDialog();
-
-            if (mode == CommonFileDialogResult.Ok)
-            {
-                string name = dialog.FileName;
-
-                target = new DirectoryInfo(name);
-
-            }
-            return target;
-        }
-
-        /// <summary>
-        /// 打开选择文件夹窗口
-        /// </summary>
-        /// <param name="Caption">窗口标题</param>
-        /// <returns></returns>
-        private static DirectoryInfo[] SelectFolders(string Caption)
-        {
-
-            using var dialog = new CommonOpenFileDialog(Caption)
-            {
-                IsFolderPicker = true,
-                Multiselect = true
-            };
-
-            var mode = dialog.ShowDialog();
-
-            if (mode == CommonFileDialogResult.Ok)
-            {
-                string[] names = dialog.FileNames.ToArray();
-                int len = names.Length;
-                DirectoryInfo[] dirs = new DirectoryInfo[len];
-                for (int i = 0; i < len; i++)
-                {
-                    var name = names[i];
-                    dirs[i] = new DirectoryInfo(name);
-                }
-
-                return dirs;
-            }
-            return null;
+            UpdateRemainingFileCounter();
         }
 
         /// <summary>

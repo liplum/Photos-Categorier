@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 
-namespace PhotosCategorier
+namespace PhotosCategorier.Photo
 {
     /// <summary>
     /// 一张图片
@@ -204,7 +204,7 @@ namespace PhotosCategorier
         {
             if (obj is Photograph p)
             {
-                if(this.FilePath == p.FilePath)
+                if (this.FilePath == p.FilePath)
                 {
                     return true;
                 }

@@ -1,10 +1,11 @@
-﻿using PhotosCategorier.Algorithm;
+﻿using PhotosCategorier.Utils;
 using PhotosCategorier.DataStructure;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
-using static PhotosCategorier.Algorithm.FileTool;
+using static PhotosCategorier.Utils.FileTool;
+using PhotosCategorier.Photo;
 
 namespace PhotosCategorier.Main
 {

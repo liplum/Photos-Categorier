@@ -130,7 +130,7 @@
     <value>Clear</value>
   </data>
   <data name="ClearDuplicates" xml:space="preserve">
-    <value>Clean the duplicates</value>
+    <value>Clean the Duplicates</value>
   </data>
   <data name="ClearDuplicatesSuccessfully" xml:space="preserve">
     <value>Clear duplicates successfully !</value>
@@ -163,7 +163,7 @@
     <value>Supported Formats</value>
   </data>
   <data name="HasNoPhoto" xml:space="preserve">
-    <value>No more photo!</value>
+    <value>No more photo.</value>
   </data>
   <data name="Help" xml:space="preserve">
     <value>Help</value>

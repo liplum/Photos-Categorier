@@ -2,7 +2,7 @@
 using System.Windows;
 using static PhotosCategorier.Layout.LayoutSize;
 
-namespace PhotosCategorier
+namespace PhotosCategorier.Main
 {
     /// <summary>
     /// SetSizeWindow.xaml 的交互逻辑

@@ -2,7 +2,7 @@
 using System.IO;
 using Microsoft.VisualBasic.FileIO;
 
-namespace PhotosCategorier.Algorithm
+namespace PhotosCategorier.Utils
 {
     public static class FileTool
     {
@@ -38,6 +38,18 @@ namespace PhotosCategorier.Algorithm
                 return f.Name.EndsWith(".png") || f.Name.EndsWith(".jpg") || f.Name.EndsWith(".gif")
            || f.Name.EndsWith(".jpeg");
             }
+            return false;
+        }
+
+        public static bool IsExisted(this string filePath,out FileInfo file)
+        {
+            var f = new FileInfo(filePath);
+            if (f.Exists)
+            {
+                file = f;
+                return true;
+            }
+            file = null;
             return false;
         }
 

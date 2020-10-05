@@ -4,7 +4,7 @@ using System;
 using System.Windows;
 using System.Windows.Input;
 
-namespace PhotosCategorier
+namespace PhotosCategorier.Main
 {
     public partial class MainWindow
     {
@@ -41,27 +41,22 @@ namespace PhotosCategorier
 
         private void SettingWindowSize_Click(object sender, RoutedEventArgs e)
         {
-            new SetSizeWindow().ShowDialog();
-            ResetSize(layout.LayoutType.GetWidth(), layout.LayoutType.GetHeight());
+            SetWindowSize();
         }
 
         private void SettingLanguage_Click(object sender, RoutedEventArgs e)
         {
-            var res = new SetLanguageWindow().ShowDialog();
-            if (res == true)
-            {
-                MessageBox.Show(Properties.Resources.PleaseReopen, Properties.Resources.Tip);
-            }
+            SetLanguage();
         }
 
         private void SettingClassifyFolder_Click(object sender, RoutedEventArgs e)
         {
-            SetClassifyFolderWithSelection();
+            AddClassifyFolderWithSelection(Properties.Resources.SettingClassifyFolder);
         }
 
         private void AddingClassifyFolder_Click(object sender, RoutedEventArgs e)
         {
-            AddClassifyFolderWithSelection();
+            AddClassifyFolderWithSelection(Properties.Resources.AddingClassifyFolder);
         }
 
         private void ClearingDuplicates_Click(object sender, RoutedEventArgs e)

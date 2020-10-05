@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace PhotosCategorier.Algorithm
+namespace PhotosCategorier.Utils
 {
     public class HashAlgorithm
     {
