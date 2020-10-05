@@ -162,6 +162,7 @@
                     Content="{x:Static loc:Resources.Left}"
                     Cursor="Hand"
                     FontWeight="Bold"
+                    Visibility="Hidden"
                     MouseDown="LeftArrowPointedToFolder_MouseDown" />
                 <Label
                     Name="RightArrowPointedToFolder"
@@ -175,6 +176,7 @@
                     Content="{x:Static loc:Resources.Right}"
                     Cursor="Hand"
                     FontWeight="Bold"
+                    Visibility="Hidden"
                     MouseDown="RightArrowPointedToFolder_MouseDown" />
                 <Label
                     Name="RemainingFileCounter"
@@ -184,7 +186,8 @@
                                                 Source={StaticResource CurLayout}}"
                     Background="{StaticResource Translucent}"
                     Content="{Binding Path=RemainingFiles, ElementName=MainWin, Mode=OneWay}"
-                    FontWeight="Bold" />
+                    FontWeight="Bold"
+                    Visibility="Hidden" />
             </Canvas>
             <DockPanel
                 Grid.Row="1"

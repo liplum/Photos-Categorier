@@ -18,7 +18,7 @@ namespace PhotosCategorier.Utils
             StringBuilder sb = new StringBuilder(32);
             for (int i = 0; i < b.Length; i++)
             {
-                sb.Append(b[i].ToString("X2"));
+                sb.Append($"{b[i]:X2}");
             }
             return sb.ToString();
         }

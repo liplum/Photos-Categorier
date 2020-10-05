@@ -56,8 +56,25 @@ namespace PhotosCategorier.Main
         {
             photographs.Clear();
             allClassifyFolder.Clear();
-            ClearCurImage();
+            ResetComponent();
             UpdateRemainingFileCounter();
+        }
+
+        private void InitComponent()
+        {
+            DeleteThis.IsEnabled = SkipThis.IsEnabled = true;
+            AddingClassifyFolder.IsEnabled = true;
+            RefreshButton.IsEnabled = ClearButton.IsEnabled = true;
+            Inited = true;
+        }
+
+        private void ResetComponent()
+        {
+            DeleteThis.IsEnabled = SkipThis.IsEnabled = false;
+            AddingClassifyFolder.IsEnabled = false;
+            RefreshButton.IsEnabled = ClearButton.IsEnabled = false;
+            ClearCurImage();
+            Inited = false;
         }
 
         /// <summary>
@@ -82,6 +99,14 @@ namespace PhotosCategorier.Main
         private void UpdateRemainingFileCounter()
         {
             RemainingFiles = photographs.RemainingFiles;
+            if(RemainingFiles == 0)
+            {
+                RemainingFileCounter.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                RemainingFileCounter.Visibility = Visibility.Visible;
+            }
         }
 
         private void RenderImage(Photograph photo)

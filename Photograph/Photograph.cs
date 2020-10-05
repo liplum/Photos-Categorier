@@ -35,7 +35,7 @@ namespace PhotosCategorier.Photo
         /// 缩放算法
         /// 必须使用<see cref="MaxWidth"/>和<see cref="MaxHeight"/>获取窗口宽度和高度
         /// </summary>
-        public static Func<(int OriginalWidth, int OriginalHeight), (int ScaleWidth, int ScaleHeight)> GetScaleSize { set; get; }
+        public static Func<(int OriginalWidth, int OriginalHeight), int, int, (int ScaleWidth, int ScaleHeight)> GetScaleSize { set; get; }
 
         /// <summary>
         /// 初始化宽度和高度
@@ -144,7 +144,7 @@ namespace PhotosCategorier.Photo
                 throw new NotInitPhotographException("GetScaleSize function isn't inited.");
 
             (int ScaleWidth, int ScaleHeight) = GetScaleSize(
-                (OriginalWidth: NeedScaleImage.Width, OriginalHeight: NeedScaleImage.Height));
+                (OriginalWidth: NeedScaleImage.Width, OriginalHeight: NeedScaleImage.Height),MaxWidth,MaxHeight);
             if (ScaleWidth <= 0 || ScaleHeight <= 0)
                 throw new ImageSizeException($"ScaleWidth:{ScaleWidth} or ScaleHeight:{ScaleHeight} is invalid.");
 

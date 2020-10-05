@@ -58,10 +58,7 @@ namespace PhotosCategorier.Main
                     }
                     else
                     {
-                        DeleteThis.IsEnabled = SkipThis.IsEnabled = true;
-                        AddingClassifyFolder.IsEnabled = true;
-                        RefreshButton.IsEnabled = ClearButton.IsEnabled = true;
-                        Inited = true;
+                        InitComponent();
                         InitImage();
                     }
                 }
@@ -159,22 +156,35 @@ namespace PhotosCategorier.Main
             var allPhotosPaths = (from item in allPhotos select item.FilePath).ToArray();
             return allPath.Except(allPhotosPaths).ToArray();
         }
-        private void SetLeftFolder()
+        private void SetLeftFolderWithSelection()
         {
             leftArrow = SelectFolder(Properties.Resources.SelectLeftFolder);
+            SetLeftFolder();
+        }
+
+        private void SetLeftFolder()
+        {
             if (leftArrow != null)
             {
                 this.LeftArrowPointedToFolder.Content = leftArrow.Name;
                 ToLeft.IsEnabled = true;
+                LeftArrowPointedToFolder.Visibility = Visibility.Visible;
             }
         }
-        private void SetRightFolder()
+
+        private void SetRightFolderWithSelection()
         {
             rightArrow = SelectFolder(Properties.Resources.SelectRightFolder);
+            SetRightFolder();
+        }
+
+        private void SetRightFolder()
+        {
             if (rightArrow != null)
             {
                 this.RightArrowPointedToFolder.Content = rightArrow.Name;
                 ToRight.IsEnabled = true;
+                RightArrowPointedToFolder.Visibility = Visibility;
             }
         }
 

@@ -31,12 +31,12 @@ namespace PhotosCategorier.Main
 
         private void SelectLeftFolder_Click(object sender, RoutedEventArgs e)
         {
-            SetLeftFolder();
+            SetLeftFolderWithSelection();
         }
 
         private void SelectRightFolder_Click(object sender, RoutedEventArgs e)
         {
-            SetRightFolder();
+            SetRightFolderWithSelection();
         }
 
         private void SettingWindowSize_Click(object sender, RoutedEventArgs e)

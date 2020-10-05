@@ -1,11 +1,10 @@
-﻿using PhotosCategorier.Utils;
-using PhotosCategorier.Main;
+﻿using PhotosCategorier.Photo;
+using PhotosCategorier.Utils;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Windows;
-using PhotosCategorier.Photo;
-using System.Collections.Generic;
 
 namespace PhotosCategorier.Main
 {
