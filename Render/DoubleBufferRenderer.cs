@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace PhotosCategorier.Render
 {
-    public class RenderPool : IRenderer
+    public class DoubleBufferRenderer : IRenderer
     {
         private readonly PhotographsGenerator Generator;
-        public RenderPool(PhotographsGenerator photographsGenerator)
+        public DoubleBufferRenderer(PhotographsGenerator photographsGenerator)
         {
             Generator = photographsGenerator;
         }

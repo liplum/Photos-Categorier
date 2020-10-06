@@ -23,7 +23,7 @@ namespace PhotosCategorier.Main
         }
         public void InitPhotograph()
         {
-            renderPool = new RenderPool(photographs);
+            renderer = new DoubleBufferRenderer(photographs);
             Photograph.Init(layout.WINDOW_WIDTH, layout.WINDOW_HEIGHT, BackgroundBrush, ScaleAlgorithm.比例缩放法);
         }
 
@@ -31,7 +31,7 @@ namespace PhotosCategorier.Main
 
         private List<Album> allClassifyFolder = new List<Album>();
 
-        private RenderPool renderPool;
+        private DoubleBufferRenderer renderer;
 
         private DirectoryInfo leftArrow, rightArrow;
 

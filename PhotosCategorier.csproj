@@ -10,8 +10,6 @@
     <Authors>Liplum</Authors>
     <Product>Photos Categorier</Product>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <SignAssembly>false</SignAssembly>
-    <AssemblyOriginatorKeyFile>Liplum.pfx</AssemblyOriginatorKeyFile>
     <Version>1.5</Version>
     <DelaySign>false</DelaySign>
   </PropertyGroup>
@@ -20,6 +18,7 @@
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
     <DocumentationFile></DocumentationFile>
+    <NoWarn>NU1701;</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

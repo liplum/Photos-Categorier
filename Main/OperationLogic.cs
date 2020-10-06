@@ -113,7 +113,7 @@ namespace PhotosCategorier.Main
         {
             try
             {
-                var res = renderPool.GetCurrentRender();
+                var res = renderer.GetCurrentRender();
                 curImage.Source = ImageTool.ToImageSource(res);
             }
             catch
@@ -230,7 +230,7 @@ namespace PhotosCategorier.Main
             var curPhoto = photographs.Current;
             try
             {
-                var res = renderPool.Init();
+                var res = renderer.Init();
                 curImage.Source = ImageTool.ToImageSource(res);
             }
             catch
