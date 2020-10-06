@@ -22,14 +22,15 @@ namespace PhotosCategorier.Main
         }
         public void InitPhotograph()
         {
-            Photograph.GetScaleSize = ScaleAlgorithm.比例缩放法;
-            Photograph.BackgroundBrush = BackgroundBrush;
-            Photograph.SetSize(layout.WINDOW_WIDTH, layout.WINDOW_HEIGHT);
+            renderPool = new RenderPool(photographs);
+            Photograph.Init(layout.WINDOW_WIDTH, layout.WINDOW_HEIGHT, BackgroundBrush, ScaleAlgorithm.比例缩放法);
         }
 
         private readonly PhotographsGenerator photographs = new PhotographsGenerator();
 
         private List<Album> allClassifyFolder = new List<Album>();
+
+        private RenderPool renderPool;
 
         private DirectoryInfo leftArrow, rightArrow;
 

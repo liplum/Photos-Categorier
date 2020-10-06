@@ -29,9 +29,12 @@ namespace PhotosCategorier.Photo
         {
             get
             {
-                if (IsEmpty)
-                    return 0;
-                return AllPhotographs.Count - CurIndex -1;
+                lock (this)
+                {
+                    if (IsEmpty)
+                        return 0;
+                    return AllPhotographs.Count - CurIndex - 1;
+                }
             }
         }
 
@@ -39,7 +42,10 @@ namespace PhotosCategorier.Photo
         {
             get
             {
-                return AllPhotographs[CurIndex];
+                lock (this)
+                {
+                    return AllPhotographs[CurIndex];
+                }
             }
         }
 
@@ -47,46 +53,94 @@ namespace PhotosCategorier.Photo
         {
             get
             {
-                return AllPhotographs[CurIndex];
+                lock (this)
+                {
+                    return AllPhotographs[CurIndex];
+                }
             }
         }
 
         public void Add(Photograph photo)
         {
-            if (photo != null)
+            lock (this)
             {
-                AllPhotographs.Add(photo);
-                CleanDuplicates();
+                if (photo != null)
+                {
+                    AllPhotographs.Add(photo);
+                    CleanDuplicates();
+                }
             }
         }
         public void AddRange(IEnumerable<Photograph> photos)
         {
-            if (photos != null && photos.Count() > 0)
+            lock (this)
             {
-                AllPhotographs.AddRange(photos);
-                CleanDuplicates();
+                if (photos != null && photos.Count() > 0)
+                {
+                    AllPhotographs.AddRange(photos);
+                    CleanDuplicates();
+                }
             }
         }
 
         private void CleanDuplicates()
         {
-            AllPhotographs = AllPhotographs.Distinct(this).ToList();
+            lock (this)
+            {
+                AllPhotographs = AllPhotographs.Distinct(this).ToList();
+            }
         }
 
         public void CleanNotExisted()
         {
-            AllPhotographs = (from item in AllPhotographs where item.FilePath.IsExisted(out _) select item).ToList();
+            lock (this)
+            {
+                AllPhotographs = (from item in AllPhotographs where item.FilePath.IsExisted(out _) select item).ToList();
+            }
         }
 
         public void Clear()
         {
-            AllPhotographs = new List<Photograph>();
+            lock (this)
+            {
+                AllPhotographs = new List<Photograph>();
+            }
         }
 
+        public Photograph Peek()
+        {
+            lock (this)
+            {
+                if (IsEmpty || !HasNext)
+                {
+                    return null;
+                }
+                else
+                {
+                    return AllPhotographs[CurIndex + 1];
+                }
+            }
+        }
+        public Photograph[] Peek(int nextCount)
+        {
+            lock (this)
+            {
+                int practicalCount = RemainingFiles > nextCount ? nextCount : RemainingFiles;
+                var nextPhotos = new Photograph[practicalCount];
+                for (int i = CurIndex, j = 0; j < practicalCount && i < Count; i++, j++)
+                {
+                    nextPhotos[j] = AllPhotographs[i];
+                }
+                return nextPhotos;
+            }
+        }
         public void Set([NotNull] List<Photograph> photos)
         {
-            AllPhotographs = photos ?? throw new ArgumentNullException();
-            CleanDuplicates();
+            lock (this)
+            {
+                AllPhotographs = photos ?? throw new ArgumentNullException();
+                CleanDuplicates();
+            }
         }
 
         public void Dispose()
@@ -96,17 +150,23 @@ namespace PhotosCategorier.Photo
 
         public bool MoveNext()
         {
-            if (HasNext)
+            lock (this)
             {
-                CurIndex++;
-                return true;
+                if (HasNext)
+                {
+                    CurIndex++;
+                    return true;
+                }
+                return false;
             }
-            return false;
         }
 
         public void Reset()
         {
-            CurIndex = 0;
+            lock (this)
+            {
+                CurIndex = 0;
+            }
         }
 
         public bool Equals([AllowNull] Photograph x, [AllowNull] Photograph y)

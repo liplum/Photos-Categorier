@@ -1,4 +1,5 @@
 ﻿using PhotosCategorier.Photo;
+using PhotosCategorier.utils;
 using PhotosCategorier.Utils;
 using System;
 using System.Collections.Generic;
@@ -83,7 +84,7 @@ namespace PhotosCategorier.Main
         private void InitImage()
         {
             photographs.Reset();
-            UpdateImage();
+            InitRenderPool();
             UpdateRemainingFileCounter();
         }
 
@@ -99,7 +100,7 @@ namespace PhotosCategorier.Main
         private void UpdateRemainingFileCounter()
         {
             RemainingFiles = photographs.RemainingFiles;
-            if(RemainingFiles == 0)
+            if (RemainingFiles == 0)
             {
                 RemainingFileCounter.Visibility = Visibility.Hidden;
             }
@@ -109,11 +110,12 @@ namespace PhotosCategorier.Main
             }
         }
 
-        private void RenderImage(Photograph photo)
+        private void RenderImage()
         {
             try
             {
-                curImage.Source = photo.GetImageSource();
+                var res = renderPool.GetCurrentRender();
+                curImage.Source = ImageTool.ToImageSource(res);
             }
             catch
             {
@@ -218,6 +220,31 @@ namespace PhotosCategorier.Main
 
         }
 
+        private void InitRenderPool()
+        {
+            if (photographs.IsEmpty)
+            {
+                ClearCurImage();
+                MessageBox.Show(Properties.Resources.HasNoPhoto, Properties.Resources.Error);
+                return;
+            }
+            var curPhoto = photographs.Current;
+            try
+            {
+                var res = renderPool.Init();
+                curImage.Source = ImageTool.ToImageSource(res);
+            }
+            catch
+            {
+                ClearCurImage();
+                var r = MessageBox.Show($"{Properties.Resources.CannotOpen}\n{curPhoto.FilePath.GetLastName()}\n{Properties.Resources.ConfirmDeletion}", Properties.Resources.Error, MessageBoxButton.OKCancel);
+                if (r == MessageBoxResult.OK)
+                {
+                    curPhoto.FilePath.DeleteFileToRecycleBin();
+                }
+            }
+        }
+
         private void UpdateImage()
         {
             if (photographs.IsEmpty)
@@ -229,7 +256,7 @@ namespace PhotosCategorier.Main
             var curPhoto = photographs.Current;
             try
             {
-                RenderImage(curPhoto);
+                RenderImage();
             }
             catch
             {
