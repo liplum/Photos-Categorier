@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 
-namespace PhotosCategorier.utils
+namespace PhotosCategorier.Utils
 {
     public static class ImageTool
     {

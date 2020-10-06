@@ -3,9 +3,9 @@ using System;
 using System.Drawing;
 using System.Threading.Tasks;
 
-namespace PhotosCategorier.Utils
+namespace PhotosCategorier.Render
 {
-    public class RenderPool
+    public class RenderPool : IRenderer
     {
         private readonly PhotographsGenerator Generator;
         public RenderPool(PhotographsGenerator photographsGenerator)

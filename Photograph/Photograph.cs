@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using static PhotosCategorier.utils.ImageTool;
+using static PhotosCategorier.Utils.ImageTool;
 
 namespace PhotosCategorier.Photo
 {

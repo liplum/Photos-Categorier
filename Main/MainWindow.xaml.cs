@@ -1,4 +1,5 @@
 ﻿using PhotosCategorier.Photo;
+using PhotosCategorier.Render;
 using PhotosCategorier.Utils;
 using System.Collections.Generic;
 using System.ComponentModel;
