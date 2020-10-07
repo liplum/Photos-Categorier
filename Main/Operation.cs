@@ -40,7 +40,6 @@ namespace PhotosCategorier.Main
             photographs.Clear();
             allClassifyFolder.Clear();
             ResetComponent();
-            ResetPhotoInfo();
             UpdateRemainingFileCounter();
         }
 
@@ -58,6 +57,7 @@ namespace PhotosCategorier.Main
             AddingClassifyFolder.IsEnabled = false;
             RefreshButton.IsEnabled = ClearButton.IsEnabled = false;
             ClearCurImage();
+            ResetPhotoInfo();
             Inited = false;
         }
 

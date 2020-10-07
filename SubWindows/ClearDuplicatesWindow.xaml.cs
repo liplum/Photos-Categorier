@@ -7,7 +7,7 @@ using System.Windows;
 using static PhotosCategorier.Utils.FileTool;
 using PhotosCategorier.Photo;
 
-namespace PhotosCategorier.Main
+namespace PhotosCategorier.SubWindows
 {
     /// <summary>
     /// ClearDuplicatesWindow.xaml 的交互逻辑

@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace PhotosCategorier.Main
+namespace PhotosCategorier.SubWindows
 {
     /// <summary>
     /// SetLanguageWindow.xaml 的交互逻辑

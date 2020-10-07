@@ -1,4 +1,5 @@
 ﻿using PhotosCategorier.Layout;
+using PhotosCategorier.SubWindows;
 using System.Windows;
 
 namespace PhotosCategorier.Main

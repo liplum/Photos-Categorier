@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace PhotosCategorier.Main
+namespace PhotosCategorier.UserControls
 {
     /// <summary>
     /// SettingSelect.xaml 的交互逻辑
