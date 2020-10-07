@@ -40,6 +40,7 @@ namespace PhotosCategorier.Main
             photographs.Clear();
             allClassifyFolder.Clear();
             ResetComponent();
+            ResetPhotoInfo();
             UpdateRemainingFileCounter();
         }
 

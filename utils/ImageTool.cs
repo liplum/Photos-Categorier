@@ -14,7 +14,7 @@ namespace PhotosCategorier.Utils
         /// <param name="ImagePath"></param>
         /// <returns></returns>
         /// <exception cref="CannotOpenFileException"></exception>
-        public static Bitmap ReadBitmap(string ImagePath)
+        public static Bitmap ReadBitmap(this string ImagePath)
         {
             try
             {
@@ -27,8 +27,7 @@ namespace PhotosCategorier.Utils
             }
         }
 
-
-        public static WriteableBitmap ToImageSource(Bitmap Bitmap)
+        public static WriteableBitmap GetImageSource(this Bitmap Bitmap)
         {
             IntPtr hBitmap = Bitmap.GetHbitmap();
             BitmapSource bitmapSource = Imaging.CreateBitmapSourceFromHBitmap(hBitmap, IntPtr.Zero, Int32Rect.Empty,

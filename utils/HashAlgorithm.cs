@@ -4,12 +4,12 @@ using System.Text;
 
 namespace PhotosCategorier.Utils
 {
-    public class HashAlgorithm
+    public static class HashAlgorithm
     {
         /// <summary>
         /// 对文件流进行MD5加密
         /// </summary>
-        public static string MD5(Stream stream)
+        public static string MD5(this Stream stream)
         {
             MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
             md5.ComputeHash(stream);
@@ -30,7 +30,7 @@ namespace PhotosCategorier.Utils
         {
             using FileStream stream = File.Open(filePath, FileMode.Open);
 
-            return MD5(stream);
+            return stream.MD5();
         }
     }
 }

@@ -58,6 +58,7 @@ namespace PhotosCategorier.Main
         private void InitImage()
         {
             photographs.Reset();
+            CurImageInfo.Visibility = Visibility.Visible;
             InitRenderPool();
             UpdateRemainingFileCounter();
         }
@@ -88,8 +89,7 @@ namespace PhotosCategorier.Main
         {
             try
             {
-                var res = renderer.GetCurrentRender();
-                CurPhotoSource = ImageTool.ToImageSource(res);
+                CurPhotoSource = renderer.GetCurrentRender().GetImageSource();
             }
             catch
             {
@@ -108,6 +108,12 @@ namespace PhotosCategorier.Main
             CurImageInfo.Content = photo.FilePath;
         }
 
+        private void ResetPhotoInfo()
+        {
+            CurImageInfo.Visibility = Visibility.Hidden;
+            CurImageInfo.Content = null;
+        }
+
         private void InitRenderPool()
         {
             if (CheckEmptyWithMessage(EmptyMessage.HAS_NO_PHOTO))
@@ -118,8 +124,7 @@ namespace PhotosCategorier.Main
             var curPhoto = photographs.Current;
             try
             {
-                var res = renderer.Init();
-                CurPhotoSource = ImageTool.ToImageSource(res);
+                CurPhotoSource = renderer.Init().GetImageSource();
                 DisplayPhotoInfo(curPhoto);
             }
             catch

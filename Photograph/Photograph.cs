@@ -161,7 +161,7 @@ namespace PhotosCategorier.Photo
                 Bitmap img;
                 try
                 {
-                    img = ReadBitmap(FilePath);
+                    img = FilePath.ReadBitmap();
                 }
                 catch (CannotOpenFileException e)
                 {
