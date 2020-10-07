@@ -3,7 +3,6 @@ using PhotosCategorier.Photo;
 using PhotosCategorier.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
@@ -11,7 +10,7 @@ using System.Windows;
 
 namespace PhotosCategorier.Main
 {
-    public sealed partial class MainWindow : INotifyPropertyChanged
+    public sealed partial class MainWindow
     {
         public bool IsIncludeSubfolder
         {
@@ -23,7 +22,7 @@ namespace PhotosCategorier.Main
                 if (settings.IncludeSubfolder != value)
                 {
                     settings.IncludeSubfolder = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsIncludeSubfolder)));
+                    OnPropertyChanged();
                 }
             }
         }
@@ -52,11 +51,7 @@ namespace PhotosCategorier.Main
                 {
                     AddClassifyFolderFunc(directories);
 
-                    if (photographs.IsEmpty)
-                    {
-                        MessageBox.Show(Properties.Resources.NotHoldPhoto, Properties.Resources.Error);
-                    }
-                    else
+                    if (!CheckEmptyWithMessage(EmptyMessage.NOT_HOLD_PHOTO))
                     {
                         InitComponent();
                         InitImage();

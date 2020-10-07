@@ -31,26 +31,26 @@
             </Style>
         </Grid.Resources>
         <Label
-            Name="Counter"
+            x:Name="Counter"
             Grid.ColumnSpan="2"
             VerticalContentAlignment="Center"
             Content="{x:Static loc:Resources.IsScanning}"
             FontSize="20" />
         <ProgressBar
-            Name="progress"
+            x:Name="progress"
             Grid.Row="1"
             Grid.ColumnSpan="2"
             Height="auto"
             Margin="5"
             Value="{Binding Path=Progress, ElementName=ClearWindow, Mode=OneWay}" />
         <Button
-            Name="OK"
+            x:Name="OK"
             Grid.Row="2"
             Click="OK_Click"
             Content="{x:Static loc:Resources.OK}"
             IsEnabled="False" />
         <Button
-            Name="Cancel"
+            x:Name="Cancel"
             Grid.Row="2"
             Grid.Column="2"
             Click="Cancel_Click"

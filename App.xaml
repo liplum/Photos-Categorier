@@ -11,5 +11,21 @@
     <Application.Resources>
         <layout:Layout x:Key="CurLayout" x:Name="CurLayout" />
         <system:String x:Key="Version">1.5</system:String>
+        <SolidColorBrush
+            x:Key="Translucent"
+            Opacity="0.4"
+            Color="White" />
+        <Style x:Key="NormalLabel" TargetType="Label">
+            <Setter Property="FontSize" Value="{Binding FontSize, Source={StaticResource CurLayout}}" />
+        </Style>
+        <Style x:Key="NormalButton" TargetType="Button">
+            <Setter Property="FontSize" Value="{Binding FontSize, Source={StaticResource CurLayout}}" />
+        </Style>
+        <Style x:Key="MiniLabel" TargetType="Label">
+            <Setter Property="FontSize" Value="{Binding ItemFontSize, Source={StaticResource CurLayout}}" />
+        </Style>
+        <Style x:Key="MiniButton" TargetType="Button">
+            <Setter Property="FontSize" Value="{Binding ItemFontSize, Source={StaticResource CurLayout}}" />
+        </Style>
     </Application.Resources>
 </Application>

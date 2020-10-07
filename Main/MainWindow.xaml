@@ -19,13 +19,7 @@
     ResizeMode="NoResize"
     mc:Ignorable="d">
     <Window.Resources>
-        <SolidColorBrush
-            x:Key="Translucent"
-            Opacity="0.4"
-            Color="White" />
-        <Style TargetType="Label">
-            <Setter Property="FontSize" Value="{Binding FontSize, Source={StaticResource CurLayout}}" />
-        </Style>
+        <DiscreteObjectKeyFrame x:Key="MainWinProxy" Value="{Binding ElementName=MainWin}" />
     </Window.Resources>
     <Window.Content>
         <Grid x:Name="MainGrid">
@@ -48,9 +42,6 @@
                     <Style x:Key="Main" TargetType="MenuItem">
                         <Setter Property="FontSize" Value="{Binding FontSize, Source={StaticResource CurLayout}}" />
                     </Style>
-                    <Style TargetType="Label">
-                        <Setter Property="FontSize" Value="{Binding ItemFontSize, Source={StaticResource CurLayout}}" />
-                    </Style>
                     <Style x:Key="Sub" TargetType="MenuItem">
                         <Setter Property="FontSize" Value="{Binding ItemFontSize, Source={StaticResource CurLayout}}" />
                     </Style>
@@ -71,24 +62,24 @@
                 </MenuItem>
                 <MenuItem Header="{x:Static loc:Resources.Folder}" Style="{StaticResource Main}">
                     <MenuItem
-                        Name="SettingClassifyFolder"
+                        x:Name="SettingClassifyFolder"
                         Click="SettingClassifyFolder_Click"
                         Header="{x:Static loc:Resources.SettingClassifyFolder}"
                         Style="{StaticResource Sub}" />
                     <Separator />
                     <MenuItem
-                        Name="SelectLeftFolder"
+                        x:Name="SelectLeftFolder"
                         Click="SelectLeftFolder_Click"
                         Header="{x:Static loc:Resources.SelectLeftFolder}"
                         Style="{StaticResource Sub}" />
                     <MenuItem
-                        Name="SelectRightFolder"
+                        x:Name="SelectRightFolder"
                         Click="SelectRightFolder_Click"
                         Header="{x:Static loc:Resources.SelectRightFolder}"
                         Style="{StaticResource Sub}" />
                     <Separator />
                     <MenuItem
-                        Name="AddingClassifyFolder"
+                        x:Name="AddingClassifyFolder"
                         Click="AddingClassifyFolder_Click"
                         Header="{x:Static loc:Resources.AddingClassifyFolder}"
                         IsEnabled="False"
@@ -96,12 +87,12 @@
                 </MenuItem>
                 <MenuItem Header="{x:Static loc:Resources.Setting}" Style="{StaticResource Main}">
                     <MenuItem
-                        Name="SettingWindowSize"
+                        x:Name="SettingWindowSize"
                         Click="SettingWindowSize_Click"
                         Header="{x:Static loc:Resources.SettingWindowSize}"
                         Style="{StaticResource Sub}" />
                     <MenuItem
-                        Name="SettingLanguage"
+                        x:Name="SettingLanguage"
                         Click="SettingLanguage_Click"
                         Header="{x:Static loc:Resources.SettingLanguage}"
                         Style="{StaticResource Sub}" />
@@ -116,42 +107,47 @@
                     <MenuItem Header="{x:Static loc:Resources.HelpInfo}" Style="{StaticResource Sub}">
                         <MenuItem.ToolTip>
                             <StackPanel>
-                                <Label Content="{x:Static loc:Resources.HelpContentA}" />
+                                <Label Content="{x:Static loc:Resources.HelpContentA}" Style="{StaticResource MiniLabel}" />
                                 <Separator />
-                                <Label Content="{x:Static loc:Resources.HelpContentB}" />
+                                <Label Content="{x:Static loc:Resources.HelpContentB}" Style="{StaticResource MiniLabel}" />
                             </StackPanel>
                         </MenuItem.ToolTip>
                     </MenuItem>
                     <MenuItem Header="{x:Static loc:Resources.Formats}" Style="{StaticResource Sub}">
                         <MenuItem.ToolTip>
-                            <Label Content="{x:Static loc:Resources.SupportedFormats}" />
+                            <Label Content="{x:Static loc:Resources.SupportedFormats}" Style="{StaticResource MiniLabel}" />
                         </MenuItem.ToolTip>
                     </MenuItem>
                     <MenuItem Header="{x:Static loc:Resources.VersionInfo}" Style="{StaticResource Sub}">
                         <MenuItem.ToolTip>
-                            <Label Content="{StaticResource Version}" />
+                            <Label Content="{StaticResource Version}" Style="{StaticResource MiniLabel}" />
                         </MenuItem.ToolTip>
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="{x:Static loc:Resources.Tool}" Style="{StaticResource Main}">
                     <MenuItem
-                        Name="ClearingDuplicates"
+                        x:Name="ClearingDuplicates"
                         Click="ClearingDuplicates_Click"
                         Header="{x:Static loc:Resources.ClearDuplicates}"
                         Style="{StaticResource Sub}" />
                 </MenuItem>
             </Menu>
             <Canvas
-                Name="DisplayArea"
+                x:Name="DisplayArea"
                 Grid.Row="1"
                 Grid.ColumnSpan="2"
                 Focusable="True">
                 <Image
-                    Name="curImage"
+                    x:Name="CurImage"
                     Canvas.Left="0"
-                    Canvas.Top="0" />
+                    Canvas.Top="0"
+                    Source="{Binding Path=CurPhotoSource, ElementName=MainWin, Mode=OneWay}">
+                    <Image.ToolTip>
+                        <Label x:Name="CurImageInfo" Content="{Binding Value.curPhotoInfo, Source={StaticResource MainWinProxy}}" />
+                    </Image.ToolTip>
+                </Image>
                 <Label
-                    Name="LeftArrowPointedToFolder"
+                    x:Name="LeftArrowPointedToFolder"
                     Canvas.Left="{calc:Binding WINDOW_WIDTH / 12,
                                                Source={StaticResource CurLayout}}"
                     Canvas.Bottom="{calc:Binding WINDOW_HEIGHT / 15,
@@ -162,10 +158,11 @@
                     Content="{x:Static loc:Resources.Left}"
                     Cursor="Hand"
                     FontWeight="Bold"
-                    Visibility="Hidden"
-                    MouseDown="LeftArrowPointedToFolder_MouseDown" />
+                    MouseDown="LeftArrowPointedToFolder_MouseDown"
+                    Style="{StaticResource NormalLabel}"
+                    Visibility="Hidden" />
                 <Label
-                    Name="RightArrowPointedToFolder"
+                    x:Name="RightArrowPointedToFolder"
                     Canvas.Right="{calc:Binding WINDOW_WIDTH / 12,
                                                 Source={StaticResource CurLayout}}"
                     Canvas.Bottom="{calc:Binding WINDOW_HEIGHT / 15,
@@ -176,10 +173,11 @@
                     Content="{x:Static loc:Resources.Right}"
                     Cursor="Hand"
                     FontWeight="Bold"
-                    Visibility="Hidden"
-                    MouseDown="RightArrowPointedToFolder_MouseDown" />
+                    MouseDown="RightArrowPointedToFolder_MouseDown"
+                    Style="{StaticResource NormalLabel}"
+                    Visibility="Hidden" />
                 <Label
-                    Name="RemainingFileCounter"
+                    x:Name="RemainingFileCounter"
                     Canvas.Top="{calc:Binding WINDOW_HEIGHT / 15,
                                               Source={StaticResource CurLayout}}"
                     Canvas.Right="{calc:Binding WINDOW_WIDTH / 12,
@@ -187,6 +185,7 @@
                     Background="{StaticResource Translucent}"
                     Content="{Binding Path=RemainingFiles, ElementName=MainWin, Mode=OneWay}"
                     FontWeight="Bold"
+                    Style="{StaticResource NormalLabel}"
                     Visibility="Hidden" />
             </Canvas>
             <DockPanel
@@ -200,8 +199,8 @@
                     Click="ToLeft_Click"
                     Content="{x:Static loc:Resources.ToLeft}"
                     DockPanel.Dock="Left"
-                    FontSize="{Binding FontSize, Source={StaticResource CurLayout}}"
-                    IsEnabled="False">
+                    IsEnabled="False"
+                    Style="{StaticResource NormalButton}">
                     <Button.LayoutTransform>
                         <RotateTransform Angle="-90" />
                     </Button.LayoutTransform>
@@ -213,8 +212,8 @@
                     Click="ToRight_Click"
                     Content="{x:Static loc:Resources.ToRight}"
                     DockPanel.Dock="Right"
-                    FontSize="{Binding FontSize, Source={StaticResource CurLayout}}"
-                    IsEnabled="False">
+                    IsEnabled="False"
+                    Style="{StaticResource NormalButton}">
                     <Button.LayoutTransform>
                         <RotateTransform Angle="90" />
                     </Button.LayoutTransform>
@@ -226,8 +225,8 @@
                     Click="DeleteThis_Click"
                     Content="{x:Static loc:Resources.DeleteThis}"
                     DockPanel.Dock="Bottom"
-                    FontSize="{Binding FontSize, Source={StaticResource CurLayout}}"
-                    IsEnabled="False" />
+                    IsEnabled="False"
+                    Style="{StaticResource NormalButton}" />
                 <Button
                     x:Name="SkipThis"
                     Margin="5,0,5,5"
@@ -235,8 +234,8 @@
                     Click="SkipThis_Click"
                     Content="{x:Static loc:Resources.SkipThis}"
                     DockPanel.Dock="Top"
-                    FontSize="{Binding FontSize, Source={StaticResource CurLayout}}"
-                    IsEnabled="False" />
+                    IsEnabled="False"
+                    Style="{StaticResource NormalButton}" />
             </DockPanel>
         </Grid>
     </Window.Content>

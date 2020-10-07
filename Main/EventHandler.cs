@@ -114,7 +114,7 @@ namespace PhotosCategorier.Main
         }
 
 
-        private void Window_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        private void Window_KeyUp(object sender, KeyEventArgs e)
         {
             this.Focus();
 
@@ -123,20 +123,16 @@ namespace PhotosCategorier.Main
                 case Key.W:
                 case Key.Up:
                     {
-                        if (!photographs.IsEmpty)
+                        if (!CheckEmptyWithMessage(EmptyMessage.NOT_SET_CLASSIFY))
                             SkipThisPhoto();
-                        else
-                            MessageBox.Show(Properties.Resources.NotSetClassifyFolder, Properties.Resources.Error);
                     }
                     break;
                 case Key.S:
                 case Key.Down:
                 case Key.Delete:
                     {
-                        if (!photographs.IsEmpty)
+                        if (!CheckEmptyWithMessage(EmptyMessage.NOT_SET_CLASSIFY))
                             DeleteThisPhoto();
-                        else
-                            MessageBox.Show(Properties.Resources.NotSetClassifyFolder, Properties.Resources.Error);
                     }
                     break;
                 case Key.A:
@@ -145,9 +141,7 @@ namespace PhotosCategorier.Main
 
                         if (leftArrow == null)
                             MessageBox.Show(Properties.Resources.NotPointLeft, Properties.Resources.Error);
-                        else if (!photographs.IsEmpty)
-                            MessageBox.Show(Properties.Resources.NotSetClassifyFolder, Properties.Resources.Error);
-                        else
+                        else if (!CheckEmptyWithMessage(EmptyMessage.NOT_SET_CLASSIFY))
                             MoveThisTo(Arrow.LEFT_ARROW);
 
                     }
@@ -157,15 +151,13 @@ namespace PhotosCategorier.Main
                     {
                         if (rightArrow == null)
                             MessageBox.Show(Properties.Resources.NotPointRight, Properties.Resources.Error);
-                        else if (!photographs.IsEmpty)
-                            MessageBox.Show(Properties.Resources.NotSetClassifyFolder, Properties.Resources.Error);
-                        else
+                        else if (!CheckEmptyWithMessage(EmptyMessage.NOT_SET_CLASSIFY))
                             MoveThisTo(Arrow.RIGHT_ARROW);
                     }
                     break;
                 case Key.F5:
                     {
-                        if (allClassifyFolder != null && allClassifyFolder.Count != 0)
+                        if (allClassifyFolder.Count != 0)
                         {
                             Refresh();
                         }

@@ -10,9 +10,8 @@ namespace PhotosCategorier.Main
             var r = MessageBox.Show(Properties.Resources.ConfirmClearingDuplicates, Properties.Resources.Warnning, MessageBoxButton.OKCancel);
             if (r == MessageBoxResult.OK)
             {
-                if (photographs.IsEmpty)
+                if (CheckEmptyWithMessage(EmptyMessage.NOT_SET_CLASSIFY))
                 {
-                    MessageBox.Show(Properties.Resources.NotSetClassifyFolder, Properties.Resources.Error);
                     return;
                 }
                 Refresh();

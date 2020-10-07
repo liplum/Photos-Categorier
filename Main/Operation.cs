@@ -2,30 +2,13 @@
 using PhotosCategorier.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Windows;
-using static PhotosCategorier.Utils.FileTool;
 
 namespace PhotosCategorier.Main
 {
-    public partial class MainWindow : INotifyPropertyChanged
+    public partial class MainWindow
     {
-        private int remainingFiles = 0;
-
-        public int RemainingFiles
-        {
-            get => remainingFiles;
-            set
-            {
-                if (remainingFiles != value)
-                {
-                    remainingFiles = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(RemainingFiles)));
-                }
-            }
-        }
-
         private void Refresh()
         {
             photographs.CleanNotExisted();
@@ -77,57 +60,6 @@ namespace PhotosCategorier.Main
             Inited = false;
         }
 
-        /// <summary>
-        /// It'll reset <see cref="curPhoto"/> to 0 and update current Image which is displayed and file counter.
-        /// </summary>
-        private void InitImage()
-        {
-            photographs.Reset();
-            InitRenderPool();
-            UpdateRemainingFileCounter();
-        }
-
-        private void NextImage()
-        {
-            if (photographs.MoveNext())
-            {
-                UpdateImage();
-            }
-            UpdateRemainingFileCounter();
-        }
-
-        private void UpdateRemainingFileCounter()
-        {
-            RemainingFiles = photographs.RemainingFiles;
-            if (RemainingFiles == 0)
-            {
-                RemainingFileCounter.Visibility = Visibility.Hidden;
-            }
-            else
-            {
-                RemainingFileCounter.Visibility = Visibility.Visible;
-            }
-        }
-
-        private void RenderImage()
-        {
-            try
-            {
-                var res = renderer.GetCurrentRender();
-                curImage.Source = ImageTool.ToImageSource(res);
-            }
-            catch
-            {
-                ClearCurImage();
-                throw;
-            }
-        }
-
-        private void ClearCurImage()
-        {
-            curImage.Source = null;
-        }
-
         private enum Arrow { LEFT_ARROW, RIGHT_ARROW }
 
         /// <summary>
@@ -143,6 +75,34 @@ namespace PhotosCategorier.Main
                 return false;
             }
             return true;
+        }
+
+        private enum EmptyMessage { HAS_NO_PHOTO, NOT_SET_CLASSIFY, NOT_HOLD_PHOTO }
+        /// <summary>
+        /// Checking whether the photographs is empty or not . If it's empty , it would pop a message box with what you want to display
+        /// </summary>
+        /// <param name="">What you want to display</param>
+        /// <returns>If photographs is empty , it would return ture.</returns>
+        private bool CheckEmptyWithMessage(EmptyMessage emptyMessage)
+        {
+            if (photographs.IsEmpty)
+            {
+                switch (emptyMessage)
+                {
+                    case EmptyMessage.HAS_NO_PHOTO:
+                        MessageBox.Show(Properties.Resources.HasNoPhoto, Properties.Resources.Error);
+                        break;
+                    case EmptyMessage.NOT_SET_CLASSIFY:
+                        MessageBox.Show(Properties.Resources.NotSetClassifyFolder, Properties.Resources.Error);
+                        break;
+                    case EmptyMessage.NOT_HOLD_PHOTO:
+                        MessageBox.Show(Properties.Resources.NotHoldPhoto, Properties.Resources.Error);
+                        break;
+                }
+                return true;
+            }
+
+            return false;
         }
         private void MoveThisTo(Arrow arrow)
         {
@@ -217,54 +177,6 @@ namespace PhotosCategorier.Main
                 }
             }
 
-        }
-
-        private void InitRenderPool()
-        {
-            if (photographs.IsEmpty)
-            {
-                ClearCurImage();
-                MessageBox.Show(Properties.Resources.HasNoPhoto, Properties.Resources.Error);
-                return;
-            }
-            var curPhoto = photographs.Current;
-            try
-            {
-                var res = renderer.Init();
-                curImage.Source = ImageTool.ToImageSource(res);
-            }
-            catch
-            {
-                ClearCurImage();
-                var r = MessageBox.Show($"{Properties.Resources.CannotOpen}\n{curPhoto.FilePath.GetLastName()}\n{Properties.Resources.ConfirmDeletion}", Properties.Resources.Error, MessageBoxButton.OKCancel);
-                if (r == MessageBoxResult.OK)
-                {
-                    curPhoto.FilePath.DeleteFileToRecycleBin();
-                }
-            }
-        }
-
-        private void UpdateImage()
-        {
-            if (photographs.IsEmpty)
-            {
-                ClearCurImage();
-                MessageBox.Show(Properties.Resources.HasNoPhoto, Properties.Resources.Error);
-                return;
-            }
-            var curPhoto = photographs.Current;
-            try
-            {
-                RenderImage();
-            }
-            catch
-            {
-                var r = MessageBox.Show($"{Properties.Resources.CannotOpen}\n{curPhoto.FilePath.GetLastName()}\n{Properties.Resources.ConfirmDeletion}", Properties.Resources.Error, MessageBoxButton.OKCancel);
-                if (r == MessageBoxResult.OK)
-                {
-                    curPhoto.FilePath.DeleteFileToRecycleBin();
-                }
-            }
         }
     }
 }

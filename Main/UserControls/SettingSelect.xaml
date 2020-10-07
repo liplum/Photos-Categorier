@@ -15,7 +15,7 @@
             HorizontalAlignment="Center"
             Orientation="Horizontal">
             <Label
-                Name="SettingLabel"
+                x:Name="SettingLabel"
                 Margin="0,0,20,0"
                 HorizontalAlignment="Center"
                 Content="{Binding LabelContent, ElementName=Setting}" />
