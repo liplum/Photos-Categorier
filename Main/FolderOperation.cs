@@ -27,6 +27,34 @@ namespace PhotosCategorier.Main
             }
         }
 
+        private string leftArrowContent = Properties.Resources.Left;
+        public string LeftArrowContent
+        {
+            get => leftArrowContent;
+            set
+            {
+                if (leftArrowContent != value)
+                {
+                    leftArrowContent = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private string rightArrowContent = Properties.Resources.Right;
+
+        public string RightArrowContent
+        {
+            get => rightArrowContent;
+            set
+            {
+                if (rightArrowContent != value)
+                {
+                    rightArrowContent = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         private void AddClassifyFolderWithSelection(string title)
         {
             var directories = SelectFolders(title);
@@ -161,7 +189,7 @@ namespace PhotosCategorier.Main
         {
             if (leftArrow != null)
             {
-                this.LeftArrowPointedToFolder.Content = leftArrow.Name;
+                LeftArrowContent = leftArrow.Name;
                 ToLeft.IsEnabled = true;
                 LeftArrowPointedToFolder.Visibility = Visibility.Visible;
             }
@@ -177,7 +205,7 @@ namespace PhotosCategorier.Main
         {
             if (rightArrow != null)
             {
-                this.RightArrowPointedToFolder.Content = rightArrow.Name;
+                RightArrowContent = rightArrow.Name;
                 ToRight.IsEnabled = true;
                 RightArrowPointedToFolder.Visibility = Visibility;
             }

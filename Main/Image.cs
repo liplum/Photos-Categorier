@@ -32,6 +32,10 @@ namespace PhotosCategorier.Main
                 if (curPhotoInfo != value)
                 {
                     curPhotoInfo = value;
+                    if (string.IsNullOrEmpty(curPhotoInfo))
+                        CurImageInfo.Visibility = Visibility.Hidden;
+                    else
+                        CurImageInfo.Visibility = Visibility.Visible;
                     OnPropertyChanged();
                 }
             }
@@ -47,6 +51,10 @@ namespace PhotosCategorier.Main
                 if (remainingFiles != value)
                 {
                     remainingFiles = value;
+                    if (remainingFiles == 0)
+                        RemainingFileCounter.Visibility = Visibility.Hidden;
+                    else
+                        RemainingFileCounter.Visibility = Visibility.Visible;
                     OnPropertyChanged();
                 }
             }
@@ -75,14 +83,6 @@ namespace PhotosCategorier.Main
         private void UpdateRemainingFileCounter()
         {
             RemainingFiles = photographs.RemainingFiles;
-            if (RemainingFiles == 0)
-            {
-                RemainingFileCounter.Visibility = Visibility.Hidden;
-            }
-            else
-            {
-                RemainingFileCounter.Visibility = Visibility.Visible;
-            }
         }
 
         private void RenderImage()
@@ -105,13 +105,12 @@ namespace PhotosCategorier.Main
 
         private void DisplayPhotoInfo(Photograph photo)
         {
-            CurImageInfo.Content = photo.FilePath;
+            CurPhotoInfo = photo.FilePath;
         }
 
         private void ResetPhotoInfo()
         {
-            CurImageInfo.Visibility = Visibility.Hidden;
-            CurImageInfo.Content = null;
+            CurPhotoInfo = null;
         }
 
         private void InitRenderPool()

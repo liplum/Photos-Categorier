@@ -143,7 +143,7 @@
                     Canvas.Top="0"
                     Source="{Binding Path=CurPhotoSource, ElementName=MainWin, Mode=OneWay}">
                     <Image.ToolTip>
-                        <Label x:Name="CurImageInfo" Content="{Binding Value.curPhotoInfo, Source={StaticResource MainWinProxy}}" />
+                        <Label x:Name="CurImageInfo" Content="{Binding Value.CurPhotoInfo, Source={StaticResource MainWinProxy},Mode=OneWay}" />
                     </Image.ToolTip>
                 </Image>
                 <Label
@@ -155,7 +155,7 @@
                     Width="Auto"
                     Height="Auto"
                     Background="{StaticResource Translucent}"
-                    Content="{x:Static loc:Resources.Left}"
+                    Content="{Binding ElementName=MainWin, Mode=OneWay, Path=LeftArrowContent}"
                     Cursor="Hand"
                     FontWeight="Bold"
                     MouseDown="LeftArrowPointedToFolder_MouseDown"
@@ -170,7 +170,7 @@
                     Width="Auto"
                     Height="Auto"
                     Background="{StaticResource Translucent}"
-                    Content="{x:Static loc:Resources.Right}"
+                    Content="{Binding ElementName=MainWin, Mode=OneWay, Path=RightArrowContent}"
                     Cursor="Hand"
                     FontWeight="Bold"
                     MouseDown="RightArrowPointedToFolder_MouseDown"
