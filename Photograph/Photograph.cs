@@ -8,7 +8,7 @@ namespace PhotosCategorier.Photo
     /// <summary>
     /// 一张图片
     /// </summary>
-    public class Photograph
+    public class Photograph : IEquatable<Photograph>
     {
         public string FilePath { get; }
 
@@ -181,21 +181,24 @@ namespace PhotosCategorier.Photo
                 return img;
             }
         }
+
         public override bool Equals(object obj)
         {
-            if (obj is Photograph p)
+            if (obj is Photograph photo)
             {
-                if (this.FilePath == p.FilePath)
-                {
-                    return true;
-                }
+                return FilePath == photo.FilePath;
             }
             return false;
         }
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return FilePath.GetHashCode();
+        }
+
+        bool IEquatable<Photograph>.Equals(Photograph other)
+        {
+            return FilePath == other.FilePath;
         }
     }
 }

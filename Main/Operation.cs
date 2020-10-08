@@ -41,10 +41,7 @@ namespace PhotosCategorier.Main
 
                 }
             }
-            foreach (var album in needRemove)
-            {
-                allClassifyFolder.Remove(album);
-            }
+            allClassifyFolder.RemoveAll(item => needRemove.Contains(item));
             photographs.AddRange(needAdd);
             IsEnd = photographs.IsEmpty;
             InitImage();

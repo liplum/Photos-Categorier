@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace PhotosCategorier.Photo
 {
-    public class PhotographsGenerator : IEnumerator<Photograph>, IEqualityComparer<Photograph>
+    public class PhotographsGenerator : IEnumerator<Photograph>
     {
         public List<Photograph> AllPhotographs { get; private set; } = new List<Photograph>();
 
@@ -101,7 +101,7 @@ namespace PhotosCategorier.Photo
         {
             lock (this)
             {
-                AllPhotographs = AllPhotographs.Distinct(this).ToList();
+                AllPhotographs = AllPhotographs.Distinct().ToList();
             }
         }
 
@@ -181,21 +181,6 @@ namespace PhotosCategorier.Photo
             {
                 CurIndex = 0;
             }
-        }
-
-        public bool Equals([AllowNull] Photograph x, [AllowNull] Photograph y)
-        {
-            if (Object.ReferenceEquals(x, y)) return true;
-
-            if (x is null || y is null)
-                return false;
-
-            return x.FilePath == y.FilePath;
-        }
-
-        public int GetHashCode([DisallowNull] Photograph obj)
-        {
-            return obj.FilePath.GetHashCode();
         }
     }
 }

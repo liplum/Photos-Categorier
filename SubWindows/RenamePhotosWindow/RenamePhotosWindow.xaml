@@ -11,13 +11,13 @@
     mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-            <Menu Style="{StaticResource Menu}">
-            <MenuItem Header="File" Style="{StaticResource Main}" >
-                <MenuItem Header="Read a Config File" Style="{StaticResource Sub}"></MenuItem>
-                <MenuItem Header="Save as Config File" Style="{StaticResource Sub}"></MenuItem>
+        <Menu Style="{StaticResource Menu}">
+            <MenuItem Header="File" Style="{StaticResource Main}">
+                <MenuItem Header="Read a Config File" Style="{StaticResource Sub}" />
+                <MenuItem Header="Save as Config File" Style="{StaticResource Sub}" />
             </MenuItem>
         </Menu>
     </Grid>

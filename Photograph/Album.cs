@@ -1,10 +1,11 @@
 ﻿using PhotosCategorier.Utils;
+using System;
 using System.IO;
 using System.Linq;
 
 namespace PhotosCategorier.Photo
 {
-    public class Album
+    public class Album : IEquatable<Album>
     {
         public DirectoryInfo Directory { get; private set; }
 
@@ -23,7 +24,7 @@ namespace PhotosCategorier.Photo
 
             var selectedFiles = from file in allFiles
                                 where
-           file.IsPhotograph() 
+           file.IsPhotograph()
                                 select file;
 
             var imageFiles = selectedFiles.ToArray();
@@ -54,8 +55,12 @@ namespace PhotosCategorier.Photo
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return Directory.GetHashCode();
         }
 
+        bool IEquatable<Album>.Equals(Album other)
+        {
+            return Directory.FullName == other.Directory.FullName;
+        }
     }
 }

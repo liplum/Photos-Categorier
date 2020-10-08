@@ -4,7 +4,6 @@ using PhotosCategorier.Utils;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -143,76 +142,86 @@ namespace PhotosCategorier.Main
         {
             if (directories != null)
             {
-                if (Inited)
+                var addedRes = AddClassifyFolderFunc(directories);
+
+                if ((addedRes & AddClassifyFolderResult.ACTUALLY_ADDED) != 0)
                 {
-                    AddClassifyFolderFunc(directories);
+                    InitComponent();
                     InitImage();
+                }
+                else if ((addedRes & AddClassifyFolderResult.REPEATEDLY_ADDED) != 0)
+                {
+
                 }
                 else
                 {
-                    AddClassifyFolderFunc(directories);
-
-                    if (!CheckEmptyWithMessage(EmptyMessage.NOT_HOLD_PHOTO))
-                    {
-                        InitComponent();
-                        InitImage();
-                    }
+                    MessageBox.Show(Properties.Resources.NotHoldPhoto, Properties.Resources.Error);
                 }
-
-                UpdateRemainingFileCounter();
             }
 
-            void AddClassifyFolderFunc(DirectoryInfo[] directories)
-            {
-                var isIncludeSubfolder = IsIncludeSubfolder;
-                AddFunc(directories);
+            UpdateRemainingFileCounter();
+        }
+        [Flags]
+        private enum AddClassifyFolderResult
+        {
+            ACTUALLY_ADDED = 0b100,
+            REPEATEDLY_ADDED = 0b010,
+            NOT_ADDED = 0b001
+        }
+        /// <summary>
+        /// Add Classify Folder
+        /// </summary>
+        /// <param name="directories"></param>
+        /// <returns>If it actually added some photos , it would return true . Otherwise , there are nothing is added , it return false.</returns>
+        private AddClassifyFolderResult AddClassifyFolderFunc(DirectoryInfo[] directories)
+        {
+            var isIncludeSubfolder = IsIncludeSubfolder;
+            var folderNeedAdd = new List<Album>();
+            AddFunc(directories);
 
-                allClassifyFolder = allClassifyFolder.Distinct(albumComparer).ToList();
-                var allPhotos = new List<Photograph>();
-                var needRemove = new List<Album>();
-                foreach (var album in allClassifyFolder)
+            var allPhotos = new List<Photograph>();
+            var needRemove = new List<Album>();
+            var addedResult = AddClassifyFolderResult.NOT_ADDED;
+            foreach (var album in folderNeedAdd)
+            {
+                var all = album.GetAllPhotographs();
+                if (all is null)
                 {
-                    var all = album.GetAllPhotographs();
-                    if (all is null)
+                    needRemove.Add(album);
+                }
+                else
+                {
+                    if (allClassifyFolder.Contains(album))
                     {
-                        needRemove.Add(album);
-                        continue;
+                        addedResult |= AddClassifyFolderResult.REPEATEDLY_ADDED;//equals actuallyAdded += AddClassifyFolderResult.REPEATEDLY_ADDED
+                    }
+                    else
+                    {
+                        addedResult |= AddClassifyFolderResult.ACTUALLY_ADDED;//equals actuallyAdded += AddClassifyFolderResult.ACTUALLY_ADDED
                     }
                     allPhotos.AddRange(all);
                 }
-                allClassifyFolder.RemoveAll(item => needRemove.Contains(item));
-                photographs.AddRange(allPhotos);
+            }
+            allClassifyFolder = allClassifyFolder.Distinct().ToList();
+            allClassifyFolder.AddRange(folderNeedAdd);
+            allClassifyFolder.RemoveAll(item => needRemove.Contains(item));
+            photographs.AddRange(allPhotos);
+            return addedResult;
 
-                void AddFunc(DirectoryInfo[] dirs)
+            void AddFunc(DirectoryInfo[] dirs)
+            {
+                foreach (var dir in dirs)
                 {
-                    foreach (var dir in dirs)
+                    folderNeedAdd.Add(new Album(dir));
+                    if (isIncludeSubfolder)
                     {
-                        allClassifyFolder.Add(new Album(dir));
-                        if (isIncludeSubfolder)
+                        var allSub = dir.GetDirectories();
+                        if (allSub.Length != 0)
                         {
-                            var allSub = dir.GetDirectories();
-                            if (allSub.Length != 0)
-                            {
-                                AddFunc(allSub);
-                            }
+                            AddFunc(allSub);
                         }
                     }
                 }
-            }
-        }
-
-        private readonly AlbumComparer albumComparer = new AlbumComparer();
-
-        private class AlbumComparer : IEqualityComparer<Album>
-        {
-            public bool Equals([AllowNull] Album x, [AllowNull] Album y)
-            {
-                return x.Directory.FullName.Equals(y.Directory.FullName);
-            }
-
-            public int GetHashCode([DisallowNull] Album obj)
-            {
-                return obj.Directory.FullName.GetHashCode();
             }
         }
 
