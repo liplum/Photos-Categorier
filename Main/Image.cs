@@ -32,10 +32,6 @@ namespace PhotosCategorier.Main
                 if (curPhotoInfo != value)
                 {
                     curPhotoInfo = value;
-                    if (string.IsNullOrEmpty(curPhotoInfo))
-                        CurImageInfo.Visibility = Visibility.Hidden;
-                    else
-                        CurImageInfo.Visibility = Visibility.Visible;
                     OnPropertyChanged();
                 }
             }
@@ -51,10 +47,6 @@ namespace PhotosCategorier.Main
                 if (remainingFiles != value)
                 {
                     remainingFiles = value;
-                    if (remainingFiles == 0)
-                        RemainingFileCounter.Visibility = Visibility.Hidden;
-                    else
-                        RemainingFileCounter.Visibility = Visibility.Visible;
                     OnPropertyChanged();
                 }
             }
@@ -66,7 +58,6 @@ namespace PhotosCategorier.Main
         private void InitImage()
         {
             photographs.Reset();
-            CurImageInfo.Visibility = Visibility.Visible;
             InitRenderPool();
             UpdateRemainingFileCounter();
         }

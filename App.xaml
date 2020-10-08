@@ -27,5 +27,14 @@
         <Style x:Key="MiniButton" TargetType="Button">
             <Setter Property="FontSize" Value="{Binding ItemFontSize, Source={StaticResource CurLayout}}" />
         </Style>
+        <Style x:Key="Main" TargetType="MenuItem">
+            <Setter Property="FontSize" Value="{Binding FontSize, Source={StaticResource CurLayout}}" />
+        </Style>
+        <Style x:Key="Sub" TargetType="MenuItem">
+            <Setter Property="FontSize" Value="{Binding ItemFontSize, Source={StaticResource CurLayout}}" />
+        </Style>
+        <Style x:Key="Menu" TargetType="Menu">
+            <Setter Property="Background" Value="Gray" />
+        </Style>
     </Application.Resources>
 </Application>

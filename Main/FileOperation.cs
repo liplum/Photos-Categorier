@@ -3,6 +3,7 @@ using PhotosCategorier.Photo;
 using PhotosCategorier.Utils;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
@@ -55,16 +56,88 @@ namespace PhotosCategorier.Main
             }
         }
 
+        private bool isEnd = true;
+
+        public bool IsEnd
+        {
+            get => isEnd;
+            set
+            {
+                if (isEnd != value)
+                {
+                    isEnd = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private enum OpenMode { FILE, DIRECTORY }
+        private void OpenFileBy(OpenMode mode)
+        {
+            var cur = photographs.Current;
+            if (!(cur is null))
+            {
+                var curfile = new FileInfo(cur.FilePath);
+                if (curfile.Exists)
+                {
+                    var path = "";
+                    switch (mode)
+                    {
+                        case OpenMode.FILE:
+                            {
+                                path = curfile.FullName;
+                            }
+                            break;
+                        case OpenMode.DIRECTORY:
+                            {
+                                var dir = curfile.Directory;
+                                if (dir.Exists)
+                                {
+                                    path = dir.FullName;
+                                }
+                                else
+                                {
+                                    MessageBox.Show(Properties.Resources.DirectoryNotFound, Properties.Resources.Error);
+                                    return;
+                                }
+                            }
+                            break;
+                    }
+                    System.Diagnostics.Process.Start("explorer.exe", path);
+                }
+                else
+                {
+                    MessageBox.Show(Properties.Resources.FileHasOccupiedOrHasDeleted, Properties.Resources.Error);
+                }
+            }
+        }
+
+        private void CopyCurrent()
+        {
+            var cur = photographs.Current;
+            if (!(cur is null))
+            {
+                var curfile = new FileInfo(cur.FilePath);
+                if (curfile.Exists)
+                {
+                    var file = new StringCollection
+                    {
+                        curfile.FullName
+                    };
+                    Clipboard.SetFileDropList(file);
+                }
+                else
+                {
+                    MessageBox.Show(Properties.Resources.FileHasOccupiedOrHasDeleted, Properties.Resources.Error);
+                }
+            }
+        }
+
         private void AddClassifyFolderWithSelection(string title)
         {
             var directories = SelectFolders(title);
             AddClassifyFolder(directories);
         }
-
-        public bool Inited
-        {
-            get; set;
-        } = false;
 
         private void AddClassifyFolder(DirectoryInfo[] directories)
         {

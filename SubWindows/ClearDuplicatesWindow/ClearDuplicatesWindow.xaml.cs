@@ -1,11 +1,11 @@
-﻿using PhotosCategorier.Utils;
-using PhotosCategorier.DataStructure;
+﻿using PhotosCategorier.DataStructure;
+using PhotosCategorier.Photo;
+using PhotosCategorier.Utils;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
 using static PhotosCategorier.Utils.FileTool;
-using PhotosCategorier.Photo;
 
 namespace PhotosCategorier.SubWindows
 {
@@ -40,7 +40,6 @@ namespace PhotosCategorier.SubWindows
             InitializeComponent();
             this.photographs = photographs;
             progress.Maximum = MAX_PROGRESS;
-            Cancel.IsEnabled = true;
         }
 
         private readonly List<Photograph> photographs;

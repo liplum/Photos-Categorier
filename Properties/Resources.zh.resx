@@ -141,6 +141,9 @@
   <data name="ConfirmDeletion" xml:space="preserve">
     <value>是否删除？</value>
   </data>
+  <data name="CopyFile" xml:space="preserve">
+    <value>复制此图片</value>
+  </data>
   <data name="DeleteThis" xml:space="preserve">
     <value>删除</value>
   </data>
@@ -172,9 +175,7 @@
     <value>按下 ←/A 把图片移动到左边的相册中
 按下 →/D 把图片移动到右边的相册中
 按下 ↓/S 删除这张图片
-按下 ↑/W 跳过这张
-按下 F5 刷新所有图片
-按下 C 清空所有剩余照片</value>
+按下 ↑/W 跳过这张</value>
   </data>
   <data name="HelpContentB" xml:space="preserve">
     <value>右上角为剩余的图片计数
@@ -221,6 +222,12 @@
   </data>
   <data name="OK" xml:space="preserve">
     <value>确定</value>
+  </data>
+  <data name="OpenFile" xml:space="preserve">
+    <value>打开此图片</value>
+  </data>
+  <data name="OpenFolderWhereFileIs" xml:space="preserve">
+    <value>打开位于的文件夹</value>
   </data>
   <data name="PleaseReopen" xml:space="preserve">
     <value>请您重新打开此程序。</value>

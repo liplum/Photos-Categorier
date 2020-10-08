@@ -54,7 +54,6 @@
             Grid.Column="2"
             Click="Cancel_Click"
             Content="{x:Static loc:Resources.Cancel}"
-            IsDefault="True"
-            IsEnabled="False" />
+            IsDefault="True" />
     </Grid>
 </Window>

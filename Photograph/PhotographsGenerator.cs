@@ -44,7 +44,14 @@ namespace PhotosCategorier.Photo
             {
                 lock (this)
                 {
-                    return AllPhotographs[CurIndex];
+                    try
+                    {
+                        return AllPhotographs[CurIndex];
+                    }
+                    catch
+                    {
+                        return null;
+                    }
                 }
             }
         }
@@ -55,7 +62,14 @@ namespace PhotosCategorier.Photo
             {
                 lock (this)
                 {
-                    return AllPhotographs[CurIndex];
+                    try
+                    {
+                        return AllPhotographs[CurIndex];
+                    }
+                    catch
+                    {
+                        return null;
+                    }
                 }
             }
         }

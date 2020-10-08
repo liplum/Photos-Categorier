@@ -133,6 +133,15 @@ namespace PhotosCategorier.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Copy this Photo 的本地化字符串。
+        /// </summary>
+        public static string CopyFile {
+            get {
+                return ResourceManager.GetString("CopyFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Delete 的本地化字符串。
         /// </summary>
         public static string DeleteThis {
@@ -217,9 +226,7 @@ namespace PhotosCategorier.Properties {
         ///   查找类似 Press ←/A to Move this photo to left album
         ///Press ←/D to Move this photo to right album
         ///Press ↓/S/Delete to Delete this photo
-        ///Press ↑/W to Skip this photos
-        ///Press F5 to Refresh all photos
-        ///Press C to Clear all the leftover photos 的本地化字符串。
+        ///Press ↑/W to Skip this photos 的本地化字符串。
         /// </summary>
         public static string HelpContentA {
             get {
@@ -364,6 +371,24 @@ namespace PhotosCategorier.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Open this Photo 的本地化字符串。
+        /// </summary>
+        public static string OpenFile {
+            get {
+                return ResourceManager.GetString("OpenFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Open Folder Where photo is 的本地化字符串。
+        /// </summary>
+        public static string OpenFolderWhereFileIs {
+            get {
+                return ResourceManager.GetString("OpenFolderWhereFileIs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Please reopen this program. 的本地化字符串。
         /// </summary>
         public static string PleaseReopen {
@@ -436,7 +461,7 @@ namespace PhotosCategorier.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Set language 的本地化字符串。
+        ///   查找类似 Set Language 的本地化字符串。
         /// </summary>
         public static string SettingLanguage {
             get {
@@ -445,7 +470,7 @@ namespace PhotosCategorier.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Set window&apos;s size 的本地化字符串。
+        ///   查找类似 Set Window&apos;s Size 的本地化字符串。
         /// </summary>
         public static string SettingWindowSize {
             get {

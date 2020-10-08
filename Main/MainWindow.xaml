@@ -7,6 +7,7 @@
     xmlns:loc="clr-namespace:PhotosCategorier.Properties"
     xmlns:local="clr-namespace:PhotosCategorier"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
     x:Name="MainWin"
     Title="{x:Static loc:Resources.Title}"
     Width="{Binding WINDOW_WIDTH, Source={StaticResource CurLayout}}"
@@ -20,7 +21,53 @@
     mc:Ignorable="d">
     <Window.Resources>
         <DiscreteObjectKeyFrame x:Key="MainWinProxy" Value="{Binding ElementName=MainWin}" />
+        <RoutedUICommand x:Key="RefreshCommand" Text="Refresh Current Photo List" />
+        <RoutedUICommand x:Key="ClearCommand" Text="Clear Current Phtot List" />
+        <RoutedUICommand x:Key="SetLeftArrow" Text="Set Left Arrow point to Folder" />
+        <RoutedUICommand x:Key="SetRightArrow" Text="Set Right Arrow point to Folder" />
+        <RoutedUICommand x:Key="OpenFolderWhereFileIs" Text="Open Folder Where the File is Located" />
+        <RoutedUICommand x:Key="OpenFile" Text="Open the File" />
+        <RoutedUICommand x:Key="CopyFile" Text="Copy the File" />
     </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Command="{StaticResource RefreshCommand}" Gesture="F5" />
+        <KeyBinding Command="{StaticResource ClearCommand}" Gesture="F12" />
+        <KeyBinding Command="{StaticResource SetLeftArrow}" Gesture="Ctrl+A" />
+        <KeyBinding Command="{StaticResource SetRightArrow}" Gesture="Ctrl+D" />
+        <KeyBinding Command="{StaticResource OpenFolderWhereFileIs}" Gesture="Ctrl+F" />
+        <KeyBinding Command="{StaticResource OpenFile}" Gesture="Ctrl+O" />
+        <KeyBinding Command="{StaticResource CopyFile}" Gesture="Ctrl+C" />
+    </Window.InputBindings>
+    <Window.CommandBindings>
+        <CommandBinding
+            CanExecute="RefreshCommand_CanExecute"
+            Command="{StaticResource RefreshCommand}"
+            Executed="RefreshCommand_Executed" />
+        <CommandBinding
+            CanExecute="ClearCommand_CanExecute"
+            Command="{StaticResource ClearCommand}"
+            Executed="ClearCommand_Executed" />
+        <CommandBinding
+            CanExecute="SetLeftArrow_CanExecute"
+            Command="{StaticResource SetLeftArrow}"
+            Executed="SetLeftArrow_Executed" />
+        <CommandBinding
+            CanExecute="SetRightArrow_CanExecute"
+            Command="{StaticResource SetRightArrow}"
+            Executed="SetRightArrow_Executed" />
+        <CommandBinding
+            CanExecute="OpenFolderWhereFileIs_CanExecute"
+            Command="{StaticResource OpenFolderWhereFileIs}"
+            Executed="OpenFolderWhereFileIs_Executed" />
+        <CommandBinding
+            CanExecute="OpenFile_CanExecute"
+            Command="{StaticResource OpenFile}"
+            Executed="OpenFile_Executed" />
+        <CommandBinding
+            CanExecute="CopyFile_CanExecute"
+            Command="{StaticResource CopyFile}"
+            Executed="CopyFile_Executed" />
+    </Window.CommandBindings>
     <Window.Content>
         <Grid x:Name="MainGrid">
             <Grid.RowDefinitions>
@@ -32,32 +79,53 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-
             <Menu
                 x:Name="Setting"
                 Grid.Row="0"
                 Grid.ColumnSpan="2"
-                Background="Gray">
-                <Menu.Resources>
-                    <Style x:Key="Main" TargetType="MenuItem">
-                        <Setter Property="FontSize" Value="{Binding FontSize, Source={StaticResource CurLayout}}" />
-                    </Style>
-                    <Style x:Key="Sub" TargetType="MenuItem">
-                        <Setter Property="FontSize" Value="{Binding ItemFontSize, Source={StaticResource CurLayout}}" />
-                    </Style>
-                </Menu.Resources>
+                Style="{StaticResource Menu}">
                 <MenuItem Header="{x:Static loc:Resources.Menu}" Style="{StaticResource Main}">
                     <MenuItem
                         x:Name="RefreshButton"
                         Click="RefreshButton_Click"
                         Header="{x:Static loc:Resources.Refresh}"
-                        IsEnabled="False"
+                        InputGestureText="F5"
+                        IsEnabled="{Binding ElementName=MainWin, Path=Inited, Mode=OneWay}"
                         Style="{StaticResource Sub}" />
                     <MenuItem
                         x:Name="ClearButton"
                         Click="ClearButton_Click"
                         Header="{x:Static loc:Resources.Clear}"
-                        IsEnabled="False"
+                        InputGestureText="F12"
+                        IsEnabled="{Binding ElementName=MainWin, Path=Inited, Mode=OneWay}"
+                        Style="{StaticResource Sub}" />
+                    <Separator />
+                    <MenuItem
+                        x:Name="OpenFile"
+                        Click="OpenFile_Click"
+                        Header="{x:Static loc:Resources.OpenFile}"
+                        InputGestureText="Ctrl+O"
+                        IsEnabled="{calc:Binding '!IsEnd',
+                                                 ElementName=MainWin,
+                                                 Mode=OneWay}"
+                        Style="{StaticResource Sub}" />
+                    <MenuItem
+                        x:Name="OpenFolderWhereFileIs"
+                        Click="OpenFolderWhereFileIs_Click"
+                        Header="{x:Static loc:Resources.OpenFolderWhereFileIs}"
+                        InputGestureText="Ctrl+F"
+                        IsEnabled="{calc:Binding '!IsEnd',
+                                                 ElementName=MainWin,
+                                                 Mode=OneWay}"
+                        Style="{StaticResource Sub}" />
+                    <MenuItem
+                        x:Name="CopyFile"
+                        Click="CopyFile_Click"
+                        Header="{x:Static loc:Resources.CopyFile}"
+                        InputGestureText="Ctrl+C"
+                        IsEnabled="{calc:Binding '!IsEnd',
+                                                 ElementName=MainWin,
+                                                 Mode=OneWay}"
                         Style="{StaticResource Sub}" />
                 </MenuItem>
                 <MenuItem Header="{x:Static loc:Resources.Folder}" Style="{StaticResource Main}">
@@ -71,18 +139,20 @@
                         x:Name="SelectLeftFolder"
                         Click="SelectLeftFolder_Click"
                         Header="{x:Static loc:Resources.SelectLeftFolder}"
+                        InputGestureText="Ctrl+A"
                         Style="{StaticResource Sub}" />
                     <MenuItem
                         x:Name="SelectRightFolder"
                         Click="SelectRightFolder_Click"
                         Header="{x:Static loc:Resources.SelectRightFolder}"
+                        InputGestureText="Ctrl+D"
                         Style="{StaticResource Sub}" />
                     <Separator />
                     <MenuItem
                         x:Name="AddingClassifyFolder"
                         Click="AddingClassifyFolder_Click"
                         Header="{x:Static loc:Resources.AddingClassifyFolder}"
-                        IsEnabled="False"
+                        IsEnabled="{Binding ElementName=MainWin, Path=Inited, Mode=OneWay}"
                         Style="{StaticResource Sub}" />
                 </MenuItem>
                 <MenuItem Header="{x:Static loc:Resources.Setting}" Style="{StaticResource Main}">
@@ -143,7 +213,13 @@
                     Canvas.Top="0"
                     Source="{Binding Path=CurPhotoSource, ElementName=MainWin, Mode=OneWay}">
                     <Image.ToolTip>
-                        <Label x:Name="CurImageInfo" Content="{Binding Value.CurPhotoInfo, Source={StaticResource MainWinProxy},Mode=OneWay}" />
+                        <Label
+                            x:Name="CurImageInfo"
+                            Content="{Binding Value.CurPhotoInfo, Source={StaticResource MainWinProxy}, Mode=OneWay}"
+                            Visibility="{calc:Binding 'CurPhotoInfo!=null',
+                                                      FalseToVisibility=Hidden,
+                                                      ElementName=MainWin,
+                                                      Mode=OneWay}" />
                     </Image.ToolTip>
                 </Image>
                 <Label
@@ -186,7 +262,10 @@
                     Content="{Binding Path=RemainingFiles, ElementName=MainWin, Mode=OneWay}"
                     FontWeight="Bold"
                     Style="{StaticResource NormalLabel}"
-                    Visibility="Hidden" />
+                    Visibility="{calc:Binding 'RemainingFiles!=0',
+                                              FalseToVisibility=Hidden,
+                                              ElementName=MainWin,
+                                              Mode=OneWay}" />
             </Canvas>
             <DockPanel
                 Grid.Row="1"
@@ -225,7 +304,7 @@
                     Click="DeleteThis_Click"
                     Content="{x:Static loc:Resources.DeleteThis}"
                     DockPanel.Dock="Bottom"
-                    IsEnabled="False"
+                    IsEnabled="{Binding ElementName=MainWin, Path=Inited, Mode=OneWay}"
                     Style="{StaticResource NormalButton}" />
                 <Button
                     x:Name="SkipThis"
@@ -234,7 +313,7 @@
                     Click="SkipThis_Click"
                     Content="{x:Static loc:Resources.SkipThis}"
                     DockPanel.Dock="Top"
-                    IsEnabled="False"
+                    IsEnabled="{Binding ElementName=MainWin, Path=Inited, Mode=OneWay}"
                     Style="{StaticResource NormalButton}" />
             </DockPanel>
         </Grid>

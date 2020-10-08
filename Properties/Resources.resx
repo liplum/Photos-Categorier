@@ -141,6 +141,9 @@
   <data name="ConfirmDeletion" xml:space="preserve">
     <value>Confirm Deletion?</value>
   </data>
+  <data name="CopyFile" xml:space="preserve">
+    <value>Copy this Photo</value>
+  </data>
   <data name="DeleteThis" xml:space="preserve">
     <value>Delete</value>
   </data>
@@ -172,9 +175,7 @@
     <value>Press ←/A to Move this photo to left album
 Press ←/D to Move this photo to right album
 Press ↓/S/Delete to Delete this photo
-Press ↑/W to Skip this photos
-Press F5 to Refresh all photos
-Press C to Clear all the leftover photos</value>
+Press ↑/W to Skip this photos</value>
   </data>
   <data name="HelpContentB" xml:space="preserve">
     <value>Remaining file's count on Top-Right
@@ -222,6 +223,12 @@ Click Button-Left/Right to open corresponding folder</value>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
   </data>
+  <data name="OpenFile" xml:space="preserve">
+    <value>Open this Photo</value>
+  </data>
+  <data name="OpenFolderWhereFileIs" xml:space="preserve">
+    <value>Open Folder Where photo is</value>
+  </data>
   <data name="PleaseReopen" xml:space="preserve">
     <value>Please reopen this program.</value>
   </data>
@@ -247,10 +254,10 @@ Click Button-Left/Right to open corresponding folder</value>
     <value>Set a album to categorize</value>
   </data>
   <data name="SettingLanguage" xml:space="preserve">
-    <value>Set language</value>
+    <value>Set Language</value>
   </data>
   <data name="SettingWindowSize" xml:space="preserve">
-    <value>Set window's size</value>
+    <value>Set Window's Size</value>
   </data>
   <data name="SkipThis" xml:space="preserve">
     <value>Skip</value>

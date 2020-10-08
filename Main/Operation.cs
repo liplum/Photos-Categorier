@@ -9,6 +9,20 @@ namespace PhotosCategorier.Main
 {
     public partial class MainWindow
     {
+        public bool inited = false;
+        public bool Inited
+        {
+            get => inited;
+            set
+            {
+                if (inited != value)
+                {
+                    inited = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         private void Refresh()
         {
             photographs.CleanNotExisted();
@@ -32,6 +46,7 @@ namespace PhotosCategorier.Main
                 allClassifyFolder.Remove(album);
             }
             photographs.AddRange(needAdd);
+            IsEnd = photographs.IsEmpty;
             InitImage();
         }
 
@@ -45,20 +60,16 @@ namespace PhotosCategorier.Main
 
         private void InitComponent()
         {
-            DeleteThis.IsEnabled = SkipThis.IsEnabled = true;
-            AddingClassifyFolder.IsEnabled = true;
-            RefreshButton.IsEnabled = ClearButton.IsEnabled = true;
+            IsEnd = false;
             Inited = true;
         }
 
         private void ResetComponent()
         {
-            DeleteThis.IsEnabled = SkipThis.IsEnabled = false;
-            AddingClassifyFolder.IsEnabled = false;
-            RefreshButton.IsEnabled = ClearButton.IsEnabled = false;
+            Inited = false;
+            IsEnd = true;
             ClearCurImage();
             ResetPhotoInfo();
-            Inited = false;
         }
 
         private enum Arrow { LEFT_ARROW, RIGHT_ARROW }
@@ -73,6 +84,7 @@ namespace PhotosCategorier.Main
             {
                 ClearCurImage();
                 MessageBox.Show(Properties.Resources.HasNoPhoto, Properties.Resources.Error);
+                IsEnd = true;
                 return false;
             }
             return true;
@@ -158,7 +170,8 @@ namespace PhotosCategorier.Main
 
         private void DeleteThisPhoto()
         {
-            if (CheckLastOne())
+            CheckLastOne();
+            if (!IsEnd)
             {
                 var photo = photographs.Current;
                 var file = photo.FilePath;
@@ -177,7 +190,7 @@ namespace PhotosCategorier.Main
                     NextImage();
                 }
             }
-
         }
+
     }
 }
