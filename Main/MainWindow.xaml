@@ -4,12 +4,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:calc="clr-namespace:CalcBinding;assembly=CalcBinding"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:loc="clr-namespace:PhotosCategorier.Properties"
     xmlns:local="clr-namespace:PhotosCategorier"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prop="clr-namespace:PhotosCategorier.Properties"
     xmlns:system="clr-namespace:System;assembly=mscorlib"
     x:Name="MainWin"
-    Title="{x:Static loc:Resources.Title}"
+    Title="{x:Static prop:Resources.Title}"
     Width="{Binding WINDOW_WIDTH, Source={StaticResource CurLayout}}"
     Height="{Binding WINDOW_HEIGHT, Source={StaticResource CurLayout}}"
     AllowDrop="True"
@@ -84,18 +84,18 @@
                 Grid.Row="0"
                 Grid.ColumnSpan="2"
                 Style="{StaticResource Menu}">
-                <MenuItem Header="{x:Static loc:Resources.Menu}" Style="{StaticResource Main}">
+                <MenuItem Header="{x:Static prop:Resources.Menu}" Style="{StaticResource Main}">
                     <MenuItem
                         x:Name="RefreshButton"
                         Click="RefreshButton_Click"
-                        Header="{x:Static loc:Resources.Refresh}"
+                        Header="{x:Static prop:Resources.Refresh}"
                         InputGestureText="F5"
                         IsEnabled="{Binding ElementName=MainWin, Path=Inited, Mode=OneWay}"
                         Style="{StaticResource Sub}" />
                     <MenuItem
                         x:Name="ClearButton"
                         Click="ClearButton_Click"
-                        Header="{x:Static loc:Resources.Clear}"
+                        Header="{x:Static prop:Resources.Clear}"
                         InputGestureText="F12"
                         IsEnabled="{Binding ElementName=MainWin, Path=Inited, Mode=OneWay}"
                         Style="{StaticResource Sub}" />
@@ -103,7 +103,7 @@
                     <MenuItem
                         x:Name="OpenFile"
                         Click="OpenFile_Click"
-                        Header="{x:Static loc:Resources.OpenFile}"
+                        Header="{x:Static prop:Resources.OpenFile}"
                         InputGestureText="Ctrl+O"
                         IsEnabled="{calc:Binding '!IsEnd',
                                                  ElementName=MainWin,
@@ -112,7 +112,7 @@
                     <MenuItem
                         x:Name="OpenFolderWhereFileIs"
                         Click="OpenFolderWhereFileIs_Click"
-                        Header="{x:Static loc:Resources.OpenFolderWhereFileIs}"
+                        Header="{x:Static prop:Resources.OpenFolderWhereFileIs}"
                         InputGestureText="Ctrl+F"
                         IsEnabled="{calc:Binding '!IsEnd',
                                                  ElementName=MainWin,
@@ -121,84 +121,84 @@
                     <MenuItem
                         x:Name="CopyFile"
                         Click="CopyFile_Click"
-                        Header="{x:Static loc:Resources.CopyFile}"
+                        Header="{x:Static prop:Resources.CopyFile}"
                         InputGestureText="Ctrl+C"
                         IsEnabled="{calc:Binding '!IsEnd',
                                                  ElementName=MainWin,
                                                  Mode=OneWay}"
                         Style="{StaticResource Sub}" />
                 </MenuItem>
-                <MenuItem Header="{x:Static loc:Resources.Folder}" Style="{StaticResource Main}">
+                <MenuItem Header="{x:Static prop:Resources.Folder}" Style="{StaticResource Main}">
                     <MenuItem
                         x:Name="SettingClassifyFolder"
                         Click="SettingClassifyFolder_Click"
-                        Header="{x:Static loc:Resources.SettingClassifyFolder}"
+                        Header="{x:Static prop:Resources.SettingClassifyFolder}"
                         Style="{StaticResource Sub}" />
                     <Separator />
                     <MenuItem
                         x:Name="SelectLeftFolder"
                         Click="SelectLeftFolder_Click"
-                        Header="{x:Static loc:Resources.SelectLeftFolder}"
+                        Header="{x:Static prop:Resources.SelectLeftFolder}"
                         InputGestureText="Ctrl+A"
                         Style="{StaticResource Sub}" />
                     <MenuItem
                         x:Name="SelectRightFolder"
                         Click="SelectRightFolder_Click"
-                        Header="{x:Static loc:Resources.SelectRightFolder}"
+                        Header="{x:Static prop:Resources.SelectRightFolder}"
                         InputGestureText="Ctrl+D"
                         Style="{StaticResource Sub}" />
                     <Separator />
                     <MenuItem
                         x:Name="AddingClassifyFolder"
                         Click="AddingClassifyFolder_Click"
-                        Header="{x:Static loc:Resources.AddingClassifyFolder}"
+                        Header="{x:Static prop:Resources.AddingClassifyFolder}"
                         IsEnabled="{Binding ElementName=MainWin, Path=Inited, Mode=OneWay}"
                         Style="{StaticResource Sub}" />
                 </MenuItem>
-                <MenuItem Header="{x:Static loc:Resources.Setting}" Style="{StaticResource Main}">
+                <MenuItem Header="{x:Static prop:Resources.Setting}" Style="{StaticResource Main}">
                     <MenuItem
                         x:Name="SettingWindowSize"
                         Click="SettingWindowSize_Click"
-                        Header="{x:Static loc:Resources.SettingWindowSize}"
+                        Header="{x:Static prop:Resources.SettingWindowSize}"
                         Style="{StaticResource Sub}" />
                     <MenuItem
                         x:Name="SettingLanguage"
                         Click="SettingLanguage_Click"
-                        Header="{x:Static loc:Resources.SettingLanguage}"
+                        Header="{x:Static prop:Resources.SettingLanguage}"
                         Style="{StaticResource Sub}" />
                     <MenuItem
                         x:Name="IncludeSubfolder"
-                        Header="{x:Static loc:Resources.IncludeSubfolder}"
+                        Header="{x:Static prop:Resources.IncludeSubfolder}"
                         IsCheckable="True"
                         IsChecked="{Binding ElementName=MainWin, Path=IsIncludeSubfolder, Mode=TwoWay}"
                         Style="{StaticResource Sub}" />
                 </MenuItem>
-                <MenuItem Header="{x:Static loc:Resources.Help}" Style="{StaticResource Main}">
-                    <MenuItem Header="{x:Static loc:Resources.HelpInfo}" Style="{StaticResource Sub}">
+                <MenuItem Header="{x:Static prop:Resources.Help}" Style="{StaticResource Main}">
+                    <MenuItem Header="{x:Static prop:Resources.HelpInfo}" Style="{StaticResource Sub}">
                         <MenuItem.ToolTip>
                             <StackPanel>
-                                <Label Content="{x:Static loc:Resources.HelpContentA}" Style="{StaticResource MiniLabel}" />
+                                <Label Content="{x:Static prop:Resources.HelpContentA}" Style="{StaticResource MiniLabel}" />
                                 <Separator />
-                                <Label Content="{x:Static loc:Resources.HelpContentB}" Style="{StaticResource MiniLabel}" />
+                                <Label Content="{x:Static prop:Resources.HelpContentB}" Style="{StaticResource MiniLabel}" />
                             </StackPanel>
                         </MenuItem.ToolTip>
                     </MenuItem>
-                    <MenuItem Header="{x:Static loc:Resources.Formats}" Style="{StaticResource Sub}">
+                    <MenuItem Header="{x:Static prop:Resources.Formats}" Style="{StaticResource Sub}">
                         <MenuItem.ToolTip>
-                            <Label Content="{x:Static loc:Resources.SupportedFormats}" Style="{StaticResource MiniLabel}" />
+                            <Label Content="{x:Static prop:Resources.SupportedFormats}" Style="{StaticResource MiniLabel}" />
                         </MenuItem.ToolTip>
                     </MenuItem>
-                    <MenuItem Header="{x:Static loc:Resources.VersionInfo}" Style="{StaticResource Sub}">
+                    <MenuItem Header="{x:Static prop:Resources.VersionInfo}" Style="{StaticResource Sub}">
                         <MenuItem.ToolTip>
                             <Label Content="{StaticResource Version}" Style="{StaticResource MiniLabel}" />
                         </MenuItem.ToolTip>
                     </MenuItem>
                 </MenuItem>
-                <MenuItem Header="{x:Static loc:Resources.Tool}" Style="{StaticResource Main}">
+                <MenuItem Header="{x:Static prop:Resources.Tool}" Style="{StaticResource Main}">
                     <MenuItem
                         x:Name="ClearingDuplicates"
                         Click="ClearingDuplicates_Click"
-                        Header="{x:Static loc:Resources.ClearDuplicates}"
+                        Header="{x:Static prop:Resources.ClearDuplicates}"
                         Style="{StaticResource Sub}" />
                 </MenuItem>
             </Menu>
@@ -276,7 +276,7 @@
                     Margin="0,5,5,5"
                     Background="{StaticResource Translucent}"
                     Click="ToLeft_Click"
-                    Content="{x:Static loc:Resources.ToLeft}"
+                    Content="{x:Static prop:Resources.ToLeft}"
                     DockPanel.Dock="Left"
                     IsEnabled="False"
                     Style="{StaticResource NormalButton}">
@@ -289,7 +289,7 @@
                     Margin="5,5,0,5"
                     Background="{StaticResource Translucent}"
                     Click="ToRight_Click"
-                    Content="{x:Static loc:Resources.ToRight}"
+                    Content="{x:Static prop:Resources.ToRight}"
                     DockPanel.Dock="Right"
                     IsEnabled="False"
                     Style="{StaticResource NormalButton}">
@@ -302,7 +302,7 @@
                     Margin="5,5,5,0"
                     Background="{StaticResource Translucent}"
                     Click="DeleteThis_Click"
-                    Content="{x:Static loc:Resources.DeleteThis}"
+                    Content="{x:Static prop:Resources.DeleteThis}"
                     DockPanel.Dock="Bottom"
                     IsEnabled="{Binding ElementName=MainWin, Path=Inited, Mode=OneWay}"
                     Style="{StaticResource NormalButton}" />
@@ -311,7 +311,7 @@
                     Margin="5,0,5,5"
                     Background="{StaticResource Translucent}"
                     Click="SkipThis_Click"
-                    Content="{x:Static loc:Resources.SkipThis}"
+                    Content="{x:Static prop:Resources.SkipThis}"
                     DockPanel.Dock="Top"
                     IsEnabled="{Binding ElementName=MainWin, Path=Inited, Mode=OneWay}"
                     Style="{StaticResource NormalButton}" />

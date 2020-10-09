@@ -15,7 +15,7 @@ namespace PhotosCategorier
 
         public App()
         {
-             
+
         }
 
         private void Application_Startup(object sender, StartupEventArgs e)
@@ -64,7 +64,7 @@ namespace PhotosCategorier
             else
             {
                 try
-                { 
+                {
                     var settingLayout = LayoutSize.GenerateLayout(settings.Width, settings.Height);
                     layout.SetLayout(settingLayout);
                 }
@@ -76,7 +76,7 @@ namespace PhotosCategorier
 
         }
 
-        public static bool SetWidth_Height(int width,int height)
+        public static bool SetWidth_Height(int width, int height)
         {
             if (width <= 0 || height <= 0)
             {

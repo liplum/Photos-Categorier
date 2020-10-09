@@ -150,6 +150,9 @@
   <data name="DirectoryNotFound" xml:space="preserve">
     <value>目标文件夹不存在或已失效</value>
   </data>
+  <data name="Edit" xml:space="preserve">
+    <value>编辑</value>
+  </data>
   <data name="Error" xml:space="preserve">
     <value>错误</value>
   </data>
@@ -205,6 +208,9 @@
   <data name="Menu" xml:space="preserve">
     <value>菜单</value>
   </data>
+  <data name="NewPreset" xml:space="preserve">
+    <value>新建预设</value>
+  </data>
   <data name="NotFoundDuplicate" xml:space="preserve">
     <value>未找到重复项！</value>
   </data>
@@ -229,6 +235,9 @@
   <data name="OpenFolderWhereFileIs" xml:space="preserve">
     <value>打开位于的文件夹</value>
   </data>
+  <data name="OpenPreset" xml:space="preserve">
+    <value>打开预设</value>
+  </data>
   <data name="PleaseReopen" xml:space="preserve">
     <value>请您重新打开此程序。</value>
   </data>
@@ -240,6 +249,12 @@
   </data>
   <data name="Right" xml:space="preserve">
     <value>右箭头</value>
+  </data>
+  <data name="SaveAsPreset" xml:space="preserve">
+    <value>另存为预设</value>
+  </data>
+  <data name="SavePreset" xml:space="preserve">
+    <value>保存预设</value>
   </data>
   <data name="SelectLeftFolder" xml:space="preserve">
     <value>设置左键头指向的相册</value>

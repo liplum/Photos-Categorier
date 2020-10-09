@@ -5,20 +5,42 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:PhotosCategorier.SubWindows"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prop="clr-namespace:PhotosCategorier.Properties"
     Title="RenamePhotosWindow"
     Width="800"
     Height="450"
     mc:Ignorable="d">
+    <Window.Resources>
+        <DataTemplate x:Key="PresetTemplate" />
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Menu Style="{StaticResource Menu}">
-            <MenuItem Header="File" Style="{StaticResource Main}">
-                <MenuItem Header="Read a Config File" Style="{StaticResource Sub}" />
-                <MenuItem Header="Save as Config File" Style="{StaticResource Sub}" />
+            <MenuItem Header="{x:Static prop:Resources.Edit}" Style="{StaticResource Main}">
+                <MenuItem Header="{x:Static prop:Resources.NewPreset}" Style="{StaticResource Sub}" />
+                <MenuItem Header="{x:Static prop:Resources.OpenPreset}" Style="{StaticResource Sub}" />
+                <Separator />
+                <MenuItem Header="{x:Static prop:Resources.SavePreset}" Style="{StaticResource Sub}" />
+                <MenuItem Header="{x:Static prop:Resources.SaveAsPreset}" Style="{StaticResource Sub}" />
             </MenuItem>
         </Menu>
+        <ScrollViewer
+            Grid.Row="1"
+            Height="auto"
+            HorizontalScrollBarVisibility="Disabled"
+            VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <StackPanel.Resources>
+                    <Style TargetType="Label">
+                        <Setter Property="FontSize" Value="60" />
+                    </Style>
+                </StackPanel.Resources>
+                <Label Content="123" />
+                <Label Content="123" />
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Window>

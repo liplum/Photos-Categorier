@@ -4,10 +4,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:calc="clr-namespace:CalcBinding;assembly=CalcBinding"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:loc="clr-namespace:PhotosCategorier.Properties"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prop="clr-namespace:PhotosCategorier.Properties"
     xmlns:uc="clr-namespace:PhotosCategorier.UserControls"
-    Title="{x:Static loc:Resources.SettingLanguage}"
+    Title="{x:Static prop:Resources.SettingLanguage}"
     Width="300"
     Height="150"
     ResizeMode="NoResize"
@@ -15,5 +15,5 @@
     <uc:SettingSelect
         x:Name="SelectLanguage"
         Margin="0,20,0,0"
-        LabelContent="{x:Static loc:Resources.SettingLanguage}" />
+        LabelContent="{x:Static prop:Resources.SettingLanguage}" />
 </Window>

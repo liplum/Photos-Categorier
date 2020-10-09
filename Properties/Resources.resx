@@ -150,6 +150,9 @@
   <data name="DirectoryNotFound" xml:space="preserve">
     <value>Target folder isn't existed or invalid</value>
   </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
   </data>
@@ -205,6 +208,9 @@ Click Button-Left/Right to open corresponding folder</value>
   <data name="Menu" xml:space="preserve">
     <value>Menu</value>
   </data>
+  <data name="NewPreset" xml:space="preserve">
+    <value>New a Preset</value>
+  </data>
   <data name="NotFoundDuplicate" xml:space="preserve">
     <value>Not found duplicate !</value>
   </data>
@@ -229,6 +235,9 @@ Click Button-Left/Right to open corresponding folder</value>
   <data name="OpenFolderWhereFileIs" xml:space="preserve">
     <value>Open Folder Where photo is</value>
   </data>
+  <data name="OpenPreset" xml:space="preserve">
+    <value>Open a Preset</value>
+  </data>
   <data name="PleaseReopen" xml:space="preserve">
     <value>Please reopen this program.</value>
   </data>
@@ -240,6 +249,12 @@ Click Button-Left/Right to open corresponding folder</value>
   </data>
   <data name="Right" xml:space="preserve">
     <value>Right Folder</value>
+  </data>
+  <data name="SaveAsPreset" xml:space="preserve">
+    <value>Save as Preset</value>
+  </data>
+  <data name="SavePreset" xml:space="preserve">
+    <value>Save the Preset</value>
   </data>
   <data name="SelectLeftFolder" xml:space="preserve">
     <value>Select Left-Arrow to point to a Album</value>

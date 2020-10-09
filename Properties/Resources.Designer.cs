@@ -160,6 +160,15 @@ namespace PhotosCategorier.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Edit 的本地化字符串。
+        /// </summary>
+        public static string Edit {
+            get {
+                return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Error 的本地化字符串。
         /// </summary>
         public static string Error {
@@ -317,6 +326,15 @@ namespace PhotosCategorier.Properties {
         }
         
         /// <summary>
+        ///   查找类似 New a Preset 的本地化字符串。
+        /// </summary>
+        public static string NewPreset {
+            get {
+                return ResourceManager.GetString("NewPreset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Not found duplicate ! 的本地化字符串。
         /// </summary>
         public static string NotFoundDuplicate {
@@ -389,6 +407,15 @@ namespace PhotosCategorier.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Open a Preset 的本地化字符串。
+        /// </summary>
+        public static string OpenPreset {
+            get {
+                return ResourceManager.GetString("OpenPreset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Please reopen this program. 的本地化字符串。
         /// </summary>
         public static string PleaseReopen {
@@ -421,6 +448,24 @@ namespace PhotosCategorier.Properties {
         public static string Right {
             get {
                 return ResourceManager.GetString("Right", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Save as Preset 的本地化字符串。
+        /// </summary>
+        public static string SaveAsPreset {
+            get {
+                return ResourceManager.GetString("SaveAsPreset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Save the Preset 的本地化字符串。
+        /// </summary>
+        public static string SavePreset {
+            get {
+                return ResourceManager.GetString("SavePreset", resourceCulture);
             }
         }
         

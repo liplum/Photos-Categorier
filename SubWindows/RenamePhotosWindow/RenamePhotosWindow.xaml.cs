@@ -9,13 +9,13 @@ namespace PhotosCategorier.SubWindows
     /// </summary>
     public partial class RenamePhotosWindow : Window
     {
-        public RenamePhotosWindow(List<Photograph> photos)
+        public RenamePhotosWindow(/*List<Photograph> photos*/)
         {
             InitializeComponent();
-            photographs = photos;
+            //photographs = photos;
         }
 
-        private readonly List<Photograph> photographs;
+        //private readonly List<Photograph> photographs;
 
 
     }

@@ -22,23 +22,16 @@ namespace PhotosCategorier.Photo
         {
             var allFiles = Directory.GetFiles();
 
-            var selectedFiles = from file in allFiles
-                                where
-           file.IsPhotograph()
-                                select file;
+            var imageFiles = (from file in allFiles
+                              where file.IsPhotograph()
+                              select file)
+                              .ToArray();
 
-            var imageFiles = selectedFiles.ToArray();
-
-            int filesCount = imageFiles.Length;
-
-            if (filesCount > 0)
+            if (imageFiles.Length > 0)
             {
-                var photographs = new Photograph[filesCount];
-
-                for (int i = 0; i < filesCount; i++)
-                {
-                    photographs[i] = new Photograph(imageFiles[i].FullName);
-                }
+                var photographs = (from file in imageFiles
+                                   select new Photograph(file.FullName))
+                                   .ToArray();
                 return photographs;
             }
             return null;

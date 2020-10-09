@@ -3,10 +3,10 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:loc="clr-namespace:PhotosCategorier.Properties"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prop="clr-namespace:PhotosCategorier.Properties"
     x:Name="ClearWindow"
-    Title="{x:Static loc:Resources.ClearDuplicates}"
+    Title="{x:Static prop:Resources.ClearDuplicates}"
     Height="150"
     MinWidth="350"
     Loaded="Window_Loaded"
@@ -33,7 +33,7 @@
             x:Name="Counter"
             Grid.ColumnSpan="2"
             VerticalContentAlignment="Center"
-            Content="{x:Static loc:Resources.IsScanning}"
+            Content="{x:Static prop:Resources.IsScanning}"
             FontSize="20" />
         <ProgressBar
             x:Name="progress"
@@ -46,14 +46,14 @@
             x:Name="OK"
             Grid.Row="2"
             Click="OK_Click"
-            Content="{x:Static loc:Resources.OK}"
+            Content="{x:Static prop:Resources.OK}"
             IsEnabled="False" />
         <Button
             x:Name="Cancel"
             Grid.Row="2"
             Grid.Column="2"
             Click="Cancel_Click"
-            Content="{x:Static loc:Resources.Cancel}"
+            Content="{x:Static prop:Resources.Cancel}"
             IsDefault="True" />
     </Grid>
 </Window>
