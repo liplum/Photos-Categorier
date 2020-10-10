@@ -12,28 +12,7 @@
     mc:Ignorable="d">
     <Window.Resources>
         <DataTemplate x:Key="PresetTemplate">
-            <DockPanel>
-                <StackPanel
-                    Name="WholePanel"
-                    DockPanel.Dock="Top"
-                    Orientation="Vertical">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <Label Content="Rule" />
-                        <ComboBox Grid.Column="1" MinWidth="100" />
-                        <Button Grid.Column="2" Content="Sub" />
-                    </Grid>
-                </StackPanel>
-                <Button
-                    Name="NewRulePart"
-                    MaxWidth="50"
-                    Content="Add"
-                    DockPanel.Dock="Bottom" />
-            </DockPanel>
+            
         </DataTemplate>
     </Window.Resources>
     <Grid>
@@ -55,7 +34,15 @@
             Height="auto"
             HorizontalScrollBarVisibility="Disabled"
             VerticalScrollBarVisibility="Auto">
-            <ListBox x:Name="AllPresetListBox" ItemTemplate="{StaticResource PresetTemplate}" />
+            <StackPanel>
+                <StackPanel.Resources>
+                    <Style TargetType="Label">
+                        <Setter Property="FontSize" Value="60" />
+                    </Style>
+                </StackPanel.Resources>
+                <Label Content="123" />
+                <Label Content="123" />
+            </StackPanel>
         </ScrollViewer>
     </Grid>
 </Window>

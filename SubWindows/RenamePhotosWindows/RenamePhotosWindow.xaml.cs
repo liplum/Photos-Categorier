@@ -1,4 +1,4 @@
-﻿using PhotosCategorier.SubWindows.RenamePhotosWindows;
+﻿using PhotosCategorier.Photo;
 using System.Collections.Generic;
 using System.Windows;
 
@@ -13,9 +13,6 @@ namespace PhotosCategorier.SubWindows
         {
             InitializeComponent();
             //photographs = photos;
-            AllPresetListBox.ItemsSource = new List<RuleBox> {
-                new RuleBox()
-            };
         }
 
         //private readonly List<Photograph> photographs;
