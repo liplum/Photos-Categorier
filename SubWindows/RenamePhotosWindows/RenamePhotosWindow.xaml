@@ -11,7 +11,9 @@
     Height="450"
     mc:Ignorable="d">
     <Window.Resources>
-        <DataTemplate x:Key="PresetTemplate" />
+        <DataTemplate x:Key="PresetTemplate">
+            
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
