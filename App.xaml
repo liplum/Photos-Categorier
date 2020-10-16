@@ -8,7 +8,6 @@
     Exit="Application_Exit"
     Startup="Application_Startup"
     StartupUri="/Main/MainWindow.xaml">
-    <!--  StartupUri="/SubWindows/RenamePhotosWindow/RenamePhotosWindow.xaml">  -->
     <Application.Resources>
         <layout:Layout x:Key="CurLayout" x:Name="CurLayout" />
         <system:String x:Key="Version">1.5</system:String>

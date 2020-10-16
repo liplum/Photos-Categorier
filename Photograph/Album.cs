@@ -17,7 +17,7 @@ namespace PhotosCategorier.Photo
         /// <summary>
         /// Geting all photos in the album
         /// </summary>
-        /// <returns>All photos the album has.If it has no photos,it would return null.</returns>
+        /// <returns>All photos the album has.If it has no photos,it'll return null.</returns>
         public Photograph[] GetAllPhotographs()
         {
             var allFiles = Directory.GetFiles();

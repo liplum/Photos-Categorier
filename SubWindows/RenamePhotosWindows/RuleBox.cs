@@ -1,7 +1,6 @@
-﻿namespace PhotosCategorier.SubWindows.RenamePhotosWindows
+﻿namespace PhotosCategorier.SubWindows
 {
     public class RuleBox
     {
-
     }
 }
