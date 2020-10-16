@@ -74,7 +74,7 @@ namespace PhotosCategorier.Main
         /// <summary>
         /// Checking whether current photo is the last one
         /// </summary>
-        /// <returns>If the current photo is the last one or it hasn't arrived yet,it would return true.Otherwise,it had ended and return false.</returns>
+        /// <returns>If the current photo is the last one or it hasn't arrived yet,it'll return true.Otherwise,it had ended and return false.</returns>
         private bool CheckLastOne()
         {
             if (!photographs.HasNext)
@@ -89,10 +89,10 @@ namespace PhotosCategorier.Main
 
         private enum EmptyMessage { HAS_NO_PHOTO, NOT_SET_CLASSIFY, NOT_HOLD_PHOTO }
         /// <summary>
-        /// Checking whether the photographs is empty or not . If it's empty , it would pop a message box with what you want to display
+        /// Checking whether the photographs is empty or not . If it's empty , it'll pop a message box with what you want to display
         /// </summary>
         /// <param name="">What you want to display</param>
-        /// <returns>If photographs is empty , it would return ture.</returns>
+        /// <returns>If photographs is empty , it'll return ture.</returns>
         private bool CheckEmptyWithMessage(EmptyMessage emptyMessage)
         {
             if (photographs.IsEmpty)

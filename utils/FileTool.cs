@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.FileIO;
+using System;
 using System.IO;
-using Microsoft.VisualBasic.FileIO;
 
 namespace PhotosCategorier.Utils
 {
@@ -14,18 +14,17 @@ namespace PhotosCategorier.Utils
 
         public static bool IsPhotograph(this FileInfo file)
         {
-            return file.Exists &&( file.Name.EndsWith(".png") || file.Name.EndsWith(".jpg") || file.Name.EndsWith(".gif")
-           || file.Name.EndsWith(".jpeg"));
+            return file.Exists && (file.Name.EndsWith(".png") || file.Name.EndsWith(".jpg") || file.Name.EndsWith(".gif")
+           || file.Name.EndsWith(".jpeg") || file.Name.EndsWith(".PNG") || file.Name.EndsWith(".JPG") || file.Name.EndsWith(".GIF") || file.Name.EndsWith(".JPEG"));
         }
 
-        public static bool IsPhotograph(this string filePath,out FileInfo file)
+        public static bool IsPhotograph(this string filePath, out FileInfo file)
         {
             var f = new FileInfo(filePath);
-            if (f.Exists)
+            if (f.IsPhotograph())
             {
                 file = f;
-                return f.Name.EndsWith(".png") || f.Name.EndsWith(".jpg") || f.Name.EndsWith(".gif")
-           || f.Name.EndsWith(".jpeg");
+                return true;
             }
             file = null;
             return false;
@@ -33,15 +32,10 @@ namespace PhotosCategorier.Utils
         public static bool IsPhotograph(this string filePath)
         {
             var f = new FileInfo(filePath);
-            if (f.Exists)
-            {
-                return f.Name.EndsWith(".png") || f.Name.EndsWith(".jpg") || f.Name.EndsWith(".gif")
-           || f.Name.EndsWith(".jpeg");
-            }
-            return false;
+            return f.IsPhotograph();
         }
 
-        public static bool IsExisted(this string filePath,out FileInfo file)
+        public static bool IsExisted(this string filePath, out FileInfo file)
         {
             var f = new FileInfo(filePath);
             if (f.Exists)

@@ -172,7 +172,7 @@ namespace PhotosCategorier.Main
         /// Add Classify Folder
         /// </summary>
         /// <param name="directories"></param>
-        /// <returns>If it actually added some photos , it would return true . Otherwise , there are nothing is added , it return false.</returns>
+        /// <returns>If it actually added some photos , it'll return true . Otherwise , there are nothing is added , it return false.</returns>
         private AddClassifyFolderResult AddClassifyFolderFunc(DirectoryInfo[] directories)
         {
             var isIncludeSubfolder = IsIncludeSubfolder;
