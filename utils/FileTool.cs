@@ -14,8 +14,8 @@ namespace PhotosCategorier.Utils
 
         public static bool IsPhotograph(this FileInfo file)
         {
-            return file.Exists && (file.Name.EndsWith(".png") || file.Name.EndsWith(".jpg") || file.Name.EndsWith(".gif")
-           || file.Name.EndsWith(".jpeg") || file.Name.EndsWith(".PNG") || file.Name.EndsWith(".JPG") || file.Name.EndsWith(".GIF") || file.Name.EndsWith(".JPEG"));
+            return file.Exists && (file.Name.EndsWith(".png", StringComparison.OrdinalIgnoreCase) || file.Name.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) || file.Name.EndsWith(".gif", StringComparison.OrdinalIgnoreCase)
+           || file.Name.EndsWith(".jpeg", StringComparison.OrdinalIgnoreCase));
         }
 
         public static bool IsPhotograph(this string filePath, out FileInfo file)
