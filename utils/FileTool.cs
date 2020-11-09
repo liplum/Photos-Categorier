@@ -6,6 +6,29 @@ namespace PhotosCategorier.Utils
 {
     public static class FileTool
     {
+        public enum TargetFileType
+        {
+            PHOTO,
+            FOLDER,
+            ANOTHER
+        }
+
+        public static TargetFileType GetTargetFileType(this string filePath)
+        {
+            if (new FileInfo(filePath).IsPhotograph())
+            {
+                return TargetFileType.PHOTO;
+            }
+            else if (new DirectoryInfo(filePath).Exists)
+            {
+                return TargetFileType.FOLDER;
+            }
+            else
+            {
+                return TargetFileType.ANOTHER;
+            }
+        }
+
         public static string GetLastName(this string filePath)
         {
             var strs = filePath.Split('\\');

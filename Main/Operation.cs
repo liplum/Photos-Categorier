@@ -1,9 +1,14 @@
-﻿using PhotosCategorier.Photo;
+﻿using PhotosCategorier.Main.Exceptions;
+using PhotosCategorier.Photo;
 using PhotosCategorier.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
+using My_DirectoryNotFoundException = PhotosCategorier.Main.Exceptions.DirectoryNotFoundException;
+using My_UnauthorizedAccessException = PhotosCategorier.Main.Exceptions.UnauthorizedAccessException;
+using DirectoryNotFoundException = System.IO.DirectoryNotFoundException;
+using UnauthorizedAccessException = System.UnauthorizedAccessException;
 
 namespace PhotosCategorier.Main
 {
@@ -114,6 +119,14 @@ namespace PhotosCategorier.Main
 
             return false;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="arrow"></param>
+        /// <exception cref="My_DirectoryNotFoundException"></exception>
+        /// <exception cref="My_UnauthorizedAccessException"></exception>
+        /// <exception cref="FileHasOccupiedOrBeenDeletedException"></exception>
         private void MoveThisTo(Arrow arrow)
         {
             if (CheckLastOne())
@@ -144,15 +157,18 @@ namespace PhotosCategorier.Main
                             target = rightArrow;
                             break;
                     }
-                    MessageBox.Show($"{Properties.Resources.DirectoryNotFound}\n{target.FullName}", Properties.Resources.Error);
+                    throw new My_DirectoryNotFoundException(target.FullName);
+                    //MessageBox.Show($"{Properties.Resources.DirectoryNotFound}\n{target.FullName}", Properties.Resources.Error);
                 }
                 catch (UnauthorizedAccessException)
                 {
-                    MessageBox.Show($"{Properties.Resources.UnauthorizedAccess}\n{photo.FilePath}", Properties.Resources.Error);
+                    throw new My_UnauthorizedAccessException(photo.FilePath);
+                    //MessageBox.Show($"{Properties.Resources.UnauthorizedAccess}\n{photo.FilePath}", Properties.Resources.Error);
                 }
                 catch (IOException)
                 {
-                    MessageBox.Show($"{Properties.Resources.FileHasOccupiedOrHasDeleted}\n{photo.FilePath}", Properties.Resources.Error);
+                    throw new FileHasOccupiedOrBeenDeletedException(photo.FilePath);
+                    //MessageBox.Show($"{Properties.Resources.FileHasOccupiedOrHasDeleted}\n{photo.FilePath}", Properties.Resources.Error);
                 }
             }
         }

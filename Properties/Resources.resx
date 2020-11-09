@@ -159,7 +159,7 @@
   <data name="FileHasOccupied" xml:space="preserve">
     <value>File has occupied</value>
   </data>
-  <data name="FileHasOccupiedOrHasDeleted" xml:space="preserve">
+  <data name="FileHasOccupiedOrBeenDeleted" xml:space="preserve">
     <value>File has occupied or deleted</value>
   </data>
   <data name="Folder" xml:space="preserve">

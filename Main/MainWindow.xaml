@@ -13,10 +13,9 @@
     Width="{Binding WINDOW_WIDTH, Source={StaticResource CurLayout}}"
     Height="{Binding WINDOW_HEIGHT, Source={StaticResource CurLayout}}"
     AllowDrop="True"
-    Focusable="True"
+    DragEnter="DisplayArea_DragEnter"
+    Drop="DisplayArea_Drop"
     KeyUp="Window_KeyUp"
-    PreviewDragOver="MainWin_PreviewDragOver"
-    PreviewDrop="MainWin_PreviewDrop"
     ResizeMode="NoResize"
     mc:Ignorable="d">
     <Window.Resources>
@@ -206,6 +205,7 @@
                 x:Name="DisplayArea"
                 Grid.Row="1"
                 Grid.ColumnSpan="2"
+                AllowDrop="True"
                 Focusable="True">
                 <Image
                     x:Name="CurImage"
@@ -278,6 +278,7 @@
                     Click="ToLeft_Click"
                     Content="{x:Static prop:Resources.ToLeft}"
                     DockPanel.Dock="Left"
+                    Focusable="False"
                     IsEnabled="False"
                     Style="{StaticResource NormalButton}">
                     <Button.LayoutTransform>
@@ -291,6 +292,7 @@
                     Click="ToRight_Click"
                     Content="{x:Static prop:Resources.ToRight}"
                     DockPanel.Dock="Right"
+                    Focusable="False"
                     IsEnabled="False"
                     Style="{StaticResource NormalButton}">
                     <Button.LayoutTransform>
@@ -304,6 +306,7 @@
                     Click="DeleteThis_Click"
                     Content="{x:Static prop:Resources.DeleteThis}"
                     DockPanel.Dock="Bottom"
+                    Focusable="False"
                     IsEnabled="{Binding ElementName=MainWin, Path=Inited, Mode=OneWay}"
                     Style="{StaticResource NormalButton}" />
                 <Button
@@ -313,6 +316,7 @@
                     Click="SkipThis_Click"
                     Content="{x:Static prop:Resources.SkipThis}"
                     DockPanel.Dock="Top"
+                    Focusable="False"
                     IsEnabled="{Binding ElementName=MainWin, Path=Inited, Mode=OneWay}"
                     Style="{StaticResource NormalButton}" />
             </DockPanel>

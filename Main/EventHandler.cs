@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PhotosCategorier.Main.Exceptions;
+using System;
 using System.Windows;
 using System.Windows.Input;
 
@@ -56,13 +57,29 @@ namespace PhotosCategorier.Main
 
         private void SettingClassifyFolder_Click(object sender, RoutedEventArgs e)
         {
-            AddClassifyFolderWithSelection(Properties.Resources.SettingClassifyFolder);
+            try
+            {
+                AddClassifyFolderWithSelection(Properties.Resources.SettingClassifyFolder);
+            }
+            catch (NotHoldPhotoException)
+            {
+                MessageBox.Show(Properties.Resources.NotHoldPhoto, Properties.Resources.Error);
+            }
+
             e.Handled = true;
         }
 
         private void AddingClassifyFolder_Click(object sender, RoutedEventArgs e)
         {
-            AddClassifyFolderWithSelection(Properties.Resources.AddingClassifyFolder);
+            try
+            {
+                AddClassifyFolderWithSelection(Properties.Resources.AddingClassifyFolder);
+            }
+            catch (NotHoldPhotoException)
+            {
+                MessageBox.Show(Properties.Resources.NotHoldPhoto, Properties.Resources.Error);
+            }
+
             e.Handled = true;
         }
 
@@ -104,13 +121,33 @@ namespace PhotosCategorier.Main
 
         private void OpenFile_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileBy(OpenMode.FILE);
+            try
+            {
+                OpenThisPhoto();
+            }
+            catch (FileHasOccupiedOrBeenDeletedException)
+            {
+                MessageBox.Show(Properties.Resources.FileHasOccupiedOrBeenDeleted, Properties.Resources.Error);
+            }
+
             e.Handled = true;
         }
 
         private void OpenFolderWhereFileIs_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileBy(OpenMode.DIRECTORY);
+            try
+            {
+                OpenFolderWherePhotoIs();
+            }
+            catch (FileHasOccupiedOrBeenDeletedException)
+            {
+                MessageBox.Show(Properties.Resources.FileHasOccupiedOrBeenDeleted, Properties.Resources.Error);
+            }
+            catch (DirectoryNotFoundException)
+            {
+                MessageBox.Show(Properties.Resources.DirectoryNotFound, Properties.Resources.Error);
+            }
+
             e.Handled = true;
         }
 
@@ -172,7 +209,19 @@ namespace PhotosCategorier.Main
 
         private void OpenFolderWhereFileIs_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            OpenFileBy(OpenMode.DIRECTORY);
+            try
+            {
+                OpenFolderWherePhotoIs();
+            }
+            catch (FileHasOccupiedOrBeenDeletedException)
+            {
+                MessageBox.Show(Properties.Resources.FileHasOccupiedOrBeenDeleted, Properties.Resources.Error);
+            }
+            catch (DirectoryNotFoundException)
+            {
+                MessageBox.Show(Properties.Resources.DirectoryNotFound, Properties.Resources.Error);
+            }
+
             e.Handled = true;
         }
 
@@ -183,7 +232,15 @@ namespace PhotosCategorier.Main
 
         private void OpenFile_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            OpenFileBy(OpenMode.FILE);
+            try
+            {
+                OpenThisPhoto();
+            }
+            catch (FileHasOccupiedOrBeenDeletedException)
+            {
+                MessageBox.Show(Properties.Resources.FileHasOccupiedOrBeenDeleted, Properties.Resources.Error);
+            }
+
             e.Handled = true;
         }
 
@@ -194,22 +251,19 @@ namespace PhotosCategorier.Main
 
         private void CopyFile_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            CopyCurrent();
-            e.Handled = true;
-        }
-
-
-        private void MainWin_PreviewDrop(object sender, DragEventArgs e)
-        {
-            var array = (Array)e.Data.GetData(DataFormats.FileDrop);
-            if (!(array is null))
+            try
             {
-                DropFolderOrFile(array);
+                CopyCurrent();
             }
+            catch (FileHasOccupiedOrBeenDeletedException)
+            {
+                MessageBox.Show(Properties.Resources.FileHasOccupiedOrBeenDeleted, Properties.Resources.Error);
+            }
+
             e.Handled = true;
         }
 
-        private void MainWin_PreviewDragOver(object sender, DragEventArgs e)
+        private void DisplayArea_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
@@ -219,6 +273,27 @@ namespace PhotosCategorier.Main
             {
                 e.Effects = DragDropEffects.None;
             }
+        }
+
+        private void DisplayArea_Drop(object sender, DragEventArgs e)
+        {
+            if ((e.Effects & DragDropEffects.Link) != 0)
+
+            {
+                var array = (Array)e.Data.GetData(DataFormats.FileDrop);
+                if (!(array is null))
+                {
+                    try
+                    {
+                        DropFolderOrFile(array);
+                    }
+                    catch (NotHoldPhotoException)
+                    {
+                        MessageBox.Show(Properties.Resources.NotHoldPhoto, Properties.Resources.Error);
+                    }
+                }
+            }
+
             e.Handled = true;
         }
 

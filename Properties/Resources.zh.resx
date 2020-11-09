@@ -159,7 +159,7 @@
   <data name="FileHasOccupied" xml:space="preserve">
     <value>文件被占用</value>
   </data>
-  <data name="FileHasOccupiedOrHasDeleted" xml:space="preserve">
+  <data name="FileHasOccupiedOrBeenDeleted" xml:space="preserve">
     <value>文件被占用或不存在</value>
   </data>
   <data name="Folder" xml:space="preserve">

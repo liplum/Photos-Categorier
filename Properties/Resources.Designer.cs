@@ -189,9 +189,9 @@ namespace PhotosCategorier.Properties {
         /// <summary>
         ///   查找类似 File has occupied or deleted 的本地化字符串。
         /// </summary>
-        public static string FileHasOccupiedOrHasDeleted {
+        public static string FileHasOccupiedOrBeenDeleted {
             get {
-                return ResourceManager.GetString("FileHasOccupiedOrHasDeleted", resourceCulture);
+                return ResourceManager.GetString("FileHasOccupiedOrBeenDeleted", resourceCulture);
             }
         }
         
