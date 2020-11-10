@@ -17,8 +17,8 @@
     <Setting Name="IsFirstOpen" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="DeleteDirectly" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+    <Setting Name="DeleteToRecycleBin" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="DeletedTip" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>

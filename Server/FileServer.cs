@@ -14,16 +14,9 @@ namespace PhotosCategorier.Servers
         {
             try
             {
-                if (Properties.Settings.Default.DeleteDirectly)
-                {
-                    filePath.DeleteFile();
-                }
-                else
-                {
-                    filePath.DeleteFileToRecycleBin();
-                }
+                filePath.DeletedWithException();
             }
-            catch (Exception)
+            catch
             {
                 MessageBox.Show(Properties.Resources.FileHasOccupied, Properties.Resources.Error);
             }
@@ -38,13 +31,13 @@ namespace PhotosCategorier.Servers
         {
             try
             {
-                if (Properties.Settings.Default.DeleteDirectly)
+                if (Properties.Settings.Default.DeleteToRecycleBin)
                 {
-                    filePath.DeleteFile();
+                    filePath.DeleteFileToRecycleBin();
                 }
                 else
                 {
-                    filePath.DeleteFileToRecycleBin();
+                    filePath.DeleteFile();
                 }
             }
             catch

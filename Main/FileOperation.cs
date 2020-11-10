@@ -30,16 +30,16 @@ namespace PhotosCategorier.Main
             }
         }
 
-        public bool IsDeleteDirectly
+        public bool IsDeleteToRecycleBin
         {
-            get => Properties.Settings.Default.DeleteDirectly;
+            get => Properties.Settings.Default.DeleteToRecycleBin;
             set
             {
                 var settings = Properties.Settings.Default;
 
-                if (settings.DeleteDirectly != value)
+                if (settings.DeleteToRecycleBin != value)
                 {
-                    settings.DeleteDirectly = value;
+                    settings.DeleteToRecycleBin = value;
                     OnPropertyChanged();
                 }
             }

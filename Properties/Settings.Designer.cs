@@ -85,13 +85,13 @@ namespace PhotosCategorier.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool DeleteDirectly {
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool DeleteToRecycleBin {
             get {
-                return ((bool)(this["DeleteDirectly"]));
+                return ((bool)(this["DeleteToRecycleBin"]));
             }
             set {
-                this["DeleteDirectly"] = value;
+                this["DeleteToRecycleBin"] = value;
             }
         }
         

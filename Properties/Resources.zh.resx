@@ -144,14 +144,14 @@
   <data name="CopyFile" xml:space="preserve">
     <value>复制此图片</value>
   </data>
-  <data name="DeleteDirectly" xml:space="preserve">
-    <value>不进入回收站直接删除</value>
-  </data>
   <data name="DeletedTip" xml:space="preserve">
     <value>删除前询问</value>
   </data>
   <data name="DeleteThis" xml:space="preserve">
     <value>删除</value>
+  </data>
+  <data name="DeleteToRecycleBin" xml:space="preserve">
+    <value>删除后进入回收站</value>
   </data>
   <data name="DirectoryNotFound" xml:space="preserve">
     <value>目标文件夹不存在或已失效</value>

@@ -172,10 +172,10 @@
                         IsChecked="{Binding ElementName=MainWin, Path=IsIncludeSubfolder, Mode=TwoWay}"
                         Style="{StaticResource Sub}" />
                     <MenuItem
-                        x:Name="DeleteDirectly_Setting"
-                        Header="{x:Static prop:Resources.DeleteDirectly}"
+                        x:Name="DeleteToRecycleBin_Setting"
+                        Header="{x:Static prop:Resources.DeleteToRecycleBin}"
                         IsCheckable="True"
-                        IsChecked="{Binding ElementName=MainWin, Path=IsDeleteDirectly, Mode=TwoWay}"
+                        IsChecked="{Binding ElementName=MainWin, Path=IsDeleteToRecycleBin, Mode=TwoWay}"
                         Style="{StaticResource Sub}" />
                     <MenuItem
                         x:Name="DeletedTip_Setting"
