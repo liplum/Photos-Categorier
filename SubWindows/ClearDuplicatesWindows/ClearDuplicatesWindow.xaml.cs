@@ -1,11 +1,11 @@
 ﻿using PhotosCategorier.DataStructure;
 using PhotosCategorier.Photo;
+using PhotosCategorier.Servers;
 using PhotosCategorier.Utils;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
-using static PhotosCategorier.Utils.FileTool;
 
 namespace PhotosCategorier.SubWindows
 {
@@ -122,7 +122,15 @@ namespace PhotosCategorier.SubWindows
 
                 foreach (var duplcate in duplicates)
                 {
-                    duplcate.DeleteFileToRecycleBin();
+                    try
+                    {
+                        duplcate.DeletedWithException();
+                    }
+                    catch
+                    {
+                        ;
+                    }
+
                     Progress += per;
                 }
                 Progress = MAX_PROGRESS;

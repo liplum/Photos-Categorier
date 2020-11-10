@@ -30,6 +30,36 @@ namespace PhotosCategorier.Main
             }
         }
 
+        public bool IsDeleteDirectly
+        {
+            get => Properties.Settings.Default.DeleteDirectly;
+            set
+            {
+                var settings = Properties.Settings.Default;
+
+                if (settings.DeleteDirectly != value)
+                {
+                    settings.DeleteDirectly = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public bool HasDeletedTip
+        {
+            get => Properties.Settings.Default.DeletedTip;
+            set
+            {
+                var settings = Properties.Settings.Default;
+
+                if (settings.DeletedTip != value)
+                {
+                    settings.DeletedTip = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         private string leftArrowContent = Properties.Resources.Left;
         public string LeftArrowContent
         {

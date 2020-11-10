@@ -1,13 +1,13 @@
 ﻿using PhotosCategorier.Main.Exceptions;
 using PhotosCategorier.Photo;
+using PhotosCategorier.Servers;
 using PhotosCategorier.Utils;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
+using DirectoryNotFoundException = System.IO.DirectoryNotFoundException;
 using My_DirectoryNotFoundException = PhotosCategorier.Main.Exceptions.DirectoryNotFoundException;
 using My_UnauthorizedAccessException = PhotosCategorier.Main.Exceptions.UnauthorizedAccessException;
-using DirectoryNotFoundException = System.IO.DirectoryNotFoundException;
 using UnauthorizedAccessException = System.UnauthorizedAccessException;
 
 namespace PhotosCategorier.Main
@@ -188,22 +188,16 @@ namespace PhotosCategorier.Main
             {
                 var photo = photographs.Current;
                 var file = photo.FilePath;
-                var r = MessageBox.Show($"{Properties.Resources.ConfirmDeletion}\n{file.GetLastName()}",
-                    Properties.Resources.Warnning, MessageBoxButton.OKCancel);
-                if (r == MessageBoxResult.OK)
+                if (!HasDeletedTip || MessageBox.Show($"{Properties.Resources.ConfirmDeletion}\n{file.GetLastName()}",
+                    Properties.Resources.Warnning, MessageBoxButton.OKCancel) == MessageBoxResult.OK)
                 {
-                    try
-                    {
-                        file.DeleteFileToRecycleBin();
-                    }
-                    catch (IOException)
-                    {
-                        MessageBox.Show($"{Properties.Resources.FileHasOccupied}\n{file}", Properties.Resources.Error);
-                    }
+                    file.Deleted();
                     NextImage();
                 }
             }
         }
+
+
 
     }
 }

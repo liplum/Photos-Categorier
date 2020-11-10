@@ -102,6 +102,11 @@ namespace PhotosCategorier.Utils
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <exception cref="Exception"></exception>
         public static void DeleteFile(this string filePath)
         {
             try
@@ -110,20 +115,34 @@ namespace PhotosCategorier.Utils
             }
             catch (IOException)
             {
-                //等待被删除的文件夹不存在
+                //等待被删除的文件不存在
                 ;
+            }
+            catch
+            {
+                throw;
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <exception cref="Exception"></exception>
         public static void DeleteFileToRecycleBin(this string filePath)
         {
             try
             {
                 FileSystem.DeleteFile(filePath, UIOption.AllDialogs, RecycleOption.SendToRecycleBin);
             }
-            catch (Exception)
+            catch (IOException)
             {
+                //等待被删除的文件不存在
                 ;
+            }
+            catch
+            {
+                throw;
             }
         }
     }

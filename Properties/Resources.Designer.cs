@@ -142,6 +142,24 @@ namespace PhotosCategorier.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Not to Recycle Bin to Delete Directly 的本地化字符串。
+        /// </summary>
+        public static string DeleteDirectly {
+            get {
+                return ResourceManager.GetString("DeleteDirectly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Deleted Tip 的本地化字符串。
+        /// </summary>
+        public static string DeletedTip {
+            get {
+                return ResourceManager.GetString("DeletedTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Delete 的本地化字符串。
         /// </summary>
         public static string DeleteThis {

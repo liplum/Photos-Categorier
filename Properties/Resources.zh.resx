@@ -144,6 +144,12 @@
   <data name="CopyFile" xml:space="preserve">
     <value>复制此图片</value>
   </data>
+  <data name="DeleteDirectly" xml:space="preserve">
+    <value>不进入回收站直接删除</value>
+  </data>
+  <data name="DeletedTip" xml:space="preserve">
+    <value>删除前询问</value>
+  </data>
   <data name="DeleteThis" xml:space="preserve">
     <value>删除</value>
   </data>

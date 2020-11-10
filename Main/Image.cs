@@ -1,4 +1,5 @@
 ﻿using PhotosCategorier.Photo;
+using PhotosCategorier.Servers;
 using PhotosCategorier.Utils;
 using System.Windows;
 using System.Windows.Media;
@@ -123,7 +124,7 @@ namespace PhotosCategorier.Main
                 var r = MessageBox.Show($"{Properties.Resources.CannotOpen}\n{curPhoto.FilePath.GetLastName()}\n{Properties.Resources.ConfirmDeletion}", Properties.Resources.Error, MessageBoxButton.OKCancel);
                 if (r == MessageBoxResult.OK)
                 {
-                    curPhoto.FilePath.DeleteFileToRecycleBin();
+                    curPhoto.FilePath.Deleted();
                 }
             }
         }
@@ -146,7 +147,7 @@ namespace PhotosCategorier.Main
                 var r = MessageBox.Show($"{Properties.Resources.CannotOpen}\n{curPhoto.FilePath.GetLastName()}\n{Properties.Resources.ConfirmDeletion}", Properties.Resources.Error, MessageBoxButton.OKCancel);
                 if (r == MessageBoxResult.OK)
                 {
-                    curPhoto.FilePath.DeleteFileToRecycleBin();
+                    curPhoto.FilePath.Deleted();
                 }
             }
         }

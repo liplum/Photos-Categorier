@@ -144,6 +144,12 @@
   <data name="CopyFile" xml:space="preserve">
     <value>Copy this Photo</value>
   </data>
+  <data name="DeleteDirectly" xml:space="preserve">
+    <value>Not to Recycle Bin to Delete Directly</value>
+  </data>
+  <data name="DeletedTip" xml:space="preserve">
+    <value>Deleted Tip</value>
+  </data>
   <data name="DeleteThis" xml:space="preserve">
     <value>Delete</value>
   </data>

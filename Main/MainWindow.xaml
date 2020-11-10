@@ -166,10 +166,22 @@
                         Header="{x:Static prop:Resources.SettingLanguage}"
                         Style="{StaticResource Sub}" />
                     <MenuItem
-                        x:Name="IncludeSubfolder"
+                        x:Name="IncludeSubfolder_Setting"
                         Header="{x:Static prop:Resources.IncludeSubfolder}"
                         IsCheckable="True"
                         IsChecked="{Binding ElementName=MainWin, Path=IsIncludeSubfolder, Mode=TwoWay}"
+                        Style="{StaticResource Sub}" />
+                    <MenuItem
+                        x:Name="DeleteDirectly_Setting"
+                        Header="{x:Static prop:Resources.DeleteDirectly}"
+                        IsCheckable="True"
+                        IsChecked="{Binding ElementName=MainWin, Path=IsDeleteDirectly, Mode=TwoWay}"
+                        Style="{StaticResource Sub}" />
+                    <MenuItem
+                        x:Name="DeletedTip_Setting"
+                        Header="{x:Static prop:Resources.DeletedTip}"
+                        IsCheckable="True"
+                        IsChecked="{Binding ElementName=MainWin, Path=HasDeletedTip, Mode=TwoWay}"
                         Style="{StaticResource Sub}" />
                 </MenuItem>
                 <MenuItem Header="{x:Static prop:Resources.Help}" Style="{StaticResource Main}">
