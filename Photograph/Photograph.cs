@@ -10,7 +10,10 @@ namespace PhotosCategorier.Photo
     /// </summary>
     public class Photograph : IEquatable<Photograph>
     {
-        public string FilePath { get; }
+        public string FilePath
+        {
+            get;
+        }
 
         /// <summary>
         /// 是否居中
@@ -26,9 +29,15 @@ namespace PhotosCategorier.Photo
         /// 通过图片的地址新建对象
         /// </summary>
         /// <param name="Path">图片的地址</param>
-        public Photograph(string Path) => FilePath = Path;
+        public Photograph(string Path)
+        {
+            FilePath = Path;
+        }
 
-        public override string ToString() => FilePath;
+        public override string ToString()
+        {
+            return FilePath;
+        }
 
         /// <summary>
         /// 初始化宽度和高度
@@ -38,7 +47,9 @@ namespace PhotosCategorier.Photo
         public static void SetSize(int maxWidth, int maxHeight)
         {
             if (maxWidth <= 0 || maxHeight <= 0)
+            {
                 throw new ImageSizeException($"Width:{maxWidth} or Height:{maxHeight} is invalid.");
+            }
 
             MaxWidth = maxWidth;
             MaxHeight = maxHeight;
@@ -51,19 +62,31 @@ namespace PhotosCategorier.Photo
             BackgroundBrush = backgroundBrush;
         }
 
-        private static int MaxWidth { get; set; }
-        private static int MaxHeight { get; set; }
+        private static int MaxWidth
+        {
+            get; set;
+        }
+        private static int MaxHeight
+        {
+            get; set;
+        }
 
         /// <summary>
         /// 背景刷
         /// </summary>
-        private static Brush BackgroundBrush { set; get; }
+        private static Brush BackgroundBrush
+        {
+            set; get;
+        }
 
         /// <summary>
         /// 缩放算法
         /// 必须使用<see cref="MaxWidth"/>和<see cref="MaxHeight"/>获取窗口宽度和高度
         /// </summary>
-        private static Func<(int OriginalWidth, int OriginalHeight), int, int, (int ScaleWidth, int ScaleHeight)> GetScaleSize { set; get; }
+        private static Func<(int OriginalWidth, int OriginalHeight), int, int, (int ScaleWidth, int ScaleHeight)> GetScaleSize
+        {
+            set; get;
+        }
 
 
         /// <summary>
@@ -76,11 +99,13 @@ namespace PhotosCategorier.Photo
         public static Bitmap CreateBitmap(int ImageWidth, int ImageHeight)
         {
             if (BackgroundBrush == null)
+            {
                 throw new NotInitPhotographException("Background Brush isn't inited.");
+            }
 
-            Bitmap img = new Bitmap(ImageWidth, ImageHeight);
+            var img = new Bitmap(ImageWidth, ImageHeight);
 
-            using Graphics G = Graphics.FromImage(img);
+            using var G = Graphics.FromImage(img);
             G.FillRectangle(BackgroundBrush, new Rectangle(0, 0, ImageWidth, ImageHeight));
             return img;
         }
@@ -94,13 +119,15 @@ namespace PhotosCategorier.Photo
         public static Bitmap CenteredImage(Bitmap NeedCenteredImage)
         {
             if (MaxWidth <= 0 || MaxHeight <= 0)
+            {
                 throw new NotInitPhotographException("MaxWidth or MaxHeight isn't inited.");
+            }
 
-            Bitmap img = CreateBitmap(MaxWidth, MaxHeight);
+            var img = CreateBitmap(MaxWidth, MaxHeight);
 
-            using Graphics G = Graphics.FromImage(img);
-            int deltaX = (MaxWidth - NeedCenteredImage.Width) / 2;
-            int deltaY = (MaxHeight - NeedCenteredImage.Height) / 2;
+            using var G = Graphics.FromImage(img);
+            var deltaX = (MaxWidth - NeedCenteredImage.Width) / 2;
+            var deltaY = (MaxHeight - NeedCenteredImage.Height) / 2;
             G.DrawImage(NeedCenteredImage, new Rectangle(deltaX, deltaY / 2, NeedCenteredImage.Width, NeedCenteredImage.Height),
                 new Rectangle(0, 0, NeedCenteredImage.Width, NeedCenteredImage.Height), GraphicsUnit.Pixel);
             return img;
@@ -119,19 +146,23 @@ namespace PhotosCategorier.Photo
         public static Bitmap ScaleImage(Bitmap NeedScaleImage)
         {
             if (GetScaleSize == null)
+            {
                 throw new NotInitPhotographException("GetScaleSize function isn't inited.");
+            }
 
-            (int ScaleWidth, int ScaleHeight) = GetScaleSize(
+            (var ScaleWidth, var ScaleHeight) = GetScaleSize(
                 (OriginalWidth: NeedScaleImage.Width, OriginalHeight: NeedScaleImage.Height), MaxWidth, MaxHeight);
             if (ScaleWidth <= 0 || ScaleHeight <= 0)
+            {
                 throw new ImageSizeException($"ScaleWidth:{ScaleWidth} or ScaleHeight:{ScaleHeight} is invalid.");
+            }
 
-            Bitmap img = new Bitmap(ScaleWidth, ScaleHeight);
+            var img = new Bitmap(ScaleWidth, ScaleHeight);
 
             try
             {
 
-                using (Graphics g = Graphics.FromImage(img))
+                using (var g = Graphics.FromImage(img))
                 {
                     // 插值算法的质量
                     g.InterpolationMode = InterpolationMode.HighQualityBicubic;
@@ -170,14 +201,19 @@ namespace PhotosCategorier.Photo
                 try
                 {
                     if (IsScale)
+                    {
                         img = ScaleImage(img);
+                    }
                 }
                 catch (CannotProcessImageException e)
                 {
                     throw e;
                 }
                 if (IsCentered)
+                {
                     img = CenteredImage(img);
+                }
+
                 return img;
             }
         }

@@ -29,10 +29,10 @@ namespace PhotosCategorier.SubWindows
         private void InitCombo()
         {
             var all = Enum.GetValues(typeof(LayoutType));
-            int len = all.Length;
+            var len = all.Length;
             layoutTypes = new LayoutType[len];
             var names = new string[len];
-            for (int i = 0; i < len; ++i)
+            for (var i = 0; i < len; ++i)
             {
                 layoutTypes[i] = (LayoutType)all.GetValue(i);
                 names[i] = layoutTypes[i].GetName();
@@ -44,16 +44,19 @@ namespace PhotosCategorier.SubWindows
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void OK_Click(object sender, RoutedEventArgs e)
         {
             var combo = SelectSize.ComboBox;
-            int index = combo.SelectedIndex;
+            var index = combo.SelectedIndex;
             if (index >= 0 && index < layoutTypes.Length)
+            {
                 curLayout.LayoutType = layoutTypes[index];
-            this.Close();
+            }
+
+            Close();
         }
     }
 }

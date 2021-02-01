@@ -9,32 +9,39 @@
     Startup="Application_Startup"
     StartupUri="/Main/MainWindow.xaml">
     <Application.Resources>
-        <layout:Layout x:Key="CurLayout" x:Name="CurLayout" />
-        <system:String x:Key="Version">1.5.1</system:String>
-        <SolidColorBrush
-            x:Key="Translucent"
-            Opacity="0.4"
-            Color="White" />
-        <Style x:Key="NormalLabel" TargetType="Label">
-            <Setter Property="FontSize" Value="{Binding FontSize, Source={StaticResource CurLayout}}" />
-        </Style>
-        <Style x:Key="NormalButton" TargetType="Button">
-            <Setter Property="FontSize" Value="{Binding FontSize, Source={StaticResource CurLayout}}" />
-        </Style>
-        <Style x:Key="MiniLabel" TargetType="Label">
-            <Setter Property="FontSize" Value="{Binding ItemFontSize, Source={StaticResource CurLayout}}" />
-        </Style>
-        <Style x:Key="MiniButton" TargetType="Button">
-            <Setter Property="FontSize" Value="{Binding ItemFontSize, Source={StaticResource CurLayout}}" />
-        </Style>
-        <Style x:Key="Main" TargetType="MenuItem">
-            <Setter Property="FontSize" Value="{Binding FontSize, Source={StaticResource CurLayout}}" />
-        </Style>
-        <Style x:Key="Sub" TargetType="MenuItem">
-            <Setter Property="FontSize" Value="{Binding ItemFontSize, Source={StaticResource CurLayout}}" />
-        </Style>
-        <Style x:Key="Menu" TargetType="Menu">
-            <Setter Property="Background" Value="Gray" />
-        </Style>
+        <ResourceDictionary>
+            <layout:Layout x:Key="CurLayout" x:Name="CurLayout" />
+            <system:String x:Key="Version">1.5.1</system:String>
+            <SolidColorBrush
+                x:Key="Translucent"
+                Opacity="0.4"
+                Color="White" />
+            <Style x:Key="NormalLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="{Binding FontSize, Source={StaticResource CurLayout}}" />
+            </Style>
+            <Style x:Key="NormalButton" TargetType="Button">
+                <Setter Property="FontSize" Value="{Binding FontSize, Source={StaticResource CurLayout}}" />
+            </Style>
+            <Style x:Key="MiniLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="{Binding ItemFontSize, Source={StaticResource CurLayout}}" />
+            </Style>
+            <Style x:Key="MiniButton" TargetType="Button">
+                <Setter Property="FontSize" Value="{Binding ItemFontSize, Source={StaticResource CurLayout}}" />
+            </Style>
+            <Style x:Key="Main" TargetType="MenuItem">
+                <Setter Property="FontSize" Value="{Binding FontSize, Source={StaticResource CurLayout}}" />
+            </Style>
+            <Style x:Key="Sub" TargetType="MenuItem">
+                <Setter Property="FontSize" Value="{Binding ItemFontSize, Source={StaticResource CurLayout}}" />
+            </Style>
+            <Style x:Key="Menu" TargetType="Menu">
+                <Setter Property="Background" Value="Gray" />
+            </Style>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Blue.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

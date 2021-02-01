@@ -14,15 +14,9 @@ namespace PhotosCategorier.DataStructure
     {
         private readonly Dictionary<Key, List<Value>> dictMultiMap;
 
-        public Key[] Keys
-        {
-            get => dictMultiMap.Keys.ToArray();
-        }
+        public Key[] Keys => dictMultiMap.Keys.ToArray();
 
-        public List<Value>[] Values
-        {
-            get => dictMultiMap.Values.ToArray();
-        }
+        public List<Value>[] Values => dictMultiMap.Values.ToArray();
 
         /// <summary>
         /// Construction of Multi map
@@ -44,7 +38,7 @@ namespace PhotosCategorier.DataStructure
             {
                 foreach (var pair in other.dictMultiMap)
                 {
-                    List<Value> listValue = new List<Value>();
+                    var listValue = new List<Value>();
 
                     foreach (var value in pair.Value)
                     {
@@ -65,7 +59,7 @@ namespace PhotosCategorier.DataStructure
 
         public bool TryGetValues(Key key, [MaybeNullWhen(false)] out List<Value> values)
         {
-            if (dictMultiMap.TryGetValue(key, out List<Value> listvValue))
+            if (dictMultiMap.TryGetValue(key, out var listvValue))
             {
                 values = listvValue;
                 return true;
@@ -88,7 +82,7 @@ namespace PhotosCategorier.DataStructure
         {
             try
             {
-                if (dictMultiMap.TryGetValue(key, out List<Value> listToAdd))
+                if (dictMultiMap.TryGetValue(key, out var listToAdd))
                 {
                     listToAdd.Add(value);
                 }
@@ -113,10 +107,10 @@ namespace PhotosCategorier.DataStructure
         /// <param name="KeyElement"></param>
         public bool RemoveAll(Key KeyElement)
         {
-            bool retVal = false;
+            var retVal = false;
             try
             {
-                if (dictMultiMap.TryGetValue(KeyElement, out List<Value> listToRemove))
+                if (dictMultiMap.TryGetValue(KeyElement, out var listToRemove))
                 {
                     listToRemove.Clear();
                     dictMultiMap.Remove(KeyElement);
@@ -137,10 +131,10 @@ namespace PhotosCategorier.DataStructure
         /// <param name="value"></param>
         public bool Remove(Key key, Value value)
         {
-            bool retVal = false;
+            var retVal = false;
             try
             {
-                if (dictMultiMap.TryGetValue(key, out List<Value> listToRemove))
+                if (dictMultiMap.TryGetValue(key, out var listToRemove))
                 {
                     retVal = listToRemove.Remove(value);
 

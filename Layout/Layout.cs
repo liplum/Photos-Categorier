@@ -1,27 +1,14 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Reflection;
 using static PhotosCategorier.Layout.LayoutSize;
 
 namespace PhotosCategorier.Layout
 {
     public class Layout : INotifyPropertyChanged
     {
-        public int WINDOW_WIDTH
-        {
-            get
-            {
-                return LayoutType.GetWidth();
-            }
-        }
+        public int WINDOW_WIDTH => LayoutType.GetWidth();
 
-        public int WINDOW_HEIGHT
-        {
-            get
-            {
-                return LayoutType.GetHeight();
-            }
-        }
+        public int WINDOW_HEIGHT => LayoutType.GetHeight();
 
         private LayoutType layoutType;
         public LayoutType LayoutType
@@ -37,24 +24,27 @@ namespace PhotosCategorier.Layout
             }
         }
 
-        public float FontSize
-        {
-            get => LayoutType.GetFontSize();
-        }
+        public float FontSize => LayoutType.GetFontSize();
 
-        public float ItemFontSize
-        {
-            get => FontSize * 7 / 10;
-        }
+        public float ItemFontSize => FontSize * 7 / 10;
 
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void SetLayout(LayoutType type = LayoutType.Size1080x720) => layoutType = type;
+        public void SetLayout(LayoutType type = LayoutType.Size1080x720)
+        {
+            layoutType = type;
+        }
 
-        public Layout() => SetLayout();
+        public Layout()
+        {
+            SetLayout();
+        }
 
-        public Layout(LayoutType layout) => SetLayout(layout);
+        public Layout(LayoutType layout)
+        {
+            SetLayout(layout);
+        }
     }
 
     public static class LayoutSize
@@ -91,7 +81,7 @@ namespace PhotosCategorier.Layout
         /// <param name="height"></param>
         /// <returns></returns>
         /// <exception cref="GenrateLayoutFailedException"></exception>
-        public static LayoutType GenerateLayout(int width,int height)
+        public static LayoutType GenerateLayout(int width, int height)
         {
             var str = $"Size{width}x{height}";
             try
@@ -109,7 +99,9 @@ namespace PhotosCategorier.Layout
         [Serializable]
         public class GenrateLayoutFailedException : Exception
         {
-            public GenrateLayoutFailedException() { }
+            public GenrateLayoutFailedException()
+            {
+            }
             public GenrateLayoutFailedException(string message) : base(message) { }
             public GenrateLayoutFailedException(string message, Exception inner) : base(message, inner) { }
             protected GenrateLayoutFailedException(
@@ -125,8 +117,8 @@ namespace PhotosCategorier.Layout
         /// <exception cref="NotDefineException"></exception>
         public static int GetWidth(this LayoutType type)
         {
-            FieldInfo fi = type.GetType().GetField(type.ToString());
-            object[] attributes = fi.GetCustomAttributes(typeof(Size), false);
+            var fi = type.GetType().GetField(type.ToString());
+            var attributes = fi.GetCustomAttributes(typeof(Size), false);
             if (attributes.Length > 0)
             {
                 return ((Size)attributes[0]).Width;
@@ -141,8 +133,8 @@ namespace PhotosCategorier.Layout
         /// <exception cref="NotDefineException"></exception>
         public static int GetHeight(this LayoutType type)
         {
-            FieldInfo fi = type.GetType().GetField(type.ToString());
-            object[] attributes = fi.GetCustomAttributes(typeof(Size), false);
+            var fi = type.GetType().GetField(type.ToString());
+            var attributes = fi.GetCustomAttributes(typeof(Size), false);
             if (attributes.Length > 0)
             {
                 return ((Size)attributes[0]).Height;
@@ -158,8 +150,8 @@ namespace PhotosCategorier.Layout
         /// <exception cref="NotDefineException"></exception>
         public static float GetFontSize(this LayoutType type)
         {
-            FieldInfo fi = type.GetType().GetField(type.ToString());
-            object[] attributes = fi.GetCustomAttributes(typeof(FontSize), false);
+            var fi = type.GetType().GetField(type.ToString());
+            var attributes = fi.GetCustomAttributes(typeof(FontSize), false);
             if (attributes.Length > 0)
             {
                 return ((FontSize)attributes[0]).Size;
@@ -174,8 +166,8 @@ namespace PhotosCategorier.Layout
         /// <exception cref="NotDefineException"></exception>
         public static string GetName(this LayoutType type)
         {
-            FieldInfo fi = type.GetType().GetField(type.ToString());
-            object[] attributes = fi.GetCustomAttributes(typeof(Size), false);
+            var fi = type.GetType().GetField(type.ToString());
+            var attributes = fi.GetCustomAttributes(typeof(Size), false);
             if (attributes.Length > 0)
             {
                 var size = (Size)attributes[0];
@@ -186,8 +178,14 @@ namespace PhotosCategorier.Layout
 
         public class Size : Attribute
         {
-            public int Width { set; get; }
-            public int Height { set; get; }
+            public int Width
+            {
+                set; get;
+            }
+            public int Height
+            {
+                set; get;
+            }
 
             public Size(int width, int height)
             {
@@ -198,8 +196,14 @@ namespace PhotosCategorier.Layout
 
         public class FontSize : Attribute
         {
-            public float Size { set; get; }
-            public FontSize(float size) => Size = size;
+            public float Size
+            {
+                set; get;
+            }
+            public FontSize(float size)
+            {
+                Size = size;
+            }
         }
 
         public class NotDefineException : Exception

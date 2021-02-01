@@ -11,12 +11,12 @@ namespace PhotosCategorier.Utils
         /// </summary>
         public static string MD5(this Stream stream)
         {
-            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+            var md5 = new MD5CryptoServiceProvider();
             md5.ComputeHash(stream);
-            byte[] b = md5.Hash;
+            var b = md5.Hash;
             md5.Clear();
-            StringBuilder sb = new StringBuilder(32);
-            for (int i = 0; i < b.Length; i++)
+            var sb = new StringBuilder(32);
+            for (var i = 0; i < b.Length; i++)
             {
                 sb.Append($"{b[i]:X2}");
             }
@@ -28,7 +28,7 @@ namespace PhotosCategorier.Utils
         /// </summary>
         public static string MD5(string filePath)
         {
-            using FileStream stream = File.Open(filePath, FileMode.Open);
+            using var stream = File.Open(filePath, FileMode.Open);
 
             return stream.MD5();
         }

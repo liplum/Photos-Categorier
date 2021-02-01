@@ -7,7 +7,10 @@ namespace PhotosCategorier.Photo
 {
     public class Album : IEquatable<Album>
     {
-        public DirectoryInfo Directory { get; private set; }
+        public DirectoryInfo Directory
+        {
+            get; private set;
+        }
 
         public Album(DirectoryInfo directory)
         {

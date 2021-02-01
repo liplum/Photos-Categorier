@@ -96,7 +96,9 @@ namespace PhotosCategorier.Render
         [Serializable]
         public class GeneratorIsEmptyException : Exception
         {
-            public GeneratorIsEmptyException() { }
+            public GeneratorIsEmptyException()
+            {
+            }
             public GeneratorIsEmptyException(string message) : base(message) { }
             public GeneratorIsEmptyException(string message, Exception inner) : base(message, inner) { }
             protected GeneratorIsEmptyException(

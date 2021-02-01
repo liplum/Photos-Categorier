@@ -33,7 +33,7 @@ namespace PhotosCategorier.Utils
             int 原宽度 = ImageSize.Width,
                 原高度 = ImageSize.Height;
             var 长度 = 得到长度();
-            double 宽高比 = (double)原宽度 / 原高度;
+            var 宽高比 = (double)原宽度 / 原高度;
             double 归一化后的宽度 = 归一化(原宽度),
                     归一化后的高度 = 归一化(原高度);
 
@@ -48,9 +48,15 @@ namespace PhotosCategorier.Utils
                 return ((int)(h * 宽高比), (int)h);
             }
 
-            double 得到长度() => Math.Sqrt(原宽度 * 原宽度 + 原高度 * 原高度);
+            double 得到长度()
+            {
+                return Math.Sqrt(原宽度 * 原宽度 + 原高度 * 原高度);
+            }
 
-            double 归一化(double 值) => 值 / 长度;
+            double 归一化(double 值)
+            {
+                return 值 / 长度;
+            }
         }
 
         public static (int ScaleWidth, int ScaleHeight) 比例缩放法((int Width, int Height) ImageSize, int MaxWidth, int MaxHeight)
@@ -62,7 +68,7 @@ namespace PhotosCategorier.Utils
 
             const double 边距 = 5f / 6f;
 
-            double 宽比高 = (double)原宽度 / 原高度;
+            var 宽比高 = (double)原宽度 / 原高度;
 
             if (MaxWidth > MaxHeight)
             {

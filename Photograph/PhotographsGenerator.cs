@@ -13,17 +13,11 @@ namespace PhotosCategorier.Photo
 
         public int CurIndex { get; private set; } = 0;
 
-        public bool IsEmpty
-        {
-            get => AllPhotographs == null || AllPhotographs.Count == 0;
-        }
+        public bool IsEmpty => AllPhotographs == null || AllPhotographs.Count == 0;
 
-        public int Count { get => AllPhotographs.Count; }
+        public int Count => AllPhotographs.Count;
 
-        public bool HasNext
-        {
-            get => CurIndex < AllPhotographs.Count - 1;
-        }
+        public bool HasNext => CurIndex < AllPhotographs.Count - 1;
 
         public int RemainingFiles
         {
@@ -32,7 +26,10 @@ namespace PhotosCategorier.Photo
                 lock (this)
                 {
                     if (IsEmpty)
+                    {
                         return 0;
+                    }
+
                     return AllPhotographs.Count - CurIndex - 1;
                 }
             }
@@ -139,7 +136,7 @@ namespace PhotosCategorier.Photo
         {
             lock (this)
             {
-                int practicalCount = RemainingFiles > nextCount ? nextCount : RemainingFiles;
+                var practicalCount = RemainingFiles > nextCount ? nextCount : RemainingFiles;
                 var nextPhotos = new Photograph[practicalCount];
                 for (int i = CurIndex, j = 0; j < practicalCount && i < Count; i++, j++)
                 {

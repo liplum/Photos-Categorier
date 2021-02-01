@@ -1,5 +1,7 @@
 ﻿using PhotosCategorier.Layout;
+using System.Globalization;
 using System.Windows;
+using WPFLocalizeExtension.Engine;
 using static PhotosCategorier.Layout.LayoutSize;
 
 namespace PhotosCategorier
@@ -97,6 +99,7 @@ namespace PhotosCategorier
             var settings = PhotosCategorier.Properties.Settings.Default;
             if (!settings.Language.Equals(lan))
             {
+                LocalizeDictionary.Instance.Culture = new CultureInfo(lan);
                 settings.Language = lan;
                 return true;
             }

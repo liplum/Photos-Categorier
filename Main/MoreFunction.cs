@@ -30,10 +30,6 @@ namespace PhotosCategorier.Main
         private static void SetLanguage()
         {
             var res = new SetLanguageWindow().ShowDialog();
-            if (res == true)
-            {
-                MessageBox.Show(Properties.Resources.PleaseReopen, Properties.Resources.Tip);
-            }
         }
     }
 }

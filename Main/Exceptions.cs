@@ -8,7 +8,9 @@ namespace PhotosCategorier.Main.Exceptions
     [Serializable]
     public class HasNoPhotoException : Exception
     {
-        public HasNoPhotoException() { }
+        public HasNoPhotoException()
+        {
+        }
         public HasNoPhotoException(string message) : base(message) { }
         public HasNoPhotoException(string message, Exception inner) : base(message, inner) { }
         protected HasNoPhotoException(
@@ -22,7 +24,9 @@ namespace PhotosCategorier.Main.Exceptions
     [Serializable]
     public class NotHoldPhotoException : Exception
     {
-        public NotHoldPhotoException() { }
+        public NotHoldPhotoException()
+        {
+        }
         public NotHoldPhotoException(string message) : base(message) { }
         public NotHoldPhotoException(string message, Exception inner) : base(message, inner) { }
         protected NotHoldPhotoException(
@@ -36,7 +40,9 @@ namespace PhotosCategorier.Main.Exceptions
     [Serializable]
     public class NotSetClassifyException : Exception
     {
-        public NotSetClassifyException() { }
+        public NotSetClassifyException()
+        {
+        }
         public NotSetClassifyException(string message) : base(message) { }
         public NotSetClassifyException(string message, Exception inner) : base(message, inner) { }
         protected NotSetClassifyException(
@@ -50,7 +56,9 @@ namespace PhotosCategorier.Main.Exceptions
     [Serializable]
     public class DirectoryNotFoundException : Exception
     {
-        public DirectoryNotFoundException() { }
+        public DirectoryNotFoundException()
+        {
+        }
         public DirectoryNotFoundException(string message) : base(message) { }
         public DirectoryNotFoundException(string message, Exception inner) : base(message, inner) { }
         protected DirectoryNotFoundException(
@@ -64,7 +72,9 @@ namespace PhotosCategorier.Main.Exceptions
     [Serializable]
     public class FileHasOccupiedOrBeenDeletedException : Exception
     {
-        public FileHasOccupiedOrBeenDeletedException() { }
+        public FileHasOccupiedOrBeenDeletedException()
+        {
+        }
         public FileHasOccupiedOrBeenDeletedException(string message) : base(message) { }
         public FileHasOccupiedOrBeenDeletedException(string message, Exception inner) : base(message, inner) { }
         protected FileHasOccupiedOrBeenDeletedException(
@@ -78,7 +88,9 @@ namespace PhotosCategorier.Main.Exceptions
     [Serializable]
     public class UnauthorizedAccessException : Exception
     {
-        public UnauthorizedAccessException() { }
+        public UnauthorizedAccessException()
+        {
+        }
         public UnauthorizedAccessException(string message) : base(message) { }
         public UnauthorizedAccessException(string message, Exception inner) : base(message, inner) { }
         protected UnauthorizedAccessException(

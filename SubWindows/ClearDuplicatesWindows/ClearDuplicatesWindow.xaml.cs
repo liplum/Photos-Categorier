@@ -14,7 +14,7 @@ namespace PhotosCategorier.SubWindows
     /// </summary>
     public sealed partial class ClearDuplicatesWindow : Window, INotifyPropertyChanged
     {
-        private bool HasDuplicates { get => duplicates.Count != 0; }
+        private bool HasDuplicates => duplicates.Count != 0;
 
         private double _Progress;
 
@@ -74,7 +74,7 @@ namespace PhotosCategorier.SubWindows
                 var per = MAX_PROGRESS / (count + 1);
 
 
-                Multimap<string, string> multimap = new Multimap<string, string>();
+                var multimap = new Multimap<string, string>();
                 foreach (var photo in photographs)
                 {
                     multimap.Add(photo.MD5(), photo.FilePath);
@@ -105,9 +105,9 @@ namespace PhotosCategorier.SubWindows
             {
                 await ClearDuplicates();
                 MessageBox.Show(Properties.Resources.ClearDuplicatesSuccessfully, Properties.Resources.Success);
-                this.DialogResult = true;
+                DialogResult = true;
             }
-            this.Close();
+            Close();
         }
 
         private async Task ClearDuplicates()
@@ -139,8 +139,8 @@ namespace PhotosCategorier.SubWindows
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = false;
-            this.Close();
+            DialogResult = false;
+            Close();
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
@@ -149,7 +149,8 @@ namespace PhotosCategorier.SubWindows
             UpdateDisplay();
         }
     }
-    static class PhotoUtil
+
+    internal static class PhotoUtil
     {
         public static string MD5(this Photograph photo)
         {

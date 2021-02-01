@@ -74,7 +74,10 @@ namespace PhotosCategorier.Main
             ResetPhotoInfo();
         }
 
-        private enum Arrow { LEFT_ARROW, RIGHT_ARROW }
+        private enum Arrow
+        {
+            LEFT_ARROW, RIGHT_ARROW
+        }
 
         /// <summary>
         /// Checking whether current photo is the last one
@@ -92,7 +95,10 @@ namespace PhotosCategorier.Main
             return true;
         }
 
-        private enum EmptyMessage { HAS_NO_PHOTO, NOT_SET_CLASSIFY, NOT_HOLD_PHOTO }
+        private enum EmptyMessage
+        {
+            HAS_NO_PHOTO, NOT_SET_CLASSIFY, NOT_HOLD_PHOTO
+        }
         /// <summary>
         /// Checking whether the photographs is empty or not . If it's empty , it'll pop a message box with what you want to display
         /// </summary>

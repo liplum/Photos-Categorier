@@ -4,12 +4,9 @@ namespace PhotosCategorier.DataStructure
 {
     public class CircularQueue<T>
     {
-        public int Capacity { get => Queue.Length; }
+        public int Capacity => Queue.Length;
 
-        public int Count
-        {
-            get => (RearIndex + Capacity - FrontIndex) % Capacity;
-        }
+        public int Count => (RearIndex + Capacity - FrontIndex) % Capacity;
 
         private readonly T[] Queue;
 
@@ -24,15 +21,9 @@ namespace PhotosCategorier.DataStructure
             Queue = new T[capatcity];
         }
 
-        public bool IsFull
-        {
-            get => (RearIndex + 1) % Capacity == FrontIndex;
-        }
+        public bool IsFull => (RearIndex + 1) % Capacity == FrontIndex;
 
-        public bool IsEmpty
-        {
-            get => RearIndex == FrontIndex;
-        }
+        public bool IsEmpty => RearIndex == FrontIndex;
 
         public bool Enqueue(T value)
         {
@@ -56,7 +47,7 @@ namespace PhotosCategorier.DataStructure
                 {
                     throw new IndexOutOfRangeException();
                 }
-                T value = Queue[FrontIndex];
+                var value = Queue[FrontIndex];
                 FrontIndex = (FrontIndex + 1) % Capacity;
                 return value;
             }

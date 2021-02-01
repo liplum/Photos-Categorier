@@ -4,20 +4,24 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:calc="clr-namespace:CalcBinding;assembly=CalcBinding"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:lex="http://wpflocalizeextension.codeplex.com"
     xmlns:local="clr-namespace:PhotosCategorier"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:prop="clr-namespace:PhotosCategorier.Properties"
     xmlns:system="clr-namespace:System;assembly=mscorlib"
     x:Name="MainWin"
-    Title="{x:Static prop:Resources.Title}"
+    Title="{lex:Loc Title}"
     Width="{Binding WINDOW_WIDTH, Source={StaticResource CurLayout}}"
     Height="{Binding WINDOW_HEIGHT, Source={StaticResource CurLayout}}"
+    lex:LocalizeDictionary.DesignCulture="en"
+    lex:ResxLocalizationProvider.DefaultAssembly="PhotosCategorier"
+    lex:ResxLocalizationProvider.DefaultDictionary="Resources"
     AllowDrop="True"
     DragEnter="DisplayArea_DragEnter"
     Drop="DisplayArea_Drop"
     KeyUp="Window_KeyUp"
-    ResizeMode="NoResize"
-    mc:Ignorable="d">
+    ResizeMode="NoResize">
     <Window.Resources>
         <DiscreteObjectKeyFrame x:Key="MainWinProxy" Value="{Binding ElementName=MainWin}" />
         <RoutedUICommand x:Key="RefreshCommand" Text="Refresh Current Photo List" />
@@ -83,18 +87,18 @@
                 Grid.Row="0"
                 Grid.ColumnSpan="2"
                 Style="{StaticResource Menu}">
-                <MenuItem Header="{x:Static prop:Resources.Menu}" Style="{StaticResource Main}">
+                <MenuItem Header="{lex:Loc Menu}" Style="{StaticResource Main}">
                     <MenuItem
                         x:Name="RefreshButton"
                         Click="RefreshButton_Click"
-                        Header="{x:Static prop:Resources.Refresh}"
+                        Header="{lex:Loc Refresh}"
                         InputGestureText="F5"
                         IsEnabled="{Binding ElementName=MainWin, Path=Inited, Mode=OneWay}"
                         Style="{StaticResource Sub}" />
                     <MenuItem
                         x:Name="ClearButton"
                         Click="ClearButton_Click"
-                        Header="{x:Static prop:Resources.Clear}"
+                        Header="{lex:Loc Clear}"
                         InputGestureText="F12"
                         IsEnabled="{Binding ElementName=MainWin, Path=Inited, Mode=OneWay}"
                         Style="{StaticResource Sub}" />
@@ -102,7 +106,7 @@
                     <MenuItem
                         x:Name="OpenFile"
                         Click="OpenFile_Click"
-                        Header="{x:Static prop:Resources.OpenFile}"
+                        Header="{lex:Loc OpenFile}"
                         InputGestureText="Ctrl+O"
                         IsEnabled="{calc:Binding '!IsEnd',
                                                  ElementName=MainWin,
@@ -111,7 +115,7 @@
                     <MenuItem
                         x:Name="OpenFolderWhereFileIs"
                         Click="OpenFolderWhereFileIs_Click"
-                        Header="{x:Static prop:Resources.OpenFolderWhereFileIs}"
+                        Header="{lex:Loc OpenFolderWhereFileIs}"
                         InputGestureText="Ctrl+F"
                         IsEnabled="{calc:Binding '!IsEnd',
                                                  ElementName=MainWin,
@@ -120,96 +124,96 @@
                     <MenuItem
                         x:Name="CopyFile"
                         Click="CopyFile_Click"
-                        Header="{x:Static prop:Resources.CopyFile}"
+                        Header="{lex:Loc CopyFile}"
                         InputGestureText="Ctrl+C"
                         IsEnabled="{calc:Binding '!IsEnd',
                                                  ElementName=MainWin,
                                                  Mode=OneWay}"
                         Style="{StaticResource Sub}" />
                 </MenuItem>
-                <MenuItem Header="{x:Static prop:Resources.Folder}" Style="{StaticResource Main}">
+                <MenuItem Header="{lex:Loc Folder}" Style="{StaticResource Main}">
                     <MenuItem
                         x:Name="SettingClassifyFolder"
                         Click="SettingClassifyFolder_Click"
-                        Header="{x:Static prop:Resources.SettingClassifyFolder}"
+                        Header="{lex:Loc SettingClassifyFolder}"
                         Style="{StaticResource Sub}" />
                     <Separator />
                     <MenuItem
                         x:Name="SelectLeftFolder"
                         Click="SelectLeftFolder_Click"
-                        Header="{x:Static prop:Resources.SelectLeftFolder}"
+                        Header="{lex:Loc SelectLeftFolder}"
                         InputGestureText="Ctrl+A"
                         Style="{StaticResource Sub}" />
                     <MenuItem
                         x:Name="SelectRightFolder"
                         Click="SelectRightFolder_Click"
-                        Header="{x:Static prop:Resources.SelectRightFolder}"
+                        Header="{lex:Loc SelectRightFolder}"
                         InputGestureText="Ctrl+D"
                         Style="{StaticResource Sub}" />
                     <Separator />
                     <MenuItem
                         x:Name="AddingClassifyFolder"
                         Click="AddingClassifyFolder_Click"
-                        Header="{x:Static prop:Resources.AddingClassifyFolder}"
+                        Header="{lex:Loc AddingClassifyFolder}"
                         IsEnabled="{Binding ElementName=MainWin, Path=Inited, Mode=OneWay}"
                         Style="{StaticResource Sub}" />
                 </MenuItem>
-                <MenuItem Header="{x:Static prop:Resources.Setting}" Style="{StaticResource Main}">
+                <MenuItem Header="{lex:Loc Setting}" Style="{StaticResource Main}">
                     <MenuItem
                         x:Name="SettingWindowSize"
                         Click="SettingWindowSize_Click"
-                        Header="{x:Static prop:Resources.SettingWindowSize}"
+                        Header="{lex:Loc SettingWindowSize}"
                         Style="{StaticResource Sub}" />
                     <MenuItem
                         x:Name="SettingLanguage"
                         Click="SettingLanguage_Click"
-                        Header="{x:Static prop:Resources.SettingLanguage}"
+                        Header="{lex:Loc SettingLanguage}"
                         Style="{StaticResource Sub}" />
                     <MenuItem
                         x:Name="IncludeSubfolder_Setting"
-                        Header="{x:Static prop:Resources.IncludeSubfolder}"
+                        Header="{lex:Loc IncludeSubfolder}"
                         IsCheckable="True"
                         IsChecked="{Binding ElementName=MainWin, Path=IsIncludeSubfolder, Mode=TwoWay}"
                         Style="{StaticResource Sub}" />
                     <MenuItem
                         x:Name="DeleteToRecycleBin_Setting"
-                        Header="{x:Static prop:Resources.DeleteToRecycleBin}"
+                        Header="{lex:Loc DeleteToRecycleBin}"
                         IsCheckable="True"
                         IsChecked="{Binding ElementName=MainWin, Path=IsDeleteToRecycleBin, Mode=TwoWay}"
                         Style="{StaticResource Sub}" />
                     <MenuItem
                         x:Name="DeletedTip_Setting"
-                        Header="{x:Static prop:Resources.DeletedTip}"
+                        Header="{lex:Loc DeletedTip}"
                         IsCheckable="True"
                         IsChecked="{Binding ElementName=MainWin, Path=HasDeletedTip, Mode=TwoWay}"
                         Style="{StaticResource Sub}" />
                 </MenuItem>
-                <MenuItem Header="{x:Static prop:Resources.Help}" Style="{StaticResource Main}">
-                    <MenuItem Header="{x:Static prop:Resources.HelpInfo}" Style="{StaticResource Sub}">
+                <MenuItem Header="{lex:Loc Help}" Style="{StaticResource Main}">
+                    <MenuItem Header="{lex:Loc HelpInfo}" Style="{StaticResource Sub}">
                         <MenuItem.ToolTip>
                             <StackPanel>
-                                <Label Content="{x:Static prop:Resources.HelpContentA}" Style="{StaticResource MiniLabel}" />
+                                <Label Content="{lex:Loc HelpContentA}" Style="{StaticResource MiniLabel}" />
                                 <Separator />
-                                <Label Content="{x:Static prop:Resources.HelpContentB}" Style="{StaticResource MiniLabel}" />
+                                <Label Content="{lex:Loc HelpContentB}" Style="{StaticResource MiniLabel}" />
                             </StackPanel>
                         </MenuItem.ToolTip>
                     </MenuItem>
-                    <MenuItem Header="{x:Static prop:Resources.Formats}" Style="{StaticResource Sub}">
+                    <MenuItem Header="{lex:Loc Formats}" Style="{StaticResource Sub}">
                         <MenuItem.ToolTip>
-                            <Label Content="{x:Static prop:Resources.SupportedFormats}" Style="{StaticResource MiniLabel}" />
+                            <Label Content="{lex:Loc SupportedFormats}" Style="{StaticResource MiniLabel}" />
                         </MenuItem.ToolTip>
                     </MenuItem>
-                    <MenuItem Header="{x:Static prop:Resources.VersionInfo}" Style="{StaticResource Sub}">
+                    <MenuItem Header="{lex:Loc VersionInfo}" Style="{StaticResource Sub}">
                         <MenuItem.ToolTip>
                             <Label Content="{StaticResource Version}" Style="{StaticResource MiniLabel}" />
                         </MenuItem.ToolTip>
                     </MenuItem>
                 </MenuItem>
-                <MenuItem Header="{x:Static prop:Resources.Tool}" Style="{StaticResource Main}">
+                <MenuItem Header="{lex:Loc Tool}" Style="{StaticResource Main}">
                     <MenuItem
                         x:Name="ClearingDuplicates"
                         Click="ClearingDuplicates_Click"
-                        Header="{x:Static prop:Resources.ClearDuplicates}"
+                        Header="{lex:Loc ClearDuplicates}"
                         Style="{StaticResource Sub}" />
                 </MenuItem>
             </Menu>
@@ -288,7 +292,7 @@
                     Margin="0,5,5,5"
                     Background="{StaticResource Translucent}"
                     Click="ToLeft_Click"
-                    Content="{x:Static prop:Resources.ToLeft}"
+                    Content="{lex:Loc ToLeft}"
                     DockPanel.Dock="Left"
                     Focusable="False"
                     IsEnabled="False"
@@ -302,7 +306,7 @@
                     Margin="5,5,0,5"
                     Background="{StaticResource Translucent}"
                     Click="ToRight_Click"
-                    Content="{x:Static prop:Resources.ToRight}"
+                    Content="{lex:Loc ToRight}"
                     DockPanel.Dock="Right"
                     Focusable="False"
                     IsEnabled="False"
@@ -316,7 +320,7 @@
                     Margin="5,5,5,0"
                     Background="{StaticResource Translucent}"
                     Click="DeleteThis_Click"
-                    Content="{x:Static prop:Resources.DeleteThis}"
+                    Content="{lex:Loc DeleteThis}"
                     DockPanel.Dock="Bottom"
                     Focusable="False"
                     IsEnabled="{Binding ElementName=MainWin, Path=Inited, Mode=OneWay}"
@@ -326,7 +330,7 @@
                     Margin="5,0,5,5"
                     Background="{StaticResource Translucent}"
                     Click="SkipThis_Click"
-                    Content="{x:Static prop:Resources.SkipThis}"
+                    Content="{lex:Loc SkipThis}"
                     DockPanel.Dock="Top"
                     Focusable="False"
                     IsEnabled="{Binding ElementName=MainWin, Path=Inited, Mode=OneWay}"

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace PhotosCategorier.SubWindows
@@ -35,14 +34,14 @@ namespace PhotosCategorier.SubWindows
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void OK_Click(object sender, RoutedEventArgs e)
         {
             var selected = selector.SelectedItem;
-            this.DialogResult = App.SetLanguage(selected.ToString());
-            this.Close();
+            DialogResult = App.SetLanguage(selected.ToString());
+            Close();
         }
     }
 

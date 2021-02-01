@@ -308,13 +308,13 @@ namespace PhotosCategorier.Main
         {
             var len = array.Length;
             var allPath = new string[len];
-            for (int i = 0; i < len; i++)
+            for (var i = 0; i < len; i++)
             {
                 allPath[i] = array.GetValue(i).ToString();
             }
             var allTypeGroups = (from path in allPath group path by path.GetTargetFileType()).ToArray();
 
-            bool actuallyAdded = false;
+            var actuallyAdded = false;
 
             foreach (var group in allTypeGroups)
             {
@@ -441,7 +441,7 @@ namespace PhotosCategorier.Main
 
             if (mode == CommonFileDialogResult.Ok)
             {
-                string name = dialog.FileName;
+                var name = dialog.FileName;
 
                 target = new DirectoryInfo(name);
 
@@ -467,10 +467,10 @@ namespace PhotosCategorier.Main
 
             if (mode == CommonFileDialogResult.Ok)
             {
-                string[] names = dialog.FileNames.ToArray();
-                int len = names.Length;
-                DirectoryInfo[] dirs = new DirectoryInfo[len];
-                for (int i = 0; i < len; i++)
+                var names = dialog.FileNames.ToArray();
+                var len = names.Length;
+                var dirs = new DirectoryInfo[len];
+                for (var i = 0; i < len; i++)
                 {
                     var name = names[i];
                     dirs[i] = new DirectoryInfo(name);

@@ -300,7 +300,7 @@ namespace PhotosCategorier.Main
 
         private void Window_KeyUp(object sender, KeyEventArgs e)
         {
-            this.Focus();
+            Focus();
 
             switch (e.Key)
             {
@@ -308,7 +308,9 @@ namespace PhotosCategorier.Main
                 case Key.Up:
                     {
                         if (!CheckEmptyWithMessage(EmptyMessage.NOT_SET_CLASSIFY))
+                        {
                             SkipThisPhoto();
+                        }
                     }
                     break;
                 case Key.S:
@@ -316,7 +318,9 @@ namespace PhotosCategorier.Main
                 case Key.Delete:
                     {
                         if (!CheckEmptyWithMessage(EmptyMessage.NOT_SET_CLASSIFY))
+                        {
                             DeleteThisPhoto();
+                        }
                     }
                     break;
                 case Key.A:
@@ -324,19 +328,26 @@ namespace PhotosCategorier.Main
                     {
 
                         if (leftArrow == null)
+                        {
                             MessageBox.Show(Properties.Resources.NotPointLeft, Properties.Resources.Error);
+                        }
                         else if (!CheckEmptyWithMessage(EmptyMessage.NOT_SET_CLASSIFY))
+                        {
                             MoveThisTo(Arrow.LEFT_ARROW);
-
+                        }
                     }
                     break;
                 case Key.D:
                 case Key.Right:
                     {
                         if (rightArrow == null)
+                        {
                             MessageBox.Show(Properties.Resources.NotPointRight, Properties.Resources.Error);
+                        }
                         else if (!CheckEmptyWithMessage(EmptyMessage.NOT_SET_CLASSIFY))
+                        {
                             MoveThisTo(Arrow.RIGHT_ARROW);
+                        }
                     }
                     break;
             }

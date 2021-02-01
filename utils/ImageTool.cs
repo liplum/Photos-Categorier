@@ -18,7 +18,7 @@ namespace PhotosCategorier.Utils
         {
             try
             {
-                using Image img = Image.FromFile(ImagePath);
+                using var img = Image.FromFile(ImagePath);
                 return new Bitmap(img);
             }
             catch
@@ -29,8 +29,8 @@ namespace PhotosCategorier.Utils
 
         public static WriteableBitmap GetImageSource(this Bitmap Bitmap)
         {
-            IntPtr hBitmap = Bitmap.GetHbitmap();
-            BitmapSource bitmapSource = Imaging.CreateBitmapSourceFromHBitmap(hBitmap, IntPtr.Zero, Int32Rect.Empty,
+            var hBitmap = Bitmap.GetHbitmap();
+            var bitmapSource = Imaging.CreateBitmapSourceFromHBitmap(hBitmap, IntPtr.Zero, Int32Rect.Empty,
                           BitmapSizeOptions.FromEmptyOptions());
             bitmapSource.Freeze();
 

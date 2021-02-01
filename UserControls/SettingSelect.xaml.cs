@@ -15,11 +15,11 @@ namespace PhotosCategorier.UserControls
 
         public string LabelContent
         {
-            get { return (string)GetValue(LabelContentProperty); }
+            get => (string)GetValue(LabelContentProperty);
             set
             {
                 SetValue(LabelContentProperty, value);
-                this.SettingLabel.Content = value;
+                SettingLabel.Content = value;
             }
         }
 
@@ -27,9 +27,9 @@ namespace PhotosCategorier.UserControls
         public static readonly DependencyProperty LabelContentProperty =
             DependencyProperty.Register("LabelContent", typeof(string), typeof(Window));
 
-        public ComboBox ComboBox => this.Combo;
+        public ComboBox ComboBox => Combo;
 
-        public Button OK => this.OKButton;
-        public Button Cancel => this.CancelButton;
+        public Button OK => OKButton;
+        public Button Cancel => CancelButton;
     }
 }
