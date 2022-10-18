@@ -61,18 +61,18 @@ namespace PhotosCategorier.Main
         }
 
         private string leftArrowContent = Properties.Resources.Left;
+
         public string LeftArrowContent
         {
             get => leftArrowContent;
             set
             {
-                if (leftArrowContent != value)
-                {
-                    leftArrowContent = value;
-                    OnPropertyChanged();
-                }
+                if (leftArrowContent == value) return;
+                leftArrowContent = value;
+                OnPropertyChanged();
             }
         }
+
         private string rightArrowContent = Properties.Resources.Right;
 
         public string RightArrowContent
@@ -80,11 +80,9 @@ namespace PhotosCategorier.Main
             get => rightArrowContent;
             set
             {
-                if (rightArrowContent != value)
-                {
-                    rightArrowContent = value;
-                    OnPropertyChanged();
-                }
+                if (rightArrowContent == value) return;
+                rightArrowContent = value;
+                OnPropertyChanged();
             }
         }
 
@@ -95,13 +93,12 @@ namespace PhotosCategorier.Main
             get => isEnd;
             set
             {
-                if (isEnd != value)
-                {
-                    isEnd = value;
-                    OnPropertyChanged();
-                }
+                if (isEnd == value) return;
+                isEnd = value;
+                OnPropertyChanged();
             }
         }
+
         /// <summary>
         /// Open this file as a photo via Windows' Photos.
         /// <br/>
@@ -111,20 +108,19 @@ namespace PhotosCategorier.Main
         private void OpenThisPhoto()
         {
             var cur = photographs.Current;
-            if (!(cur is null))
+            if (cur is null) return;
+            var curFile = new FileInfo(cur.FilePath);
+            if (curFile.Exists)
             {
-                var curfile = new FileInfo(cur.FilePath);
-                if (curfile.Exists)
-                {
-                    var path = curfile.FullName;
-                    System.Diagnostics.Process.Start("explorer.exe", path);
-                }
-                else
-                {
-                    throw new FileHasOccupiedOrBeenDeletedException();
-                }
+                var path = curFile.FullName;
+                System.Diagnostics.Process.Start("explorer.exe", path);
+            }
+            else
+            {
+                throw new FileHasOccupiedOrBeenDeletedException();
             }
         }
+
         /// <summary>
         /// Open the folder in which this photo located via Windows' Explorer.
         /// <br/>
@@ -137,26 +133,23 @@ namespace PhotosCategorier.Main
         private void OpenFolderWherePhotoIs()
         {
             var cur = photographs.Current;
-            if (!(cur is null))
+            if (cur is null) return;
+            var curFile = new FileInfo(cur.FilePath);
+            if (curFile.Exists)
             {
-                var curfile = new FileInfo(cur.FilePath);
-                if (curfile.Exists)
+                var dir = curFile.Directory;
+                if (dir is not null && dir.Exists)
                 {
-
-                    var dir = curfile.Directory;
-                    if (dir.Exists)
-                    {
-                        System.Diagnostics.Process.Start("explorer.exe", dir.FullName);
-                    }
-                    else
-                    {
-                        throw new My_DirectoryNotFoundException();
-                    }
+                    System.Diagnostics.Process.Start("explorer.exe", dir.FullName);
                 }
                 else
                 {
-                    throw new FileHasOccupiedOrBeenDeletedException();
+                    throw new My_DirectoryNotFoundException();
                 }
+            }
+            else
+            {
+                throw new FileHasOccupiedOrBeenDeletedException();
             }
         }
 
@@ -167,21 +160,19 @@ namespace PhotosCategorier.Main
         private void CopyCurrent()
         {
             var cur = photographs.Current;
-            if (!(cur is null))
+            if (cur is null) return;
+            var curFile = new FileInfo(cur.FilePath);
+            if (curFile.Exists)
             {
-                var curfile = new FileInfo(cur.FilePath);
-                if (curfile.Exists)
+                var file = new StringCollection
                 {
-                    var file = new StringCollection
-                    {
-                        curfile.FullName
-                    };
-                    Clipboard.SetFileDropList(file);
-                }
-                else
-                {
-                    throw new FileHasOccupiedOrBeenDeletedException();
-                }
+                    curFile.FullName
+                };
+                Clipboard.SetFileDropList(file);
+            }
+            else
+            {
+                throw new FileHasOccupiedOrBeenDeletedException();
             }
         }
 
@@ -197,10 +188,6 @@ namespace PhotosCategorier.Main
             try
             {
                 AddClassifyFolder(directories);
-            }
-            catch
-            {
-                throw;
             }
             finally
             {
@@ -225,14 +212,11 @@ namespace PhotosCategorier.Main
             {
                 var addedRes = AddClassifyFolderFunc(directories);
 
-                if ((addedRes & AddClassifyFolderResult.ACTUALLY_ADDED) != 0)
+                if ((addedRes & AddClassifyFolderResult.ActuallyAdded) != 0)
                 {
-
-
                 }
-                else if ((addedRes & AddClassifyFolderResult.REPEATEDLY_ADDED) != 0)
+                else if ((addedRes & AddClassifyFolderResult.RepeatedlyAdded) != 0)
                 {
-
                 }
                 else
                 {
@@ -240,13 +224,15 @@ namespace PhotosCategorier.Main
                 }
             }
         }
+
         [Flags]
         private enum AddClassifyFolderResult
         {
-            ACTUALLY_ADDED = 0b_1_0_0,
-            REPEATEDLY_ADDED = 0b_0_1_0,
-            NOT_ADDED = 0b_0_0_1
+            ActuallyAdded = 0b_1_0_0,
+            RepeatedlyAdded = 0b_0_1_0,
+            NotAdded = 0b_0_0_1
         }
+
         /// <summary>
         /// Add Classify Folder
         /// </summary>
@@ -260,7 +246,7 @@ namespace PhotosCategorier.Main
 
             var allPhotos = new List<Photograph>();
             var needRemove = new List<Album>();
-            var addedResult = AddClassifyFolderResult.NOT_ADDED;
+            var addedResult = AddClassifyFolderResult.NotAdded;
             foreach (var album in folderNeedAdd)
             {
                 var all = album.GetAllPhotographs();
@@ -272,15 +258,21 @@ namespace PhotosCategorier.Main
                 {
                     if (allClassifyFolder.Contains(album))
                     {
-                        addedResult |= AddClassifyFolderResult.REPEATEDLY_ADDED;//equals actuallyAdded += AddClassifyFolderResult.REPEATEDLY_ADDED
+                        addedResult |=
+                            AddClassifyFolderResult
+                                .RepeatedlyAdded; //equals actuallyAdded += AddClassifyFolderResult.REPEATEDLY_ADDED
                     }
                     else
                     {
-                        addedResult |= AddClassifyFolderResult.ACTUALLY_ADDED;//equals actuallyAdded += AddClassifyFolderResult.ACTUALLY_ADDED
+                        addedResult |=
+                            AddClassifyFolderResult
+                                .ActuallyAdded; //equals actuallyAdded += AddClassifyFolderResult.ACTUALLY_ADDED
                     }
+
                     allPhotos.AddRange(all);
                 }
             }
+
             allClassifyFolder = allClassifyFolder.Distinct().ToList();
             allClassifyFolder.AddRange(folderNeedAdd);
             allClassifyFolder.RemoveAll(item => needRemove.Contains(item));
@@ -292,19 +284,23 @@ namespace PhotosCategorier.Main
                 foreach (var dir in dirs)
                 {
                     folderNeedAdd.Add(new Album(dir));
-                    if (isIncludeSubfolder)
+                    if (!isIncludeSubfolder) continue;
+                    var allSub = dir.GetDirectories();
+                    if (allSub.Length != 0)
                     {
-                        var allSub = dir.GetDirectories();
-                        if (allSub.Length != 0)
-                        {
-                            AddFunc(allSub);
-                        }
+                        AddFunc(allSub);
                     }
                 }
             }
         }
 
-        private void DropFolderOrFile(Array array)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="array"></param>
+        /// <returns>whether added any image</returns>
+        /// <exception cref="NotHoldPhotoException"></exception>
+        private bool DropFolderOrFile(Array array)
         {
             var len = array.Length;
             var allPath = new string[len];
@@ -312,6 +308,7 @@ namespace PhotosCategorier.Main
             {
                 allPath[i] = array.GetValue(i).ToString();
             }
+
             var allTypeGroups = (from path in allPath group path by path.GetTargetFileType()).ToArray();
 
             var actuallyAdded = false;
@@ -320,30 +317,27 @@ namespace PhotosCategorier.Main
             {
                 switch (group.Key)
                 {
-                    case TargetFileType.PHOTO:
-                        {
-                            var res = DropPhoto(group.ToArray());
-                            actuallyAdded = res || actuallyAdded;
-                        }
+                    case TargetFileType.Photo:
+                    {
+                        var res = DropPhoto(group.ToArray());
+                        actuallyAdded = res || actuallyAdded;
+                    }
                         break;
-                    case TargetFileType.FOLDER:
-                        {
-                            var res = DropFolder(group.ToArray());
-                            actuallyAdded = res || actuallyAdded;
-                        }
+                    case TargetFileType.Folder:
+                    {
+                        var res = DropFolder(group.ToArray());
+                        actuallyAdded = res || actuallyAdded;
+                    }
                         break;
-                    case TargetFileType.ANOTHER:
-                        {
-                            ;
-                        }
+                    case TargetFileType.Another:
+                    {
+                        ;
+                    }
                         break;
                 }
             }
 
-            if (!actuallyAdded)
-            {
-                throw new NotHoldPhotoException();
-            }
+            return actuallyAdded;
         }
 
         /// <summary>
@@ -370,25 +364,24 @@ namespace PhotosCategorier.Main
                 InitImage();
             }
         }
+
         /// <summary>
         /// Adding all the photos (Themselves are just files).
         /// </summary>
         /// <param name="allPath"></param>
         /// <param name="remains">The remains except all the photos.</param>
         /// <returns>It has actually added some photos.</returns>
-        private bool DropPhoto(string[] allPath)
+        private bool DropPhoto(IEnumerable<string> allPath)
         {
             var allPhotos = (from item in allPath select new Photograph(item)).ToList();
 
-            if (allPhotos.Count != 0)
-            {
-                photographs.AddRange(allPhotos);
-                UpdateRemainingFileCounter();
-                InitComponent();
-                InitImage();
-                return true;
-            }
-            return false;
+            if (allPhotos.Count == 0) return false;
+            photographs.AddRange(allPhotos);
+            UpdateRemainingFileCounter();
+            InitComponent();
+            InitImage();
+            return true;
+
         }
 
         private void SetLeftFolderWithSelection()
@@ -399,12 +392,10 @@ namespace PhotosCategorier.Main
 
         private void SetLeftFolder()
         {
-            if (leftArrow != null)
-            {
-                LeftArrowContent = leftArrow.Name;
-                ToLeft.IsEnabled = true;
-                LeftArrowPointedToFolder.Visibility = Visibility.Visible;
-            }
+            if (leftArrow == null) return;
+            LeftArrowContent = leftArrow.Name;
+            ToLeft.IsEnabled = true;
+            LeftArrowPointedToFolder.Visibility = Visibility.Visible;
         }
 
         private void SetRightFolderWithSelection()
@@ -415,49 +406,44 @@ namespace PhotosCategorier.Main
 
         private void SetRightFolder()
         {
-            if (rightArrow != null)
-            {
-                RightArrowContent = rightArrow.Name;
-                ToRight.IsEnabled = true;
-                RightArrowPointedToFolder.Visibility = Visibility;
-            }
+            if (rightArrow == null) return;
+            RightArrowContent = rightArrow.Name;
+            ToRight.IsEnabled = true;
+            RightArrowPointedToFolder.Visibility = Visibility;
         }
 
         /// <summary>
         /// 打开选择文件夹窗口
         /// </summary>
-        /// <param name="Caption">窗口标题</param>
+        /// <param name="caption">窗口标题</param>
         /// <returns></returns>
-        private static DirectoryInfo SelectFolder(string Caption)
+        private static DirectoryInfo SelectFolder(string caption)
         {
             DirectoryInfo target = null;
 
-            using var dialog = new CommonOpenFileDialog(Caption)
+            using var dialog = new CommonOpenFileDialog(caption)
             {
                 IsFolderPicker = true,
             };
 
             var mode = dialog.ShowDialog();
 
-            if (mode == CommonFileDialogResult.Ok)
-            {
-                var name = dialog.FileName;
+            if (mode != CommonFileDialogResult.Ok) return target;
+            var name = dialog.FileName;
 
-                target = new DirectoryInfo(name);
+            target = new DirectoryInfo(name);
 
-            }
             return target;
         }
 
         /// <summary>
         /// 打开选择文件夹窗口
         /// </summary>
-        /// <param name="Caption">窗口标题</param>
+        /// <param name="caption">窗口标题</param>
         /// <returns></returns>
-        private static DirectoryInfo[] SelectFolders(string Caption)
+        private static DirectoryInfo[] SelectFolders(string caption)
         {
-
-            using var dialog = new CommonOpenFileDialog(Caption)
+            using var dialog = new CommonOpenFileDialog(caption)
             {
                 IsFolderPicker = true,
                 Multiselect = true
@@ -465,20 +451,18 @@ namespace PhotosCategorier.Main
 
             var mode = dialog.ShowDialog();
 
-            if (mode == CommonFileDialogResult.Ok)
+            if (mode != CommonFileDialogResult.Ok) return null;
+            var names = dialog.FileNames.ToArray();
+            var len = names.Length;
+            var dirs = new DirectoryInfo[len];
+            for (var i = 0; i < len; i++)
             {
-                var names = dialog.FileNames.ToArray();
-                var len = names.Length;
-                var dirs = new DirectoryInfo[len];
-                for (var i = 0; i < len; i++)
-                {
-                    var name = names[i];
-                    dirs[i] = new DirectoryInfo(name);
-                }
-
-                return dirs;
+                var name = names[i];
+                dirs[i] = new DirectoryInfo(name);
             }
-            return null;
+
+            return dirs;
+
         }
     }
 }

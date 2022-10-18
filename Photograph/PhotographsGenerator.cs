@@ -106,7 +106,7 @@ namespace PhotosCategorier.Photo
         {
             lock (this)
             {
-                AllPhotographs = (from item in AllPhotographs where item.FilePath.IsExisted(out _) select item).ToList();
+                AllPhotographs = (from item in AllPhotographs where item.FilePath.PathExists() select item).ToList();
             }
         }
 

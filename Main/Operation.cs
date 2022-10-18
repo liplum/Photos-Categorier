@@ -44,7 +44,6 @@ namespace PhotosCategorier.Main
                 else
                 {
                     needAdd.AddRange(ps);
-
                 }
             }
             allClassifyFolder.RemoveAll(item => needRemove.Contains(item));

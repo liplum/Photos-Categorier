@@ -8,33 +8,29 @@ namespace PhotosCategorier.Main
 {
     public partial class MainWindow
     {
-        private ImageSource curPhotoSource = null;
+        private ImageSource curPhotoSource;
 
         public ImageSource CurPhotoSource
         {
             get => curPhotoSource;
             set
             {
-                if (curPhotoSource != value)
-                {
-                    curPhotoSource = value;
-                    OnPropertyChanged();
-                }
+                if (curPhotoSource == value) return;
+                curPhotoSource = value;
+                OnPropertyChanged();
             }
         }
 
-        private string curPhotoInfo = null;
+        private string curPhotoInfo;
 
         public string CurPhotoInfo
         {
             get => curPhotoInfo;
             set
             {
-                if (curPhotoInfo != value)
-                {
-                    curPhotoInfo = value;
-                    OnPropertyChanged();
-                }
+                if (curPhotoInfo == value) return;
+                curPhotoInfo = value;
+                OnPropertyChanged();
             }
         }
 
@@ -45,11 +41,9 @@ namespace PhotosCategorier.Main
             get => remainingFiles;
             set
             {
-                if (remainingFiles != value)
-                {
-                    remainingFiles = value;
-                    OnPropertyChanged();
-                }
+                if (remainingFiles == value) return;
+                remainingFiles = value;
+                OnPropertyChanged();
             }
         }
 

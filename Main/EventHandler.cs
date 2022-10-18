@@ -13,6 +13,7 @@ namespace PhotosCategorier.Main
             {
                 System.Diagnostics.Process.Start("explorer.exe", leftArrow.FullName);
             }
+
             e.Handled = true;
         }
 
@@ -22,6 +23,7 @@ namespace PhotosCategorier.Main
             {
                 System.Diagnostics.Process.Start("explorer.exe", rightArrow.FullName);
             }
+
             e.Handled = true;
         }
 
@@ -281,7 +283,7 @@ namespace PhotosCategorier.Main
 
             {
                 var array = (Array)e.Data.GetData(DataFormats.FileDrop);
-                if (!(array is null))
+                if (array is not null)
                 {
                     try
                     {
@@ -306,51 +308,51 @@ namespace PhotosCategorier.Main
             {
                 case Key.W:
                 case Key.Up:
+                {
+                    if (!CheckEmptyWithMessage(EmptyMessage.NotSetClassify))
                     {
-                        if (!CheckEmptyWithMessage(EmptyMessage.NotSetClassify))
-                        {
-                            SkipThisPhoto();
-                        }
+                        SkipThisPhoto();
                     }
+                }
                     break;
                 case Key.S:
                 case Key.Down:
                 case Key.Delete:
+                {
+                    if (!CheckEmptyWithMessage(EmptyMessage.NotSetClassify))
                     {
-                        if (!CheckEmptyWithMessage(EmptyMessage.NotSetClassify))
-                        {
-                            DeleteThisPhoto();
-                        }
+                        DeleteThisPhoto();
                     }
+                }
                     break;
                 case Key.A:
                 case Key.Left:
+                {
+                    if (leftArrow == null)
                     {
-
-                        if (leftArrow == null)
-                        {
-                            MessageBox.Show(Properties.Resources.NotPointLeft, Properties.Resources.Error);
-                        }
-                        else if (!CheckEmptyWithMessage(EmptyMessage.NotSetClassify))
-                        {
-                            MoveThisTo(Arrow.LeftArrow);
-                        }
+                        MessageBox.Show(Properties.Resources.NotPointLeft, Properties.Resources.Error);
                     }
+                    else if (!CheckEmptyWithMessage(EmptyMessage.NotSetClassify))
+                    {
+                        MoveThisTo(Arrow.LeftArrow);
+                    }
+                }
                     break;
                 case Key.D:
                 case Key.Right:
+                {
+                    if (rightArrow == null)
                     {
-                        if (rightArrow == null)
-                        {
-                            MessageBox.Show(Properties.Resources.NotPointRight, Properties.Resources.Error);
-                        }
-                        else if (!CheckEmptyWithMessage(EmptyMessage.NotSetClassify))
-                        {
-                            MoveThisTo(Arrow.RightArrow);
-                        }
+                        MessageBox.Show(Properties.Resources.NotPointRight, Properties.Resources.Error);
                     }
+                    else if (!CheckEmptyWithMessage(EmptyMessage.NotSetClassify))
+                    {
+                        MoveThisTo(Arrow.RightArrow);
+                    }
+                }
                     break;
             }
+
             e.Handled = true;
         }
     }

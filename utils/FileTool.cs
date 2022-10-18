@@ -8,25 +8,24 @@ namespace PhotosCategorier.Utils
     {
         public enum TargetFileType
         {
-            PHOTO,
-            FOLDER,
-            ANOTHER
+            Photo,
+            Folder,
+            Another
         }
 
         public static TargetFileType GetTargetFileType(this string filePath)
         {
             if (new FileInfo(filePath).IsPhotograph())
             {
-                return TargetFileType.PHOTO;
+                return TargetFileType.Photo;
             }
-            else if (new DirectoryInfo(filePath).Exists)
+
+            if (new DirectoryInfo(filePath).Exists)
             {
-                return TargetFileType.FOLDER;
+                return TargetFileType.Folder;
             }
-            else
-            {
-                return TargetFileType.ANOTHER;
-            }
+
+            return TargetFileType.Another;
         }
 
         public static string GetLastName(this string filePath)
@@ -68,6 +67,10 @@ namespace PhotosCategorier.Utils
             }
             file = null;
             return false;
+        }
+        public static bool PathExists(this string filePath)
+        {
+            return File.Exists(filePath);
         }
 
         /// <summary>
