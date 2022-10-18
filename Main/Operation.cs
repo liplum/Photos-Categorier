@@ -1,10 +1,11 @@
-﻿using PhotosCategorier.Main.Exceptions;
+﻿using System;
+using PhotosCategorier.Main.Exceptions;
 using PhotosCategorier.Photo;
-using PhotosCategorier.Servers;
 using PhotosCategorier.Utils;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
+using PhotosCategorier.Server;
 using DirectoryNotFoundException = System.IO.DirectoryNotFoundException;
 using My_DirectoryNotFoundException = PhotosCategorier.Main.Exceptions.DirectoryNotFoundException;
 using My_UnauthorizedAccessException = PhotosCategorier.Main.Exceptions.UnauthorizedAccessException;
@@ -14,7 +15,7 @@ namespace PhotosCategorier.Main
 {
     public partial class MainWindow
     {
-        public bool inited = false;
+        private bool inited = false;
         public bool Inited
         {
             get => inited;
@@ -76,7 +77,7 @@ namespace PhotosCategorier.Main
 
         private enum Arrow
         {
-            LEFT_ARROW, RIGHT_ARROW
+            LeftArrow, RightArrow
         }
 
         /// <summary>
@@ -97,33 +98,33 @@ namespace PhotosCategorier.Main
 
         private enum EmptyMessage
         {
-            HAS_NO_PHOTO, NOT_SET_CLASSIFY, NOT_HOLD_PHOTO
+            HasNoPhoto, NotSetClassify, NotHoldPhoto
         }
+
         /// <summary>
         /// Checking whether the photographs is empty or not . If it's empty , it'll pop a message box with what you want to display
         /// </summary>
-        /// <param name="">What you want to display</param>
+        /// <param name="emptyMessage"></param>
         /// <returns>If photographs is empty , it'll return ture.</returns>
         private bool CheckEmptyWithMessage(EmptyMessage emptyMessage)
         {
-            if (photographs.IsEmpty)
+            if (!photographs.IsEmpty) return false;
+            switch (emptyMessage)
             {
-                switch (emptyMessage)
-                {
-                    case EmptyMessage.HAS_NO_PHOTO:
-                        MessageBox.Show(Properties.Resources.HasNoPhoto, Properties.Resources.Error);
-                        break;
-                    case EmptyMessage.NOT_SET_CLASSIFY:
-                        MessageBox.Show(Properties.Resources.NotSetClassifyFolder, Properties.Resources.Error);
-                        break;
-                    case EmptyMessage.NOT_HOLD_PHOTO:
-                        MessageBox.Show(Properties.Resources.NotHoldPhoto, Properties.Resources.Error);
-                        break;
-                }
-                return true;
+                case EmptyMessage.HasNoPhoto:
+                    MessageBox.Show(Properties.Resources.HasNoPhoto, Properties.Resources.Error);
+                    break;
+                case EmptyMessage.NotSetClassify:
+                    MessageBox.Show(Properties.Resources.NotSetClassifyFolder, Properties.Resources.Error);
+                    break;
+                case EmptyMessage.NotHoldPhoto:
+                    MessageBox.Show(Properties.Resources.NotHoldPhoto, Properties.Resources.Error);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(emptyMessage), emptyMessage, null);
             }
+            return true;
 
-            return false;
         }
 
         /// <summary>
@@ -142,10 +143,10 @@ namespace PhotosCategorier.Main
                 {
                     switch (arrow)
                     {
-                        case Arrow.LEFT_ARROW:
+                        case Arrow.LeftArrow:
                             photo.FilePath.MoveTo(leftArrow);
                             break;
-                        case Arrow.RIGHT_ARROW:
+                        case Arrow.RightArrow:
                             photo.FilePath.MoveTo(rightArrow);
                             break;
                     }
@@ -156,10 +157,10 @@ namespace PhotosCategorier.Main
                     DirectoryInfo target = null;
                     switch (arrow)
                     {
-                        case Arrow.LEFT_ARROW:
+                        case Arrow.LeftArrow:
                             target = leftArrow;
                             break;
-                        case Arrow.RIGHT_ARROW:
+                        case Arrow.RightArrow:
                             target = rightArrow;
                             break;
                     }

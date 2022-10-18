@@ -1,8 +1,8 @@
 ﻿using PhotosCategorier.Photo;
-using PhotosCategorier.Servers;
 using PhotosCategorier.Utils;
 using System.Windows;
 using System.Windows.Media;
+using PhotosCategorier.Server;
 
 namespace PhotosCategorier.Main
 {
@@ -107,7 +107,7 @@ namespace PhotosCategorier.Main
 
         private void InitRenderPool()
         {
-            if (CheckEmptyWithMessage(EmptyMessage.HAS_NO_PHOTO))
+            if (CheckEmptyWithMessage(EmptyMessage.HasNoPhoto))
             {
                 ClearCurImage();
                 return;
@@ -131,7 +131,7 @@ namespace PhotosCategorier.Main
 
         private void UpdateImage()
         {
-            if (CheckEmptyWithMessage(EmptyMessage.HAS_NO_PHOTO))
+            if (CheckEmptyWithMessage(EmptyMessage.HasNoPhoto))
             {
                 ClearCurImage();
                 return;

@@ -1,50 +1,46 @@
-﻿using PhotosCategorier.DataStructure;
+﻿using System;
+using PhotosCategorier.DataStructure;
 using PhotosCategorier.Photo;
-using PhotosCategorier.Servers;
 using PhotosCategorier.Utils;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
+using PhotosCategorier.Server;
 
 namespace PhotosCategorier.SubWindows
 {
-    /// <summary>
-    /// ClearDuplicatesWindow.xaml 的交互逻辑
-    /// </summary>
     public sealed partial class ClearDuplicatesWindow : Window, INotifyPropertyChanged
     {
         private bool HasDuplicates => duplicates.Count != 0;
 
-        private double _Progress;
+        private double _progress;
 
         public double Progress
         {
-            get => _Progress;
+            get => _progress;
             set
             {
-                if (_Progress != value)
-                {
-                    _Progress = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Progress)));
-                }
+                if (Math.Abs(_progress - value) < 0.0001) return;
+                _progress = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Progress)));
             }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private const double MAX_PROGRESS = 100;
+        private const double MaxProgress = 100;
 
         public ClearDuplicatesWindow(List<Photograph> photographs)
         {
             InitializeComponent();
             this.photographs = photographs;
-            progress.Maximum = MAX_PROGRESS;
+            progress.Maximum = MaxProgress;
         }
 
         private readonly List<Photograph> photographs;
 
-        private readonly List<string> duplicates = new List<string>();
+        private readonly List<string> duplicates = new();
 
         private void UpdateDisplay()
         {
@@ -71,13 +67,20 @@ namespace PhotosCategorier.SubWindows
                 var count = photographs.Count;
                 Progress = 0;
 
-                var per = MAX_PROGRESS / (count + 1);
+                var per = MaxProgress / (count + 1);
 
 
                 var multimap = new Multimap<string, string>();
                 foreach (var photo in photographs)
                 {
-                    multimap.Add(photo.MD5(), photo.FilePath);
+                    try
+                    {
+                        multimap.Add(photo.Md5(), photo.FilePath);
+                    }
+                    catch
+                    {
+                        
+                    }
 
                     Progress += per;
                 }
@@ -85,17 +88,16 @@ namespace PhotosCategorier.SubWindows
                 foreach (var item in multimap)
                 {
                     var values = item.Value;
-                    if (values.Count > 1)
+                    if (values.Count <= 1) continue;
+                    using var iterator = values.GetEnumerator();
+                    iterator.MoveNext();
+                    while (iterator.MoveNext())
                     {
-                        var iterator = values.GetEnumerator();
-                        iterator.MoveNext();
-                        while (iterator.MoveNext())
-                        {
-                            duplicates.Add(iterator.Current);
-                        }
+                        duplicates.Add(iterator.Current);
                     }
                 }
-                Progress = MAX_PROGRESS;
+
+                Progress = MaxProgress;
             }
         }
 
@@ -107,6 +109,7 @@ namespace PhotosCategorier.SubWindows
                 MessageBox.Show(Properties.Resources.ClearDuplicatesSuccessfully, Properties.Resources.Success);
                 DialogResult = true;
             }
+
             Close();
         }
 
@@ -117,23 +120,23 @@ namespace PhotosCategorier.SubWindows
             void Run()
             {
                 var count = duplicates.Count;
-                var per = MAX_PROGRESS / (count + 1);
+                var per = MaxProgress / (count + 1);
                 Progress = 0;
 
-                foreach (var duplcate in duplicates)
+                foreach (var duplicate in duplicates)
                 {
                     try
                     {
-                        duplcate.DeletedWithException();
+                        duplicate.DeletedWithException();
                     }
                     catch
                     {
-                        ;
                     }
 
                     Progress += per;
                 }
-                Progress = MAX_PROGRESS;
+
+                Progress = MaxProgress;
             }
         }
 
@@ -152,9 +155,9 @@ namespace PhotosCategorier.SubWindows
 
     internal static class PhotoUtil
     {
-        public static string MD5(this Photograph photo)
+        public static string Md5(this Photograph photo)
         {
-            return HashAlgorithm.MD5(photo.FilePath);
+            return HashAlgorithm.Md5(photo.FilePath);
         }
     }
 }

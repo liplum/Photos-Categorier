@@ -4,22 +4,22 @@ namespace PhotosCategorier.Utils
 {
     public static class ScaleAlgorithm
     {
-        public static (int ScaleWidth, int ScaleHeight) 折半缩放法((int Width, int Height) ImageSize, int MaxWidth, int MaxHeight)
+        public static (int ScaleWidth, int ScaleHeight) 折半缩放法((int Width, int Height) size, int maxWidth, int maxHeight)
         {
-            int 缩放后宽度 = ImageSize.Width,
-                缩放后高度 = ImageSize.Height;
+            int 缩放后宽度 = size.Width,
+                缩放后高度 = size.Height;
 
-            if (缩放后宽度 > MaxWidth || 缩放后高度 > MaxHeight)
+            if (缩放后宽度 > maxWidth || 缩放后高度 > maxHeight)
             {
-                while (缩放后宽度 > MaxWidth || 缩放后高度 > MaxHeight)
+                while (缩放后宽度 > maxWidth || 缩放后高度 > maxHeight)
                 {
                     缩放后宽度 = 缩放后宽度 * 2 / 3;
                     缩放后高度 = 缩放后高度 * 2 / 3;
                 }
             }
-            else if (缩放后宽度 < MaxWidth || 缩放后高度 < MaxHeight)
+            else if (缩放后宽度 < maxWidth || 缩放后高度 < maxHeight)
             {
-                while (缩放后宽度 > MaxWidth || 缩放后高度 > MaxHeight)
+                while (缩放后宽度 > maxWidth || 缩放后高度 > maxHeight)
                 {
                     缩放后宽度 = 缩放后宽度 * 3 / 2;
                     缩放后高度 = 缩放后高度 * 3 / 2;
@@ -28,10 +28,10 @@ namespace PhotosCategorier.Utils
             return (缩放后宽度, 缩放后高度);
         }
 
-        public static (int ScaleWidth, int ScaleHeight) 归一化缩放法((int Width, int Height) ImageSize, int MaxWidth, int MaxHeight)
+        public static (int ScaleWidth, int ScaleHeight) 归一化缩放法((int Width, int Height) size, int maxWidth, int maxHeight)
         {
-            int 原宽度 = ImageSize.Width,
-                原高度 = ImageSize.Height;
+            int 原宽度 = size.Width,
+                原高度 = size.Height;
             var 长度 = 得到长度();
             var 宽高比 = (double)原宽度 / 原高度;
             double 归一化后的宽度 = 归一化(原宽度),
@@ -39,12 +39,12 @@ namespace PhotosCategorier.Utils
 
             if (原宽度 < 原高度)
             {
-                var w = 归一化后的宽度 * MaxWidth * 2 / 3;
+                var w = 归一化后的宽度 * maxWidth * 2 / 3;
                 return ((int)w, (int)(w * (1 / 宽高比)));
             }
             else//此时原图的高度小于宽度
             {
-                var h = 归一化后的高度 * MaxHeight;
+                var h = 归一化后的高度 * maxHeight;
                 return ((int)(h * 宽高比), (int)h);
             }
 
@@ -59,10 +59,10 @@ namespace PhotosCategorier.Utils
             }
         }
 
-        public static (int ScaleWidth, int ScaleHeight) 比例缩放法((int Width, int Height) ImageSize, int MaxWidth, int MaxHeight)
+        public static (int ScaleWidth, int ScaleHeight) ScaleByRatio((int Width, int Height) size, int maxWidth, int maxHeight)
         {
-            int 原宽度 = ImageSize.Width,
-                原高度 = ImageSize.Height;
+            int 原宽度 = size.Width,
+                原高度 = size.Height;
             int 新宽度,
                 新高度;
 
@@ -70,13 +70,13 @@ namespace PhotosCategorier.Utils
 
             var 宽比高 = (double)原宽度 / 原高度;
 
-            if (MaxWidth > MaxHeight)
+            if (maxWidth > maxHeight)
             {
-                获取新宽高(较小的宽或高: MaxHeight);
+                获取新宽高(较小的宽或高: maxHeight);
             }
             else
             {
-                获取新宽高(较小的宽或高: MaxWidth);
+                获取新宽高(较小的宽或高: maxWidth);
             }
             return (新宽度, 新高度);
 
@@ -84,12 +84,12 @@ namespace PhotosCategorier.Utils
             {
                 if (原宽度 > 原高度)
                 {
-                    新宽度 = 有边距化(MaxWidth);
+                    新宽度 = 有边距化(maxWidth);
                     新高度 = (int)(新宽度 / 宽比高);
                 }
                 else if (原高度 > 原宽度)
                 {
-                    新高度 = 有边距化(MaxHeight);
+                    新高度 = 有边距化(maxHeight);
                     新宽度 = (int)(新高度 * 宽比高);
                 }
                 else

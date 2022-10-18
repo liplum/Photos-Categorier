@@ -26,18 +26,18 @@ namespace PhotosCategorier.Main
         public void InitPhotograph()
         {
             renderer = new DoubleBufferRenderer(photographs);
-            Photograph.Init(layout.WINDOW_WIDTH, layout.WINDOW_HEIGHT, BackgroundBrush, ScaleAlgorithm.比例缩放法);
+            Photograph.Init(layout.WINDOW_WIDTH, layout.WINDOW_HEIGHT, BackgroundBrush, ScaleAlgorithm.ScaleByRatio);
         }
         [NotNull]
-        private readonly PhotographsGenerator photographs = new PhotographsGenerator();
+        private readonly PhotographsGenerator photographs = new();
         [NotNull]
-        private List<Album> allClassifyFolder = new List<Album>();
+        private List<Album> allClassifyFolder = new();
         [NotNull]
         private IRenderer renderer;
 
         private DirectoryInfo leftArrow, rightArrow;
 
-        private readonly SolidBrush BackgroundBrush = new SolidBrush(Color.FromArgb(122, 240, 240, 240));
+        private readonly SolidBrush BackgroundBrush = new(Color.FromArgb(122, 240, 240, 240));
 
         public event PropertyChangedEventHandler PropertyChanged;
 

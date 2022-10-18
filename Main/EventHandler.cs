@@ -91,13 +91,13 @@ namespace PhotosCategorier.Main
 
         private void ToLeft_Click(object sender, RoutedEventArgs e)
         {
-            MoveThisTo(Arrow.LEFT_ARROW);
+            MoveThisTo(Arrow.LeftArrow);
             e.Handled = true;
         }
 
         private void ToRight_Click(object sender, RoutedEventArgs e)
         {
-            MoveThisTo(Arrow.RIGHT_ARROW);
+            MoveThisTo(Arrow.RightArrow);
             e.Handled = true;
         }
 
@@ -307,7 +307,7 @@ namespace PhotosCategorier.Main
                 case Key.W:
                 case Key.Up:
                     {
-                        if (!CheckEmptyWithMessage(EmptyMessage.NOT_SET_CLASSIFY))
+                        if (!CheckEmptyWithMessage(EmptyMessage.NotSetClassify))
                         {
                             SkipThisPhoto();
                         }
@@ -317,7 +317,7 @@ namespace PhotosCategorier.Main
                 case Key.Down:
                 case Key.Delete:
                     {
-                        if (!CheckEmptyWithMessage(EmptyMessage.NOT_SET_CLASSIFY))
+                        if (!CheckEmptyWithMessage(EmptyMessage.NotSetClassify))
                         {
                             DeleteThisPhoto();
                         }
@@ -331,9 +331,9 @@ namespace PhotosCategorier.Main
                         {
                             MessageBox.Show(Properties.Resources.NotPointLeft, Properties.Resources.Error);
                         }
-                        else if (!CheckEmptyWithMessage(EmptyMessage.NOT_SET_CLASSIFY))
+                        else if (!CheckEmptyWithMessage(EmptyMessage.NotSetClassify))
                         {
-                            MoveThisTo(Arrow.LEFT_ARROW);
+                            MoveThisTo(Arrow.LeftArrow);
                         }
                     }
                     break;
@@ -344,9 +344,9 @@ namespace PhotosCategorier.Main
                         {
                             MessageBox.Show(Properties.Resources.NotPointRight, Properties.Resources.Error);
                         }
-                        else if (!CheckEmptyWithMessage(EmptyMessage.NOT_SET_CLASSIFY))
+                        else if (!CheckEmptyWithMessage(EmptyMessage.NotSetClassify))
                         {
-                            MoveThisTo(Arrow.RIGHT_ARROW);
+                            MoveThisTo(Arrow.RightArrow);
                         }
                     }
                     break;

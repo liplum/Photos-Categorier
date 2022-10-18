@@ -283,6 +283,7 @@
                                               ElementName=MainWin,
                                               Mode=OneWay}" />
             </Canvas>
+
             <DockPanel
                 Grid.Row="1"
                 Grid.ColumnSpan="2"

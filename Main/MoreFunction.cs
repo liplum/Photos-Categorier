@@ -11,7 +11,7 @@ namespace PhotosCategorier.Main
             var r = MessageBox.Show(Properties.Resources.ConfirmClearingDuplicates, Properties.Resources.Warnning, MessageBoxButton.OKCancel);
             if (r == MessageBoxResult.OK)
             {
-                if (CheckEmptyWithMessage(EmptyMessage.NOT_SET_CLASSIFY))
+                if (CheckEmptyWithMessage(EmptyMessage.NotSetClassify))
                 {
                     return;
                 }

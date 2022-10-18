@@ -1,8 +1,8 @@
-﻿using PhotosCategorier.Utils;
-using System;
+﻿using System;
 using System.Windows;
+using PhotosCategorier.Utils;
 
-namespace PhotosCategorier.Servers
+namespace PhotosCategorier.Server
 {
     public static class FileServer
     {
