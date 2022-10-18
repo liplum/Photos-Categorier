@@ -4,30 +4,6 @@ namespace PhotosCategorier.Utils
 {
     public static class ScaleAlgorithm
     {
-        public static (int ScaleWidth, int ScaleHeight) 折半缩放法((int Width, int Height) size, int maxWidth, int maxHeight)
-        {
-            int 缩放后宽度 = size.Width,
-                缩放后高度 = size.Height;
-
-            if (缩放后宽度 > maxWidth || 缩放后高度 > maxHeight)
-            {
-                while (缩放后宽度 > maxWidth || 缩放后高度 > maxHeight)
-                {
-                    缩放后宽度 = 缩放后宽度 * 2 / 3;
-                    缩放后高度 = 缩放后高度 * 2 / 3;
-                }
-            }
-            else if (缩放后宽度 < maxWidth || 缩放后高度 < maxHeight)
-            {
-                while (缩放后宽度 > maxWidth || 缩放后高度 > maxHeight)
-                {
-                    缩放后宽度 = 缩放后宽度 * 3 / 2;
-                    缩放后高度 = 缩放后高度 * 3 / 2;
-                }
-            }
-            return (缩放后宽度, 缩放后高度);
-        }
-
         public static (int ScaleWidth, int ScaleHeight) 归一化缩放法((int Width, int Height) size, int maxWidth, int maxHeight)
         {
             int 原宽度 = size.Width,

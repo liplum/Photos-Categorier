@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:loc="clr-namespace:PhotosCategorier.Properties"
-    xmlns:local="clr-namespace:PhotosCategorier.Main"
+    xmlns:local="clr-namespace:PhotosCategorier"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="Setting"
     mc:Ignorable="d">

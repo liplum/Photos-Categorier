@@ -117,8 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddingClassifyFolder" xml:space="preserve">
-    <value>Add (a) new classify folder</value>
+  <data name="AddFiles" xml:space="preserve">
+    <value>Add files</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
@@ -318,5 +318,8 @@ Click Button-Left/Right to open corresponding folder</value>
   </data>
   <data name="WindowSize" xml:space="preserve">
     <value>Window's Size</value>
+  </data>
+  <data name="AddFolder" xml:space="preserve">
+    <value>Add folders</value>
   </data>
 </root>

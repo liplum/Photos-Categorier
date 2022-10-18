@@ -35,7 +35,7 @@ namespace PhotosCategorier.Photo
             }
         }
 
-        public Photograph Current
+        public Photograph? Current
         {
             get
             {
@@ -145,7 +145,7 @@ namespace PhotosCategorier.Photo
                 return nextPhotos;
             }
         }
-        public void Set([NotNull] List<Photograph> photos)
+        public void Set(List<Photograph> photos)
         {
             lock (this)
             {

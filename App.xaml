@@ -11,7 +11,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <layout:Layout x:Key="CurLayout" x:Name="CurLayout" />
-            <system:String x:Key="Version">1.5.1</system:String>
+            <system:String x:Key="Version">1.6</system:String>
             <SolidColorBrush
                 x:Key="Translucent"
                 Opacity="0.4"

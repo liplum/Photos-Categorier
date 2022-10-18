@@ -10,20 +10,7 @@ namespace PhotosCategorier.Photo
     /// </summary>
     public class Photograph : IEquatable<Photograph>
     {
-        public string FilePath
-        {
-            get;
-        }
-
-        /// <summary>
-        /// 是否居中
-        /// </summary>
-        public static bool IsCentered { set; get; } = true;
-
-        /// <summary>
-        /// 是否缩放
-        /// </summary>
-        public static bool IsScale { set; get; } = true;
+        public string FilePath { get; }
 
         /// <summary>
         /// 通过图片的地址新建对象
@@ -55,38 +42,28 @@ namespace PhotosCategorier.Photo
             MaxHeight = maxHeight;
         }
 
-        public static void Init(int maxWidth, int maxHeight, Brush backgroundBrush, Func<(int OriginalWidth, int OriginalHeight), int, int, (int ScaleWidth, int ScaleHeight)> getScaleSize)
+        public static void Init(int maxWidth, int maxHeight, Brush backgroundBrush,
+            Func<(int OriginalWidth, int OriginalHeight), int, int, (int ScaleWidth, int ScaleHeight)> getScaleSize)
         {
             SetSize(maxWidth, maxHeight);
             GetScaleSize = getScaleSize;
             BackgroundBrush = backgroundBrush;
         }
 
-        private static int MaxWidth
-        {
-            get; set;
-        }
-        private static int MaxHeight
-        {
-            get; set;
-        }
+        private static int MaxWidth { get; set; }
+        private static int MaxHeight { get; set; }
 
         /// <summary>
         /// 背景刷
         /// </summary>
-        private static Brush BackgroundBrush
-        {
-            set; get;
-        }
+        private static Brush BackgroundBrush { set; get; }
 
         /// <summary>
         /// 缩放算法
         /// 必须使用<see cref="MaxWidth"/>和<see cref="MaxHeight"/>获取窗口宽度和高度
         /// </summary>
-        private static Func<(int OriginalWidth, int OriginalHeight), int, int, (int ScaleWidth, int ScaleHeight)> GetScaleSize
-        {
-            set; get;
-        }
+        private static Func<(int OriginalWidth, int OriginalHeight), int, int, (int ScaleWidth, int ScaleHeight)>
+            GetScaleSize { set; get; }
 
 
         /// <summary>
@@ -128,7 +105,8 @@ namespace PhotosCategorier.Photo
             using var G = Graphics.FromImage(img);
             var deltaX = (MaxWidth - NeedCenteredImage.Width) / 2;
             var deltaY = (MaxHeight - NeedCenteredImage.Height) / 2;
-            G.DrawImage(NeedCenteredImage, new Rectangle(deltaX, deltaY / 2, NeedCenteredImage.Width, NeedCenteredImage.Height),
+            G.DrawImage(NeedCenteredImage,
+                new Rectangle(deltaX, deltaY / 2, NeedCenteredImage.Width, NeedCenteredImage.Height),
                 new Rectangle(0, 0, NeedCenteredImage.Width, NeedCenteredImage.Height), GraphicsUnit.Pixel);
             return img;
         }
@@ -161,7 +139,6 @@ namespace PhotosCategorier.Photo
 
             try
             {
-
                 using (var g = Graphics.FromImage(img))
                 {
                     // 插值算法的质量
@@ -170,6 +147,7 @@ namespace PhotosCategorier.Photo
                     g.DrawImage(NeedScaleImage, new Rectangle(0, 0, ScaleWidth, ScaleHeight),
                         new Rectangle(0, 0, NeedScaleImage.Width, NeedScaleImage.Height), GraphicsUnit.Pixel);
                 }
+
                 return img;
             }
             catch
@@ -198,21 +176,17 @@ namespace PhotosCategorier.Photo
                 {
                     throw e;
                 }
+
                 try
                 {
-                    if (IsScale)
-                    {
-                        img = ScaleImage(img);
-                    }
+                    img = ScaleImage(img);
                 }
                 catch (CannotProcessImageException e)
                 {
                     throw e;
                 }
-                if (IsCentered)
-                {
-                    img = CenteredImage(img);
-                }
+
+                img = CenteredImage(img);
 
                 return img;
             }
@@ -224,6 +198,7 @@ namespace PhotosCategorier.Photo
             {
                 return FilePath == photo.FilePath;
             }
+
             return false;
         }
 
