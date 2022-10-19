@@ -19,11 +19,9 @@ public sealed partial class MainWindow
         {
             var settings = Properties.Settings.Default;
 
-            if (settings.IncludeSubfolder != value)
-            {
-                settings.IncludeSubfolder = value;
-                OnPropertyChanged();
-            }
+            if (settings.IncludeSubfolder == value) return;
+            settings.IncludeSubfolder = value;
+            OnPropertyChanged();
         }
     }
 
@@ -34,11 +32,9 @@ public sealed partial class MainWindow
         {
             var settings = Properties.Settings.Default;
 
-            if (settings.DeleteToRecycleBin != value)
-            {
-                settings.DeleteToRecycleBin = value;
-                OnPropertyChanged();
-            }
+            if (settings.DeleteToRecycleBin == value) return;
+            settings.DeleteToRecycleBin = value;
+            OnPropertyChanged();
         }
     }
 
@@ -49,11 +45,9 @@ public sealed partial class MainWindow
         {
             var settings = Properties.Settings.Default;
 
-            if (settings.DeletedTip != value)
-            {
-                settings.DeletedTip = value;
-                OnPropertyChanged();
-            }
+            if (settings.DeletedTip == value) return;
+            settings.DeletedTip = value;
+            OnPropertyChanged();
         }
     }
 

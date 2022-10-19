@@ -33,6 +33,7 @@ public partial class MainWindow
     private void Refresh()
     {
         photographs.CleanNotExisted();
+        all
         var needRemove = new List<Album>();
         var needAdd = new List<Photograph>();
         foreach (var album in allClassifyFolder)
@@ -88,15 +89,12 @@ public partial class MainWindow
     /// <returns>If the current photo is the last one or it hasn't arrived yet,it'll return true.Otherwise,it had ended and return false.</returns>
     private bool CheckLastOne()
     {
-        if (!photographs.HasNext)
-        {
-            ClearCurImage();
-            MessageBox.Show(Properties.Resources.HasNoPhoto, Properties.Resources.Error);
-            IsEnd = true;
-            return false;
-        }
+        if (photographs.HasNext) return true;
+        ClearCurImage();
+        MessageBox.Show(Properties.Resources.HasNoPhoto, Properties.Resources.Error);
+        IsEnd = true;
+        return false;
 
-        return true;
     }
 
     private enum EmptyMessage
